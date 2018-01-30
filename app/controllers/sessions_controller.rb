@@ -9,8 +9,7 @@ class SessionsController < ApplicationController
    if user && user.authenticate(session_params[:password])
      session[:user_id] = user.id
 
-     flash[:notice] = 'Thank you for sign in!'
-     redirect_to trips_path
+     redirect_to trips_path, notice: 'Thank you for sign in!'
    else
      flash.now[:alert] = 'Wrong email or password!'
      render :new
