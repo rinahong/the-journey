@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   get('/', { to: 'welcome#index', as: :home })
   get('/about', { to: 'welcome#about', as: :about })
 
-  resources :users
-  resource :sessions
+  resources :users, except: [:index]
+  resource :sessions, only: [:new, :create, :destroy]
 
   resources :trips
 
