@@ -1,9 +1,7 @@
-
-
 $('#map').on('click', '.fa.fa-plus-circle', e => {
-  let address = $('#routeInfo p').html();
+  let address = $('#routeInfo .address').html();
   $('#routes').append($(`<div class="single-route"><p>${address}</p></div>`));
-
+  console.log(address)
   let form =
   `<form
     action="/routes"

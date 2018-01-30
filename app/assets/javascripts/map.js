@@ -109,7 +109,7 @@ function geocodeLatLng(geocoder, map, infowindow, path) {
         console.log(`path.b, lng:`, path.lng());
         let contentString = '<div id="content">'+
            '<div id="routeInfo">' +
-           '<span>' + address + '</span>' +
+           '<span class="address">' + address + '</span>' +
            '<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>' +
            '</div>';
         infowindow.setContent(contentString);
