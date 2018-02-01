@@ -14,5 +14,8 @@
 //= require jquery_ujs
 //= require popper
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
+//= require moment
+//= require fullcalendar
 //= require rails-ujs
 //= require_tree .

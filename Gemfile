@@ -35,6 +35,10 @@ gem 'faker', github: 'stympy/faker'
 gem 'jquery-rails'
 gem 'bootstrap'
 gem "font-awesome-rails"
+gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
+                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

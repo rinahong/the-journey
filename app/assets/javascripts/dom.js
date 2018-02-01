@@ -3,33 +3,14 @@ $('#map').on('click', '.fa.fa-plus-circle', e => {
   $('#routes').append($(`<div class="single-route"><p>${address}</p></div>`));
   console.log(address)
   let form =
-  `<form
-    action="/routes"
-    method='POST'
-  >
+  `<%= form_for @route do |f| %>
     <div class="form-group">
-      <input
-        class="form-control"
-        type="text"
-        name="startDate"
-        value=""
-      >
+      <%= f.label :start_date %>
+      <%= f.text_field :start_date, data:{ provide:'datepicker' } %>
     </div>
-
-    <div class="form-group">
-      <input
-        class="form-control"
-        type="text"
-        name="endDate"
-        value=""
-      >
-    </div>
-
-    <input
-      class="btn btn-outline-primary"
-      type='submit'
-      value='Submit'
-    />
-  </form>`
+    <%= f.submit 'Sign In!', class:"btn btn-primary"%>
+  <% end %>`
   $("div.single-route:last-child").append(form);
+
+
 });

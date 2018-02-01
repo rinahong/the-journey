@@ -3,6 +3,7 @@ var poly;
 var map;
 var geocoder;
 var infowindow;
+var path;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 7,
@@ -31,7 +32,7 @@ function initMap() {
 //For Polylines!!!!!!!
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
-  var path = poly.getPath();
+  path = poly.getPath();
 
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
@@ -45,6 +46,10 @@ function addLatLng(event) {
      title: '#' + path.getLength(),
      map: map
   });
+}
+
+function deleteLatLng(event) {
+
 }
 
 
