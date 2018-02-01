@@ -6,7 +6,7 @@ class CreateRoutes < ActiveRecord::Migration[5.1]
       t.float :longitude
       t.datetime :start_date
       t.datetime :end_date
-      t.references :trip, foreign_key: true, index: true
+      t.references :trip, foreign_key: true
 
       t.timestamps
     end

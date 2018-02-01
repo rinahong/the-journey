@@ -55,10 +55,14 @@ puts Cowsay.say("Created #{trips.count} trips", :ghostbusters)
 
 trips.each do |trip|
   rand(2..5).times.each do
+    s_d = trip.start_date + rand(1..3).days
+    e_d = s_d + 1.days
     Route.create(
       address: "address should be seeded",
       latitude: 39.2780017  + rand(1...12),
       longitude: -6.1203521 + rand(1...36),
+      start_date: s_d,
+      end_date: e_d,
       trip_id: trip.id
     )
   end
