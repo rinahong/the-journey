@@ -3,13 +3,14 @@ class TripsController < ApplicationController
 
   # GET /trips
   # GET /trips.json
-  def index
-    @trips = Trip.all
-  end
+  # def index
+  #   @trips = Trip.all
+  # end
 
   # GET /trips/1
   # GET /trips/1.json
   def show
+    @route = Route.new
   end
 
   # GET /trips/new
@@ -29,7 +30,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+        format.html { redirect_to user_path(current_user), notice: 'Trip was successfully created.' }
         format.json { render :show, status: :created, location: @trip }
       else
         format.html { render :new }

@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @trips = Trip.where user_id:current_user
+    @trip = Trip.new
   end
 
   # GET /users/new

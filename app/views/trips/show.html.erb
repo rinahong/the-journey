@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<script defer="defer" src="/assets/dom.js" type="text/javascript"></script>
 <p>
   <strong>Title:</strong>
   <%= @trip.title %>
@@ -20,10 +19,24 @@
   <%= @trip.end_date %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @trip.user %>
-</p>
-
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>
+
+<hr />
+<div class="row">
+<div id="routes" class="col-3"><h3>Your Routes</h3></div>
+<div class="col-9">
+  <div class="latlng"></div>
+  <div id="floating-panel">
+    <input id="address" type="textbox" value="Sydney, NSW">
+    <input id="submit" type="button" value="Geocode">
+  </div>
+  <div id="map" class=""></div>
+</div>
+</div>
+
+<div id="calendar"></div>
+
+<script src="/js/calendar.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_SECRET'] %>&callback=initMap"
+async defer></script>
