@@ -1,3 +1,4 @@
+const tripid = $('#calendar').data('tripid');
 $('#calendar').fullCalendar({
-  events: '/trips/85/routes.json'
+  events: `/trips/${tripid}.json`
 });

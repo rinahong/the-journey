@@ -58,7 +58,7 @@ trips.each do |trip|
     s_d = trip.start_date + rand(1..3).days
     e_d = s_d + 1.days
     Route.create(
-      address: "address should be seeded",
+      address: "#{trip.title}",
       latitude: 39.2780017  + rand(1...12),
       longitude: -6.1203521 + rand(1...36),
       start_date: s_d,

@@ -35,7 +35,8 @@
 </div>
 </div>
 
-<div id="calendar"></div>
+
+<div id="calendar" data-tripid="<%= @trip.id %>"></div>
 
 <script src="/js/calendar.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_SECRET'] %>&callback=initMap"
