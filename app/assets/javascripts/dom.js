@@ -1,10 +1,15 @@
-function create(valuePassed) {
+function ready (fn) {
+  document.addEventListener('DOMContentLoaded', fn);
+}
+
+function create(addressPassed) {
   const tripid = $('#calendar').data('tripid');
+  const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
   const dataToSend = {
-    address: valuePassed
+    address: addressPassed
   }
-  const myUrl = `http://localhost:3000/trips/${tripid}/routes`
-  return fetch(
+
+  fetch(
     myUrl,
     {
       method: 'POST',
@@ -18,20 +23,40 @@ function create(valuePassed) {
     return res.json()
   })
   .then(data => {
-    console.log("res >>> ", data, " of type >>>>", typeof(data))
+    console.log("res >>> ", data)
   })
 }
+
+function all() {
+  const tripid = $('#calendar').data('tripid');
+  const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
+  return new Promise((resolve, reject) => {
+    resolve(fetch(myUrl)
+     .then(res => res.json())
+    )
+  })
+}
+
+all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
+  allRoutes.map(route =>
+    $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
+  )
+})
+
+// ready(() => {
+//   all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
+//     allRoutes.map(route =>
+//       $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
+//     )
+//   })
+// });
+
+
 
 $('#map').on('click', '.fa.fa-plus-circle', e => {
   let address = $('#routeInfo .address').html();
   $('#routes').append($(`<div class="single-route"><p>${address}</p></div>`));
-  console.log(address)
   create(address);
   let form = $("#hideMe").html();
-
   $("div.single-route:last-child").append(form);
-
-
-
-
 });

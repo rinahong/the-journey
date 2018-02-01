@@ -4,7 +4,8 @@ class RoutesController < ApplicationController
   # GET /routes
   # GET /routes.json
   def index
-    @routes = Route.all
+    @routes = Route.where(trip_id:params[:trip_id])
+    render json: @routes
   end
 
   # GET /routes/1
@@ -29,7 +30,7 @@ class RoutesController < ApplicationController
     route = Route.new
     route.address = params[:address]
     route.trip_id = params[:trip_id]
-    route.start_date = DateTime.new() + rand(1...50).days
+    route.start_date = DateTime.now() + rand(1...50).days
     route.end_date = route.start_date + 1.days
 
     p "route.address >>>> "

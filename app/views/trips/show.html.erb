@@ -1,4 +1,4 @@
-<script defer="defer" src="/assets/dom.js" type="text/javascript"></script>
+
 <p>
   <strong>Title:</strong>
   <%= @trip.title %>
@@ -24,7 +24,8 @@
 
 <hr />
 <div class="row">
-<div id="routes" class="col-3"><h3>Your Routes</h3></div>
+<div id="routes" class="col-3"><h3>Your Routes</h3>
+</div>
 <div class="col-9">
   <div class="latlng"></div>
   <div id="floating-panel">
@@ -49,5 +50,6 @@
 <div id="calendar" data-tripid="<%= @trip.id %>"></div>
 
 <script src="/js/calendar.js"></script>
+<script defer="defer" src="/assets/dom.js" type="text/javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_SECRET'] %>&callback=initMap"
 async defer></script>
