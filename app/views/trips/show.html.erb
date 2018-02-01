@@ -35,6 +35,16 @@
 </div>
 </div>
 
+<h1>here</h1>
+<div id="hideMe" style="display:none">
+  <%= form_for @route, url: trip_routes_path(@trip)  do |f| %>
+    <div class="form-group">
+      <%= f.label :start_date %>
+      <%= f.text_field :start_date, data:{ provide:'datepicker' } %>
+    </div>
+    <%= f.submit 'Sign In!', class:"btn btn-primary"%>
+  <% end %>
+</div>
 
 <div id="calendar" data-tripid="<%= @trip.id %>"></div>
 

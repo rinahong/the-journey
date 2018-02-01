@@ -24,17 +24,40 @@ class RoutesController < ApplicationController
   # POST /routes
   # POST /routes.json
   def create
-    @route = Route.new(route_params)
+    # @route = Route.new(route_params)
+    # trip = Trip.find para
+    route = Route.new
+    route.address = params[:address]
+    route.trip_id = params[:trip_id]
+    route.start_date = DateTime.new() + rand(1...50).days
+    route.end_date = route.start_date + 1.days
 
-    respond_to do |format|
-      if @route.save
-        format.html { redirect_to @route, notice: 'Route was successfully created.' }
-        format.json { render :show, status: :created, location: @route }
-      else
-        format.html { render :new }
-        format.json { render json: @route.errors, status: :unprocessable_entity }
-      end
+    p "route.address >>>> "
+    p route.address
+
+    p "route.trip_id >>>>> "
+    p route.trip_id
+
+    may_success = false
+
+    if route.save
+      may_success = true
     end
+
+    render json: {
+      success: may_success,
+      msg: "hello"
+     }
+
+    # respond_to do |format|
+    #   if @route.save
+    #     format.html { redirect_to @route, notice: 'Route was successfully created.' }
+    #     format.json { render :show, status: :created, location: @route }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @route.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /routes/1
