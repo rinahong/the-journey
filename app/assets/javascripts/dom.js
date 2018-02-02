@@ -37,19 +37,19 @@ function all() {
   })
 }
 
-all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
-  allRoutes.map(route =>
-    $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
-  )
-})
+// all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
+//   allRoutes.map(route =>
+//     $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
+//   )
+// })
 
-// ready(() => {
-//   all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
-//     allRoutes.map(route =>
-//       $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
-//     )
-//   })
-// });
+ready(() => {
+  all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
+    allRoutes.map(route =>
+      $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
+    )
+  })
+});
 
 
 

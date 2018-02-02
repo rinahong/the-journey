@@ -6,8 +6,8 @@ var infowindow;
 var path;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 7,
-    center: {lat: 41.879, lng: -87.624}  // Center the map on Chicago, USA.
+    zoom: 4,
+    center: {lat: 49.879, lng: 13.624}  // Center the map on Chicago, USA.
   });
 
   infowindow = new google.maps.InfoWindow;
