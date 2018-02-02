@@ -52,11 +52,13 @@ ready(() => {
 });
 
 
-
+// When + icon clicked, create a route with the address passing to the parameter.
+// fullCalendar will refetch and rerender.
 $('#map').on('click', '.fa.fa-plus-circle', e => {
   let address = $('#routeInfo .address').html();
   $('#routes').append($(`<div class="single-route"><p>${address}</p></div>`));
   create(address);
+  $('#calendar').fullCalendar('refetchEvents');
   let form = $("#hideMe").html();
   $("div.single-route:last-child").append(form);
 });
