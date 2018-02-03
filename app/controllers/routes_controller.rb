@@ -25,18 +25,17 @@ class RoutesController < ApplicationController
   # POST /routes
   # POST /routes.json
   def create
-    # @route = Route.new(route_params)
-    # trip = Trip.find para
     route = Route.new
     route.address = params[:address]
     route.trip_id = params[:trip_id]
+    # route.trip =  Trip.find params[:trip_id]
     route.start_date = DateTime.now() + rand(1...50).days
     route.end_date = route.start_date + 1.days
 
-    p "route.address >>>> "
+    p "route.address >>>>>>>>>>>>>>>>>>>> "
     p route.address
 
-    p "route.trip_id >>>>> "
+    p "route.trip_id >>>>>>>>>>>>>>>>>>>> "
     p route.trip_id
 
     may_success = false

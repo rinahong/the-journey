@@ -18,4 +18,4 @@
 //= require moment
 //= require fullcalendar
 //= require rails-ujs
-//= require_tree .
+//= require_directory .

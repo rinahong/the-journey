@@ -1,9 +1,6 @@
-function ready (fn) {
-  document.addEventListener('DOMContentLoaded', fn);
-}
 
 function create(addressPassed) {
-  const tripid = $('#calendar').data('tripid');
+  const tripid = $('#map').data('tripid');
   const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
   const dataToSend = {
     address: addressPassed
@@ -37,20 +34,11 @@ function all() {
   })
 }
 
-// all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
-//   allRoutes.map(route =>
-//     $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
-//   )
-// })
-
-ready(() => {
-  all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
-    allRoutes.map(route =>
-      $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
-    )
-  })
-});
-
+all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
+  allRoutes.map(route =>
+    $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
+  )
+})
 
 // When + icon clicked, create a route with the address passing to the parameter.
 // fullCalendar will refetch and rerender.
@@ -62,3 +50,23 @@ $('#map').on('click', '.fa.fa-plus-circle', e => {
   let form = $("#hideMe").html();
   $("div.single-route:last-child").append(form);
 });
+
+//
+// var myDoughnutChart = new Chart(ctx, {
+//     type: 'doughnut',
+//     data: data,
+//     options: options
+// });
+//
+// data = {
+//     datasets: [{
+//         data: [10, 20, 30]
+//     }],
+//
+//     // These labels appear in the legend and in the tooltips when hovering different arcs
+//     labels: [
+//         'Red',
+//         'Yellow',
+//         'Blue'
+//     ]
+// };

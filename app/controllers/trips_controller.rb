@@ -20,6 +20,7 @@ class TripsController < ApplicationController
 
   # GET /trips/1/edit
   def edit
+    @route = Route.new
   end
 
   # POST /trips
@@ -30,7 +31,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to user_path(current_user), notice: 'Trip was successfully created.' }
+        format.html { redirect_to edit_trip_path(@trip), notice: 'Trip was successfully created.' }
         format.json { render :show, status: :created, location: @trip }
       else
         format.html { render :new }
