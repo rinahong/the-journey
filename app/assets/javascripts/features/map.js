@@ -1,9 +1,21 @@
 // import qs, qsa from './helpers'
+// import {all} from './dom';
 let poly;
 let map;
 let geocoder;
 let infowindow;
 let path;
+
+function all() {
+  const tripid = $('#map').data('tripid');
+  const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
+  return new Promise((resolve, reject) => {
+    resolve(fetch(myUrl)
+     .then(res => res.json())
+    )
+  })
+}
+
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
@@ -30,6 +42,13 @@ function initMap() {
   if(clickable) {
     map.addListener('click', addLatLng);
   }
+
+  all().then(allRoutes => {
+    allRoutes.map(route => {
+      displayMarker(route.latitude, route.longitude)
+    })
+  });
+
 }
 
 //For Polylines!!!!!!!
@@ -50,11 +69,6 @@ function addLatLng(event) {
      map: map
   });
 }
-
-function deleteLatLng(event) {
-
-}
-
 
 //For searching by address!!!!!!!
 function geocodeAddress(geocoder, resultsMap) {
@@ -119,6 +133,10 @@ function geocodeLatLng(geocoder, map, infowindow, path) {
            '<div id="routeInfo">' +
            '<span class="address">' + address + '</span>' +
            '<i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>' +
+           '<div style="display:none">' +
+           '<p class="latitude">' + latlng.lat + '</p>' +
+           '<p class="longitude">' + latlng.lng + '</p>' +
+           '</div>' +
            '</div>';
         infowindow.setContent(contentString);
         infowindow.open(map, marker);
@@ -136,4 +154,20 @@ function displayLocation(path) {
     console.log(`path.b, lat:`, path.lat());
     console.log(`path.b, lng:`, path.lng());
     //qs('.latlng')
+}
+
+function displayMarker(routeLat, routeLng) {
+  var latLng = {lat: routeLat, lng: routeLng};
+  console.log(latLng);
+    if(latLng !== null) {
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: 'Hello World!'
+      });
+    }
+}
+
+function deleteLatLng(event) {
+
 }
