@@ -45,6 +45,9 @@ function initMap() {
 
   all().then(allRoutes => {
     allRoutes.map(route => {
+      // console.log("Route======", route)
+      // console.log("RouteLat>>>>>>", route.latitude)
+      // console.log("RouteLng>>>>>>", route.longitude)
       displayMarker(route.latitude, route.longitude)
     })
   });
@@ -158,7 +161,7 @@ function displayLocation(path) {
 
 function displayMarker(routeLat, routeLng) {
   var latLng = {lat: routeLat, lng: routeLng};
-  console.log(latLng);
+  console.log("IN displayMarker: ", latLng);
     if(latLng !== null) {
       var marker = new google.maps.Marker({
         position: latLng,

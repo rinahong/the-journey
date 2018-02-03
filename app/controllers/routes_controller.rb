@@ -25,10 +25,7 @@ class RoutesController < ApplicationController
   # POST /routes
   # POST /routes.json
   def create
-    route = Route.new
-    route.address = params[:address]
-    route.trip_id = params[:trip_id]
-    # route.trip =  Trip.find params[:trip_id]
+    route = Route.new route_params
     route.start_date = DateTime.now() + rand(1...50).days
     route.end_date = route.start_date + 1.days
 
@@ -92,6 +89,6 @@ class RoutesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def route_params
-      params.require(:route).permit(:address, :latitude, :longitude, :start_date, :end_date, :trip_id)
+      params.permit(:address, :latitude, :longitude, :start_date, :end_date, :trip_id)
     end
 end

@@ -2,11 +2,14 @@
 function create(address, latitude, longitude) {
   const tripid = $('#map').data('tripid');
   const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
+  // console.log("lat in create========:", latitude)
+  // console.log("lng in create========:", longitude)
   const dataToSend = {
     address: address,
     latitude: latitude,
     longitude: longitude
   }
+  console.log("!!!!!!", dataToSend)
 
   fetch(
     myUrl,
@@ -48,6 +51,8 @@ $('#map').on('click', '.fa.fa-plus-circle', e => {
   let address = $('#routeInfo .address').html();
   let lat = parseFloat($('#routeInfo .latitude').html());
   let lng = parseFloat($('#routeInfo .longitude').html());
+  console.log("lat========:", lat)
+  console.log("lng========:", lng)
   $('#routes').append($(`<div class="single-route"><p>${address}</p></div>`));
   create(address, lat, lng);
 
