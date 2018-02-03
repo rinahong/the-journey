@@ -4,6 +4,6 @@ json.array! trip.routes do |r|
   json.title r.address
   json.start r.start_date
   json.end r.end_date
-  json.url trip_route_path(trip.id, r, format: :html)
+  json.url route_path(trip.id, r, format: :html)
 end
 # json.url trip_url(trip, format: :json)

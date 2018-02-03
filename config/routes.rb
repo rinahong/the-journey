@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resource :sessions, only: [:new, :create, :destroy]
 
   resources :trips, except: [:index] do
-    resources :routes
+    resources :routes, shallow: true
+    resources :expense_trackers, shallow: true
   end
 
 end
