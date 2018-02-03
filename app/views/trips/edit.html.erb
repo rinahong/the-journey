@@ -13,7 +13,7 @@
     <input id="address" type="textbox" value="Sydney, NSW">
     <input id="submit" type="button" value="Geocode">
   </div>
-  <div id="map" data-tripid="<%= @trip.id %>"></div>
+  <div id="map" data-tripid="<%= @trip.id %>" data-clickable="true"></div>
 </div>
 </div>
 
@@ -27,8 +27,8 @@
   <% end %>
 </div>
 
-<h1>here</h1>
-<div id="hideMe" style="display:none">
+
+<div id="addForm" style="display:none">
   <%= form_for @route, url: trip_routes_path(@trip)  do |f| %>
     <div class="form-group">
       <%= f.label :start_date %>
@@ -38,6 +38,7 @@
   <% end %>
 </div>
 
-<%= javascript_include_tag 'routes/dom' %>
+<%= javascript_include_tag 'features/dom' %>
+<%= javascript_include_tag 'features/map' %>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_SECRET'] %>&callback=initMap"
 async defer></script>

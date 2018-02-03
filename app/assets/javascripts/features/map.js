@@ -1,9 +1,9 @@
-
-var poly;
-var map;
-var geocoder;
-var infowindow;
-var path;
+// import qs, qsa from './helpers'
+let poly;
+let map;
+let geocoder;
+let infowindow;
+let path;
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
@@ -25,8 +25,11 @@ function initMap() {
   });
   poly.setMap(map);
 
-  // Add a listener for the click event for polylines
-  map.addListener('click', addLatLng);
+  const clickable = $('#map').data('clickable');
+  // Add a listener for the click event for polylines on trip controller edit page
+  if(clickable) {
+    map.addListener('click', addLatLng);
+  }
 }
 
 //For Polylines!!!!!!!
@@ -41,7 +44,7 @@ function addLatLng(event) {
   geocodeLatLng(geocoder, map, infowindow, path.b[path.b.length - 1]);
 
   // Add a new marker at the new plotted point on the polyline.
-  var marker = new google.maps.Marker({
+  let marker = new google.maps.Marker({
      position: event.latLng,
      title: '#' + path.getLength(),
      map: map
@@ -55,11 +58,11 @@ function deleteLatLng(event) {
 
 //For searching by address!!!!!!!
 function geocodeAddress(geocoder, resultsMap) {
-  var address = document.getElementById('address').value;
+  let address = document.getElementById('address').value;
   geocoder.geocode({'address': address}, function(results, status) {
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
-      var marker = new google.maps.Marker({
+      let marker = new google.maps.Marker({
         map: resultsMap,
         position: results[0].geometry.location
       });
@@ -71,7 +74,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
 //For getting address using latitude and longitude
 function geocodeLatLng(geocoder, map, infowindow, path) {
-  var latlng = {lat: path.lat(), lng: path.lng()};
+  let latlng = {lat: path.lat(), lng: path.lng()};
   geocoder.geocode({'location': latlng}, function(results, status) {
     if (status === 'OK') {
       if (results[0]) {
@@ -133,13 +136,4 @@ function displayLocation(path) {
     console.log(`path.b, lat:`, path.lat());
     console.log(`path.b, lng:`, path.lng());
     //qs('.latlng')
-}
-
-// Shortcut functions for `.querySelector()`
-function qs(...args) {
-  return document.querySelector(...args);
-}
-// Shortcut functions `.querySelectorAll()`
-function qsa(query, node) {
-  return (node || document).querySelectorAll(query);
 }

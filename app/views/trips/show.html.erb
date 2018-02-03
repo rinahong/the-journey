@@ -33,7 +33,7 @@
 
 
 <div id="calendar" data-tripid="<%= @trip.id %>"></div>
-
-<script src="/js/calendar.js"></script>
+<%= javascript_include_tag 'features/calendar' %>
+<%= javascript_include_tag 'features/map' %>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_SECRET'] %>&callback=initMap"
 async defer></script>

@@ -47,7 +47,7 @@ $('#map').on('click', '.fa.fa-plus-circle', e => {
   $('#routes').append($(`<div class="single-route"><p>${address}</p></div>`));
   create(address);
   $('#calendar').fullCalendar('refetchEvents');
-  let form = $("#hideMe").html();
+  let form = $("#addForm").html();
   $("div.single-route:last-child").append(form);
 });
 
