@@ -40,6 +40,7 @@ gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'acts-as-taggable-on', '~> 4.0'
+gem 'chart-js-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

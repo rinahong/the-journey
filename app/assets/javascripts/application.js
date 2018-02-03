@@ -17,5 +17,6 @@
 //= require bootstrap-datepicker
 //= require moment
 //= require fullcalendar
+//= require Chart.min
 //= require rails-ujs
 //= require_directory .

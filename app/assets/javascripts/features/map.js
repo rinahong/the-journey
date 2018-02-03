@@ -161,7 +161,6 @@ function displayLocation(path) {
 
 function displayMarker(routeLat, routeLng) {
   var latLng = {lat: routeLat, lng: routeLng};
-  console.log("IN displayMarker: ", latLng);
     if(latLng !== null) {
       var marker = new google.maps.Marker({
         position: latLng,
