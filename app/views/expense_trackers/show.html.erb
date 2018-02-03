@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @expense_tracker.category %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @expense_tracker.date %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @expense_tracker.description %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @expense_tracker.price %>
+</p>
+
+<p>
+  <strong>Trip:</strong>
+  <%= @expense_tracker.trip %>
+</p>
+
+<%= link_to 'Edit', edit_expense_tracker_path(@expense_tracker) %> |
+<%= link_to 'Back', expense_trackers_path %>

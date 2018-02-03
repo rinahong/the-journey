@@ -1,0 +1,42 @@
+<%= form_with(model: expense_tracker, local: true) do |form| %>
+  <% if expense_tracker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(expense_tracker.errors.count, "error") %> prohibited this expense_tracker from being saved:</h2>
+
+      <ul>
+      <% expense_tracker.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.text_field :category, id: :expense_tracker_category %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.datetime_select :date, id: :expense_tracker_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :expense_tracker_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price, id: :expense_tracker_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :trip_id %>
+    <%= form.text_field :trip_id, id: :expense_tracker_trip_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

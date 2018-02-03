@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Expense Trackers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Trip</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expense_trackers.each do |expense_tracker| %>
+      <tr>
+        <td><%= expense_tracker.category %></td>
+        <td><%= expense_tracker.date %></td>
+        <td><%= expense_tracker.description %></td>
+        <td><%= expense_tracker.price %></td>
+        <td><%= expense_tracker.trip %></td>
+        <td><%= link_to 'Show', expense_tracker %></td>
+        <td><%= link_to 'Edit', edit_expense_tracker_path(expense_tracker) %></td>
+        <td><%= link_to 'Destroy', expense_tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Expense Tracker', new_expense_tracker_path %>
