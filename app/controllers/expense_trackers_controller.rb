@@ -1,12 +1,19 @@
 class ExpenseTrackersController < ApplicationController
-  before_action :find_trip, only: [:index, :destroy]
+  before_action :find_trip, only: [:index, :edit, :update, :destroy]
   before_action :set_expense_tracker, only: [:show, :edit, :update, :destroy]
 
   # GET /expense_trackers
   # GET /expense_trackers.json
   def index
     @expense_tracker = ExpenseTracker.new
-    @expense_trackers = ExpenseTracker.where(trip_id:params[:trip_id])
+    expenses_in_the_trip = ExpenseTracker.where(trip_id:params[:trip_id])
+    if sort_by_keyword #Default: Date ascending
+      if filter_by_keyword
+        @expense_trackers = expenses_in_the_trip.filter_by(filter_by_keyword)
+      else
+        @expense_trackers = expenses_in_the_trip.order_by(sort_by_keyword)
+      end
+    end
   end
 
   # GET /expense_trackers/1
