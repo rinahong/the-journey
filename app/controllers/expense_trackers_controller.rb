@@ -1,10 +1,12 @@
 class ExpenseTrackersController < ApplicationController
+  before_action :find_trip, only: [:index, :destroy]
   before_action :set_expense_tracker, only: [:show, :edit, :update, :destroy]
 
   # GET /expense_trackers
   # GET /expense_trackers.json
   def index
-    @expense_trackers = ExpenseTracker.all
+    @expense_tracker = ExpenseTracker.new
+    @expense_trackers = ExpenseTracker.where(trip_id:params[:trip_id])
   end
 
   # GET /expense_trackers/1
@@ -24,11 +26,13 @@ class ExpenseTrackersController < ApplicationController
   # POST /expense_trackers
   # POST /expense_trackers.json
   def create
-    @expense_tracker = ExpenseTracker.new(expense_tracker_params)
+    @expense_tracker = ExpenseTracker.new expense_tracker_params
+    @trip = Trip.find params[:trip_id]
+    @expense_tracker.trip = @trip
 
     respond_to do |format|
       if @expense_tracker.save
-        format.html { redirect_to @expense_tracker, notice: 'Expense tracker was successfully created.' }
+        format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully created.' }
         format.json { render :show, status: :created, location: @expense_tracker }
       else
         format.html { render :new }
@@ -56,7 +60,7 @@ class ExpenseTrackersController < ApplicationController
   def destroy
     @expense_tracker.destroy
     respond_to do |format|
-      format.html { redirect_to expense_trackers_url, notice: 'Expense tracker was successfully destroyed.' }
+      format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +73,11 @@ class ExpenseTrackersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_tracker_params
-      params.require(:expense_tracker).permit(:category, :date, :description, :price, :trip_id)
+      params.require(:expense_tracker).permit(:category, :date, :description, :price)
     end
+
+    def find_trip
+      @trip = Trip.find_by(user_id:current_user)
+    end
+
 end

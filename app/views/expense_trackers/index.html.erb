@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<%= simple_form_for @expense_tracker, url: trip_expense_trackers_path(@trip) do |form| %>
+  <%= form.input :category %>
+  <%= form.input :date %>
+  <%= form.input :description %>
+  <%= form.input :price %>
+  <%= form.submit class: 'btn btn-primary' %>
+<% end %>
+
 
 <h1>Expense Trackers</h1>
 
@@ -18,11 +25,9 @@
     <% @expense_trackers.each do |expense_tracker| %>
       <tr>
         <td><%= expense_tracker.category %></td>
-        <td><%= expense_tracker.date %></td>
+        <td><%= expense_tracker.date.strftime("%b/%d/%Y")  %></td>
         <td><%= expense_tracker.description %></td>
         <td><%= expense_tracker.price %></td>
-        <td><%= expense_tracker.trip %></td>
-        <td><%= link_to 'Show', expense_tracker %></td>
         <td><%= link_to 'Edit', edit_expense_tracker_path(expense_tracker) %></td>
         <td><%= link_to 'Destroy', expense_tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -31,5 +36,3 @@
 </table>
 
 <br>
-
-<%= link_to 'New Expense Tracker', new_expense_tracker_path %>

@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-
-
-  resources :expense_trackers
   get('/', { to: 'welcome#index', as: :home })
   get('/about', { to: 'welcome#about', as: :about })
 
