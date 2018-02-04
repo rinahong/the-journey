@@ -1,5 +1,12 @@
 <h1>Editing Expense Tracker</h1>
 
-<%= render 'form', expense_tracker: @expense_tracker %>
+<%= simple_form_for @expense_tracker, url: expense_tracker_path do |form| %>
+  <%= form.input :category %>
+  <%= form.input :date %>
+  <%= form.input :description %>
+  <%= form.input :price %>
+  <%= form.submit class: 'btn btn-primary' %>
+<% end %>
 
-<%= link_to 'Back', trip_expense_trackers_path(@trip) %>
+
+<%#= link_to 'Back', trip_expense_trackers_path(@trip) %>

@@ -7,13 +7,7 @@ class ExpenseTrackersController < ApplicationController
   def index
     @expense_tracker = ExpenseTracker.new
     expenses_in_the_trip = ExpenseTracker.where(trip_id:params[:trip_id])
-    if sort_by_keyword #Default: Date ascending
-      if filter_by_keyword
-        @expense_trackers = expenses_in_the_trip.filter_by(filter_by_keyword)
-      else
-        @expense_trackers = expenses_in_the_trip.order_by(sort_by_keyword)
-      end
-    end
+    @expense_trackers = expenses_in_the_trip.order(date: :asc)
   end
 
   # GET /expense_trackers/1
@@ -51,9 +45,10 @@ class ExpenseTrackersController < ApplicationController
   # PATCH/PUT /expense_trackers/1
   # PATCH/PUT /expense_trackers/1.json
   def update
+    @trip = @expense_tracker.trip
     respond_to do |format|
       if @expense_tracker.update(expense_tracker_params)
-        format.html { redirect_to @expense_tracker, notice: 'Expense tracker was successfully updated.' }
+        format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully updated.' }
         format.json { render :show, status: :ok, location: @expense_tracker }
       else
         format.html { render :edit }

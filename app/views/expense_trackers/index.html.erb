@@ -25,7 +25,7 @@
     <% @expense_trackers.each do |expense_tracker| %>
       <tr>
         <td><%= expense_tracker.category %></td>
-        <td><%= expense_tracker.date.strftime("%b/%d/%Y")  %></td>
+        <td><%= expense_tracker.date %></td>
         <td><%= expense_tracker.description %></td>
         <td><%= expense_tracker.price %></td>
         <td><%= link_to 'Edit', edit_expense_tracker_path(expense_tracker) %></td>
