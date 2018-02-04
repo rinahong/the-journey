@@ -40,7 +40,7 @@ users.each do |user|
     s_d = DateTime.new(2018,2,01) + rand(1...50).days
     e_d = s_d + rand(1...10).days
     Trip.create(
-      title: Faker::Address.country ,
+      title: Faker::Address.country,
       note: Faker::HarryPotter.quote,
       start_date: s_d,
       end_date: e_d,
@@ -66,12 +66,25 @@ trips.each do |trip|
       trip_id: trip.id
     )
   end
+
+  rand(3..5).times.each do
+    s_d = trip.start_date + rand(1..3).days
+    ExpenseTracker.create(
+      category: Faker::Beer.hop,
+      date: s_d,
+      description: Faker::Beer.style,
+      price: rand(1..200),
+      trip_id: trip.id
+    )
+  end
 end
 
 
 routes = Route.all
+expenses = ExpenseTracker.all
 
 puts Cowsay.say("Created #{routes.count} routes", :moose)
+puts Cowsay.say("Created #{expenses.count} expenses", :kitty)
 
 
 puts "Use #{user_not_admin.email} and #{PASSWORD} for testing"
