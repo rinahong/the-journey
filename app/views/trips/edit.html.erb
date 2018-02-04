@@ -17,16 +17,6 @@
 </div>
 </div>
 
-<div>
-  <%= form_for @trip do |f| %>
-    <div class="form-group">
-      <%= f.label :tag_list %>
-      <%= f.text_field :tag_list, value: f.object.tag_list.to_s %>
-    </div>
-    <%= f.submit 'Tags!', class:"btn btn-primary"%>
-  <% end %>
-</div>
-
 
 <div id="addForm" style="display:none">
   <%= form_for @route, url: trip_routes_path(@trip)  do |f| %>
