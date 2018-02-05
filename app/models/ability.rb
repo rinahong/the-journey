@@ -39,6 +39,10 @@ class Ability
       user == trip.user
     end
 
+    can :crud, Like do |like|
+      like.user == user
+    end
+
     # can :crud, Route do |route|
     #   user = route.trip.user
     # end

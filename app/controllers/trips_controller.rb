@@ -6,7 +6,7 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
-    @route = Route.new
+    @current_user_like = current_user.likes.find_by_trip_id(@trip)  
   end
 
   # GET /trips/new

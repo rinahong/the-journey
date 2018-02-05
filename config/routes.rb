@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :trips, except: [:index] do
     resources :routes, shallow: true
     resources :expense_trackers, shallow: true
+    resources :likes, only: [:create, :destroy], shallow: true
   end
 
 end
