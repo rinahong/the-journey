@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :show]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user!, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
+  # Only Admin user has access to index
   def index
     @users = User.all
   end
@@ -74,5 +77,10 @@ class UsersController < ApplicationController
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 
-    
+    def authorize_user!
+      unless can?(:rud, @user)
+        flash[:alert] = "Access Desined: You are not authorized to view this account"
+        redirect_to home_path
+      end
+    end
 end
