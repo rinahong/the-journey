@@ -1,1 +1,5 @@
 <h1>Welcome</h1>
+
+<% @trips.each do |trip| %>
+  <%= link_to trip.title, trip_path(trip) %>
+<% end %>
