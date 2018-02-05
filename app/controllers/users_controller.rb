@@ -79,7 +79,7 @@ class UsersController < ApplicationController
 
     def authorize_user!
       unless can?(:rud, @user)
-        flash[:alert] = "Access Desined: You are not authorized to view this account"
+        flash[:alert] = "Access Desined: Not authorized to view this account"
         redirect_to home_path
       end
     end

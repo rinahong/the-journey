@@ -1,6 +1,7 @@
 class RoutesController < ApplicationController
+  # before_action :authenticate_user!, except: [:show]
   before_action :set_route, only: [:show, :edit, :update, :destroy]
-
+  # before_action :authorize_user!,
   # GET /routes
   # GET /routes.json
   def index
@@ -90,5 +91,12 @@ class RoutesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def route_params
       params.permit(:address, :latitude, :longitude, :start_date, :end_date, :trip_id)
+    end
+
+    def authorize_user!
+      unless can?(:crud, @route)
+        flash[:alert] = "Access Desined: Not authorized to manage this route"
+        redirect_to home_path
+      end
     end
 end

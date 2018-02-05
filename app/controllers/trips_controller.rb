@@ -73,8 +73,8 @@ class TripsController < ApplicationController
     end
 
     def authorize_user!
-      unless can?(:rud, @user)
-        flash[:alert] = "Access Desined: You are not authorized to view this account"
+      unless can?(:crud, @trip)
+        flash[:alert] = "Access Desined: Not authorized to manage this trip"
         redirect_to home_path
       end
     end

@@ -28,15 +28,20 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-    alias_action :create, :read, :update, :destroy, :to => :crud
     alias_action :read, :update, :destroy, :to => :rud
-
-    can :crud, Trip do |trip|
-      user == Trip.user
-    end
+    alias_action :create, :read, :update, :destroy, :to => :crud
 
     can :rud, User do |u|
       user == u
     end
+
+    can :crud, Trip do |trip|
+      user == trip.user
+    end
+
+    # can :crud, Route do |route|
+    #   user = route.trip.user
+    # end
+
   end
 end
