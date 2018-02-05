@@ -8,6 +8,12 @@ class ExpenseTrackersController < ApplicationController
     @expense_tracker = ExpenseTracker.new
     expenses_in_the_trip = ExpenseTracker.where(trip_id:params[:trip_id])
     @expense_trackers = expenses_in_the_trip.order(date: :asc)
+
+    respond_to do |format|
+      format.json { render json: @expense_trackers }
+      format.html { @expense_trackers }
+    end
+    # render json: @expense_trackers
   end
 
   # GET /expense_trackers/1
