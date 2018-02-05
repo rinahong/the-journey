@@ -42,6 +42,7 @@ gem 'momentjs-rails'
 gem 'acts-as-taggable-on', '~> 4.0'
 gem 'chart-js-rails'
 gem 'simple_form'
+gem 'cancancan'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
