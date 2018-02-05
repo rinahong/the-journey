@@ -1,11 +1,7 @@
 class TripsController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
-
-  # GET /trips
-  # GET /trips.json
-  # def index
-  #   @trips = Trip.all
-  # end
+  before_action :authorize_user!, except: [:show]
 
   # GET /trips/1
   # GET /trips/1.json
@@ -74,5 +70,12 @@ class TripsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
       params.require(:trip).permit(:title, :note, :start_date, :end_date, :user_id, :tag_list)
+    end
+
+    def authorize_user!
+      unless can?(:rud, @user)
+        flash[:alert] = "Access Desined: You are not authorized to view this account"
+        redirect_to home_path
+      end
     end
 end
