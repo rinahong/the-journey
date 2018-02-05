@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
     tags.each do |tag|
       tag.taggings.each do |tagging|
         trip = Trip.find tagging.taggable_id
+        # TODO: Find the highest likes (top 10) trips
         unless @trips.include? trip
           @trips.push(trip)
         end

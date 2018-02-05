@@ -1,5 +1,9 @@
 class User < ApplicationRecord
   has_many :trips, dependent: :destroy
+
+  has_many :likes, dependent: :destroy
+  has_many :liked_trip, through: :likes, source: :trip
+
   has_secure_password
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
