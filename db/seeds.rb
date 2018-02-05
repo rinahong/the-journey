@@ -20,6 +20,13 @@ user_not_admin = User.create(
   # is_admin: false
 )
 
+user_not_admin = User.create(
+  username: 'test2',
+  email: 't2@t.t',
+  password: PASSWORD,
+  # is_admin: false
+)
+
 10.times.each do
   username = Faker::Name.first_name
   User.create(
@@ -36,11 +43,11 @@ tags = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
   "n", "o", "p", "q", "r", "x", "t", "u", "v", "w", "x", "y", "z"]
 
 users.each do |user|
-  tags_arr = []
-  rand(0..4).times.each do
-    tags_arr.push(tags.sample)
-  end
   rand(1..3).times.each do
+    tags_arr = []
+    rand(0..4).times.each do
+      tags_arr.push(tags.sample)
+    end
     s_d = DateTime.new(2018,2,01) + rand(1...50).days
     e_d = s_d + rand(1...10).days
     Trip.create(
