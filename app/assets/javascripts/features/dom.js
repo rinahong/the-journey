@@ -44,25 +44,77 @@ const Route = {
   delete(routeId) {
     const myUrl = `http://localhost:3000/routes/${routeId}`;
     return fetch(
-         myUrl,
-        {
-          method: 'DELETE'
-        }
-      )
-       .then(res => res.json())
+      myUrl,
+      {
+        method: 'DELETE'
+      }
+    )
+    .then(res => res.json())
+  },
+
+  update(routeId, data) {
+    const myUrl = `http://localhost:3000/routes/${routeId}`;
+    return fetch (
+      myUrl,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
+    )
+    .then(res => res.json())
   }
+
 } //End Of Route
+
 
 function renderRoutes (allRoutes) {
   return allRoutes.map(route => {
-    return H( 'li', {'class': 'single-route'},
-        H( 'span', null, route.address),
-        H( 'i',
-           {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}),
-    )
-  })
+    return H( 'li',
+              {
+                'class': 'single-route',
+                'id': route.id
+              },
+              H( 'span', null, route.address),
+              H( 'i',
+                {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}
+              )
+    ) // End Of OuterMost H()
+  }) // End Of allRoutes.map
+} // End of renderRoutes()
+
+function dragStart(event) {
+    event.dataTransfer.setData("Text", event.currentTarget.id);
+    console.log(event.currentTarget)
+    event.currentTarget.style.color = 'green';
 }
 
+function allowDrop(event) {
+    event.currentTarget.style.color = 'blue';
+    event.preventDefault();
+}
+
+function drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("Text");
+    event.target.appendChild(document.getElementById(data));
+}
+
+function sortRouteList() {
+  $( "#sortable" ).sortable({
+    update: function( event, ui ) {
+      let routeId = ui.item.context.id;
+      // Route.update(routeId, {address: "rinaChanged"});
+      console.log(ui)
+      console.log()
+    }
+ });
+}
+
+
+//Jquery Events Handler
 document.addEventListener('DOMContentLoaded', () => {
 
   function reloadRouteList () {
@@ -71,6 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
         $('#sortable').empty();
         $('#sortable').append(...renderRoutes(allRoutes));
         initMap();
+        let index = null;
+        $('li.single-route').on('mousedown', e => {
+          index = $( "li" ).index(e.currentTarget);
+          console.log("=====list Index", index);
+        })
+        sortRouteList();
       })
   }
 
@@ -87,8 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // let form = $("#addForm").html();
     // $("li.single-route:last-child").append(form);
   });
-
-
 
   $('#sortable').on('click','.fa.fa-minus-square', e => {
     const routeId = $(e.target).data('routeid');

@@ -1,11 +1,16 @@
 <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
 <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script>
-   $(function() {
-      $( "#sortable" ).sortable();
-   });
-</script>
+
+<style>
+ul {
+    float: left;
+    margin: 15px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+</style>
+
 
 <h1>Editing Trip</h1>
 
@@ -15,8 +20,9 @@
 
 <div class="row">
 <div id="routes" class="col-3"><h3>Your Routes</h3>
-  <ul id="sortable">
-  </ul>
+   <!-- ondrop="drop(event)" ondragover="allowDrop(event)" -->
+  <ol id="sortable">
+  </ol>
 </div>
 <div class="col-9">
   <div class="latlng"></div>
@@ -37,6 +43,8 @@
     <%= f.submit 'Sign In!', class:"btn btn-primary"%>
   <% end %>
 </div>
+
+
 
 <%= javascript_include_tag 'features/dom' %>
 <%= javascript_include_tag 'features/map' %>

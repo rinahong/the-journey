@@ -5,7 +5,7 @@ class RoutesController < ApplicationController
   # GET /routes
   # GET /routes.json
   def index
-    @routes = Route.where(trip_id:params[:trip_id]).order(created_at: :asc)
+    @routes = Route.where(trip_id:params[:trip_id]).order(start_date: :asc)
     render json: @routes
   end
 
@@ -64,15 +64,11 @@ class RoutesController < ApplicationController
   # PATCH/PUT /routes/1
   # PATCH/PUT /routes/1.json
   def update
-    respond_to do |format|
       if @route.update(route_params)
-        format.html { redirect_to @route, notice: 'Route was successfully updated.' }
-        format.json { render :show, status: :ok, location: @route }
+        render json: @route
       else
-        format.html { render :edit }
-        format.json { render json: @route.errors, status: :unprocessable_entity }
+        render json: @route.errors, status: :unprocessable_entity
       end
-    end
   end
 
   # DELETE /routes/1
