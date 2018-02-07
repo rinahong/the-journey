@@ -1,5 +1,17 @@
 // import {allRoutes} from './dom';
+function qS (query, node) {
+  return (node || document).querySelector(query);
+}
 
+function qSA (query, node) {
+  return (node || document).querySelectorAll(query);
+}
+
+function ready (fn) {
+  document.addEventListener('DOMContentLoaded', fn);
+}
+
+// Helper method to create new node.
 function H (tagName, htmlAttrs = {}, ...elements) {
   const newElement = document.createElement(tagName);
   for (let attribute in htmlAttrs) {
@@ -10,12 +22,11 @@ function H (tagName, htmlAttrs = {}, ...elements) {
   return newElement;
 }
 
+// Ajax for Route Object: create, all, delete
 const Route = {
   create(address, latitude, longitude) {
     const tripid = $('#map').data('tripid');
     const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
-    // console.log("lat in create========:", latitude)
-    // console.log("lng in create========:", longitude)
     const dataToSend = {
       address: address,
       latitude: latitude,
@@ -44,11 +55,8 @@ const Route = {
   all() {
     const tripid = $('#map').data('tripid');
     const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
-    return new Promise((resolve, reject) => {
-      resolve(fetch(myUrl)
+    return fetch(myUrl)
        .then(res => res.json())
-      )
-    })
   },
 
   delete(routeId) {
@@ -64,20 +72,56 @@ const Route = {
       )
     })
   }
+} //End Of Route
+
+function renderRoutes (allRoutes) {
+  return allRoutes.map(route => {
+    return H( 'li', {'class': 'single-route'},
+        H( 'span', null, route.address),
+        H( 'i',
+           {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}),
+    )
+  })
 }
 
-Route.all().then(allRoutes => {
-  allRoutes.map(route =>
-    $('#sortable').append(
-      `<li class="single-route"><span>${route.address}</span>` +
-      `<i class="fa fa-minus-square" data-routeid="${route.id}" aria-hidden="true"></i>` +
-      `</li>`
-    )
-  )
+// Route.all().then(allRoutes => {
+//   allRoutes.map(route =>
+//     $('#sortable').append(
+//       `<li class="single-route"><span>${route.address}</span>` +
+//       `<i class="fa fa-minus-square" data-routeid="${route.id}" aria-hidden="true"></i>` +
+//       `</li>`
+//     )
+//   )
+// })
+
+document.addEventListener('DOMContentLoaded', () => {
+  
+  function reloadRouteList () {
+    Route.all()
+      .then(allRoutes => {
+        $('#sortable').empty();
+        $('#sortable').append(...renderRoutes(allRoutes));
+      })
+  }
+
+  reloadRouteList();
+
+  // When + icon clicked, create a route with the address passing to the parameter.
+  // fullCalendar will refetch and rerender.
+  // $('#map').on('click', '.fa.fa-plus-circle', e => {
+  //   let address = $('#routeInfo .address').html();
+  //   let lat = parseFloat($('#routeInfo .latitude').html());
+  //   let lng = parseFloat($('#routeInfo .longitude').html());
+  //   console.log("lat========:", lat)
+  //   console.log("lng========:", lng)
+  //   Route.create(address, lat, lng).then(() => reloadRouteList());
+  //
+  //   let form = $("#addForm").html();
+  //   $("li.single-route:last-child").append(form);
+  // });
+
 })
 
-// When + icon clicked, create a route with the address passing to the parameter.
-// fullCalendar will refetch and rerender.
 $('#map').on('click', '.fa.fa-plus-circle', e => {
   let address = $('#routeInfo .address').html();
   let lat = parseFloat($('#routeInfo .latitude').html());
