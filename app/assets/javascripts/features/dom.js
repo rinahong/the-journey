@@ -1,11 +1,4 @@
 // import {allRoutes} from './dom';
-function qS (query, node) {
-  return (node || document).querySelector(query);
-}
-
-function qSA (query, node) {
-  return (node || document).querySelectorAll(query);
-}
 
 function ready (fn) {
   document.addEventListener('DOMContentLoaded', fn);
@@ -44,12 +37,7 @@ const Route = {
         body: JSON.stringify(dataToSend)
       }
     )
-    .then(res => {
-      return res.json()
-    })
-    .then(data => {
-      console.log("res >>> ", data)
-    })
+    .then(res => res.json())
   },
 
   all() {
@@ -71,7 +59,18 @@ const Route = {
        .then(res => res.json())
       )
     })
-  }
+  },
+
+  // delete(routeId) {
+  //   const myUrl = `http://localhost:3000/routes/${routeId}`;
+  //   return fetch(
+  //        myUrl,
+  //       {
+  //         method: 'DELETE'
+  //       }
+  //     )
+  //      .then(res => res.json())
+  // }
 } //End Of Route
 
 function renderRoutes (allRoutes) {
@@ -95,7 +94,7 @@ function renderRoutes (allRoutes) {
 // })
 
 document.addEventListener('DOMContentLoaded', () => {
-  
+
   function reloadRouteList () {
     Route.all()
       .then(allRoutes => {
@@ -106,55 +105,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   reloadRouteList();
 
-  // When + icon clicked, create a route with the address passing to the parameter.
-  // fullCalendar will refetch and rerender.
-  // $('#map').on('click', '.fa.fa-plus-circle', e => {
-  //   let address = $('#routeInfo .address').html();
-  //   let lat = parseFloat($('#routeInfo .latitude').html());
-  //   let lng = parseFloat($('#routeInfo .longitude').html());
-  //   console.log("lat========:", lat)
-  //   console.log("lng========:", lng)
-  //   Route.create(address, lat, lng).then(() => reloadRouteList());
-  //
-  //   let form = $("#addForm").html();
-  //   $("li.single-route:last-child").append(form);
-  // });
+  //Create New Route on click of + icon
+  $('#map').on('click', '.fa.fa-plus-circle', e => {
+    let address = $('#routeInfo .address').html();
+    let lat = parseFloat($('#routeInfo .latitude').html());
+    let lng = parseFloat($('#routeInfo .longitude').html());
+    console.log("lat========:", lat)
+    console.log("lng========:", lng)
+    Route.create(address, lat, lng)
+      .then(data => console.log(data))
+      .then(() => reloadRouteList())
 
-})
-
-$('#map').on('click', '.fa.fa-plus-circle', e => {
-  let address = $('#routeInfo .address').html();
-  let lat = parseFloat($('#routeInfo .latitude').html());
-  let lng = parseFloat($('#routeInfo .longitude').html());
-  console.log("lat========:", lat)
-  console.log("lng========:", lng)
-  $('#sortable').append($(`<li class="single-route"><p>${address}</p></li>`));
-  Route.create(address, lat, lng);
-
-  let form = $("#addForm").html();
-  $("li.single-route:last-child").append(form);
-});
+    // let form = $("#addForm").html();
+    // $("li.single-route:last-child").append(form);
+  });
 
 
-$('#sortable').on('click','.fa.fa-minus-square', e => {
-  console.log("Its clicked!")
-  const routeId = $(e.target).data('routeid');
-  //!!!!!!!!Map also needs to be reload to update the data.
-  // !!!!!!!!!I don't like to do this below line... I think using ajax is fancy
-  // $(e.target).parent().remove();
-  // Route.delete(routeId)
 
-  //Below is alt way but still not working.....
-  Route.delete(routeId)
-  .then($('#sortable').empty())
-  .then(Route.all().then( allRoutes => {
-    allRoutes.map(route =>
-      $('#sortable').append(
-        `<li class="single-route"><span>${route.address}</span>` +
-        `<i class="fa fa-minus-square" data-routeid="${route.id}" aria-hidden="true"></i>` +
-        `</li>`
-      )
-    )
-  }))
+  $('#sortable').on('click','.fa.fa-minus-square', e => {
+    const routeId = $(e.target).data('routeid');
+    Route
+    .delete(routeId)
+    .then(() => reloadRouteList())
+  });
 
-});
+}) //End of Document.addEventListener
+
+// $('#map').on('click', '.fa.fa-plus-circle', e => {
+//   let address = $('#routeInfo .address').html();
+//   let lat = parseFloat($('#routeInfo .latitude').html());
+//   let lng = parseFloat($('#routeInfo .longitude').html());
+//   console.log("lat========:", lat)
+//   console.log("lng========:", lng)
+//   $('#sortable').append($(`<li class="single-route"><p>${address}</p></li>`));
+//   Route.create(address, lat, lng);
+//
+//   let form = $("#addForm").html();
+//   $("li.single-route:last-child").append(form);
+// });

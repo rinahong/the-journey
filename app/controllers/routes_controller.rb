@@ -48,10 +48,7 @@ class RoutesController < ApplicationController
       may_success = true
     end
 
-    render json: {
-      success: may_success,
-      msg: "hello"
-     }
+    render json: route
 
     # respond_to do |format|
     #   if @route.save
