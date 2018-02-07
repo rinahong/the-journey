@@ -1,3 +1,12 @@
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script>
+   $(function() {
+      $( "#sortable" ).sortable();
+   });
+</script>
+
 <h1>Editing Trip</h1>
 
 <%= render 'form', trip: @trip %>
@@ -6,6 +15,8 @@
 
 <div class="row">
 <div id="routes" class="col-3"><h3>Your Routes</h3>
+  <ul id="sortable">
+  </ul>
 </div>
 <div class="col-9">
   <div class="latlng"></div>

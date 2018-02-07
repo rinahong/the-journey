@@ -1,3 +1,18 @@
+// import {allRoutes} from './dom';
+
+function H (tagName, htmlAttrs = {}, ...elements) {
+  const newElement = document.createElement(tagName);
+  for (let attribute in htmlAttrs) {
+    newElement.setAttribute(attribute, htmlAttrs[attribute])
+  }
+  newElement.append(...elements);
+
+  return newElement;
+}
+
+const Route = {
+  
+}
 
 function createRoute(address, latitude, longitude) {
   const tripid = $('#map').data('tripid');
@@ -39,12 +54,26 @@ function allRoutes() {
   })
 }
 
+function deleteRoute(routeId) {
+  const myUrl = `http://localhost:3000/routes/${routeId}`;
+  return new Promise((resolve, reject) => {
+    resolve(fetch(
+       myUrl,
+      {
+        method: 'DELETE'
+      }
+    )
+     .then(res => res.json())
+    )
+  })
+}
+
 allRoutes().then(allRoutes => {
   allRoutes.map(route =>
-    $('#routes').append(
-      `<div class="single-route"><span>${route.address}</span>` +
-      `<i class="fa fa-minus-square" aria-hidden="true"></i>` +
-      `</div>`
+    $('#sortable').append(
+      `<li class="single-route"><span>${route.address}</span>` +
+      `<i class="fa fa-minus-square" data-routeid="${route.id}" aria-hidden="true"></i>` +
+      `</li>`
     )
   )
 })
@@ -57,10 +86,33 @@ $('#map').on('click', '.fa.fa-plus-circle', e => {
   let lng = parseFloat($('#routeInfo .longitude').html());
   console.log("lat========:", lat)
   console.log("lng========:", lng)
-  $('#routes').append($(`<div class="single-route"><p>${address}</p></div>`));
+  $('#sortable').append($(`<li class="single-route"><p>${address}</p></li>`));
   createRoute(address, lat, lng);
 
-  $('#calendar').fullCalendar('refetchEvents');
   let form = $("#addForm").html();
-  $("div.single-route:last-child").append(form);
+  $("li.single-route:last-child").append(form);
+});
+
+
+$('#sortable').on('click','.fa.fa-minus-square', e => {
+  console.log("Its clicked!")
+  const routeId = $(e.target).data('routeid');
+  //!!!!!!!!Map also needs to be reload to update the data.
+  // !!!!!!!!!I don't like to do this below line... I think using ajax is fancy
+  // $(e.target).parent().remove();
+  // deleteRoute(routeId)
+
+  //Below is alt way but still not working.....
+  deleteRoute(routeId)
+  .then($('#sortable').empty())
+  .then(allRoutes().then( allRoutes => {
+    allRoutes.map(route =>
+      $('#sortable').append(
+        `<li class="single-route"><span>${route.address}</span>` +
+        `<i class="fa fa-minus-square" data-routeid="${route.id}" aria-hidden="true"></i>` +
+        `</li>`
+      )
+    )
+  }))
+
 });

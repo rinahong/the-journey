@@ -27,8 +27,14 @@ class RoutesController < ApplicationController
   # POST /routes.json
   def create
     route = Route.new route_params
-    route.start_date = DateTime.now() + rand(1...50).days
-    route.end_date = route.start_date + 1.days
+    trip = Trip.find params[:trip_id]
+    if trip.routes.empty?
+      route.start_date = trip.start_date
+    else
+      route.start_date = trip.routes.last.end_date
+    end
+
+    route.end_date = route.start_date + 2.days
 
     p "route.address >>>>>>>>>>>>>>>>>>>> "
     p route.address
@@ -75,10 +81,10 @@ class RoutesController < ApplicationController
   # DELETE /routes/1
   # DELETE /routes/1.json
   def destroy
-    @route.destroy
-    respond_to do |format|
-      format.html { redirect_to routes_url, notice: 'Route was successfully destroyed.' }
-      format.json { head :no_content }
+    if @route.destroy
+      render json: :ok
+    else
+      head :bad_request
     end
   end
 

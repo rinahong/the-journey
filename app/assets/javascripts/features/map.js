@@ -60,7 +60,8 @@ function addLatLng(event) {
   path = poly.getPath();
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
-  console.log("Testing event latlng>>>>>>>",event.latLng)
+  console.log("Testing event latlng>>>>>>>", event.latLng)
+  console.log("Testing>>>>>>>", event.getPath)
   path.push(event.latLng);
   // console.log(`path.b, lat:`, path.lat());
   // console.log(`path.b, lng:`, path.lng());
@@ -71,22 +72,6 @@ function addLatLng(event) {
      position: event.latLng,
      title: '#' + path.getLength(),
      map: map
-  });
-}
-
-//For searching by address!!!!!!!
-function geocodeAddress(geocoder, resultsMap) {
-  let address = document.getElementById('address').value;
-  geocoder.geocode({'address': address}, function(results, status) {
-    if (status === 'OK') {
-      resultsMap.setCenter(results[0].geometry.location);
-      let marker = new google.maps.Marker({
-        map: resultsMap,
-        position: results[0].geometry.location
-      });
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
   });
 }
 
@@ -152,6 +137,22 @@ function geocodeLatLng(geocoder, map, infowindow, path) {
   });
 }
 
+//For searching by address!!!!!!!
+function geocodeAddress(geocoder, resultsMap) {
+  let address = document.getElementById('address').value;
+  geocoder.geocode({'address': address}, function(results, status) {
+    if (status === 'OK') {
+      resultsMap.setCenter(results[0].geometry.location);
+      let marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
 
 function displayMarker(routeLat, routeLng) {
   let latLng = {lat: routeLat, lng: routeLng};
@@ -165,16 +166,16 @@ function displayMarker(routeLat, routeLng) {
 }
 
 function displayRoutePath(routePathCoordinates) {
-   var lineSymbol = {
+   let lineSymbol = {
           path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
         };
-   routePathLines = new google.maps.Polyline({
+   let routePathLines = new google.maps.Polyline({
                   path: routePathCoordinates,
                   icons: [
                     {
                       icon: lineSymbol,
                       //offset: '20%',
-                      repeat: '10%'
+                      repeat: '15%'
                     }
                   ],
                   strokeColor: '#FF0000',
