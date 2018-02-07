@@ -41,6 +41,7 @@ function initMap() {
   // Add a listener for the click event for polylines on trip controller edit page
   if(clickable) {
     map.addListener('click', addLatLng);
+    // map.addListener('click');
   }
 
   allRoutes().then(allRoutes => {
@@ -59,6 +60,7 @@ function addLatLng(event) {
   path = poly.getPath();
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
+  console.log("Testing event latlng>>>>>>>",event.latLng)
   path.push(event.latLng);
   // console.log(`path.b, lat:`, path.lat());
   // console.log(`path.b, lng:`, path.lng());
@@ -163,8 +165,18 @@ function displayMarker(routeLat, routeLng) {
 }
 
 function displayRoutePath(routePathCoordinates) {
+   var lineSymbol = {
+          path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+        };
    routePathLines = new google.maps.Polyline({
                   path: routePathCoordinates,
+                  icons: [
+                    {
+                      icon: lineSymbol,
+                      //offset: '20%',
+                      repeat: '10%'
+                    }
+                  ],
                   strokeColor: '#FF0000',
                   strokeOpacity: 1.0,
                   strokeWeight: 2

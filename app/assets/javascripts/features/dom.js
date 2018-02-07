@@ -41,7 +41,11 @@ function allRoutes() {
 
 allRoutes().then(allRoutes => {
   allRoutes.map(route =>
-    $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
+    $('#routes').append(
+      `<div class="single-route"><span>${route.address}</span>` +
+      `<i class="fa fa-minus-square" aria-hidden="true"></i>` +
+      `</div>`
+    )
   )
 })
 
