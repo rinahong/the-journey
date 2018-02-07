@@ -1,12 +1,12 @@
 // import qs, qsa from './helpers'
-// import {all} from './dom';
+// import {allRoutes} from './dom';
 let poly;
 let map;
 let geocoder;
 let infowindow;
 let path;
 
-function all() {
+function allRoutes() {
   const tripid = $('#map').data('tripid');
   const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
   return new Promise((resolve, reject) => {
@@ -43,13 +43,12 @@ function initMap() {
     map.addListener('click', addLatLng);
   }
 
-  all().then(allRoutes => {
+  allRoutes().then(allRoutes => {
     let routePathCoordinatesArray = [];
     allRoutes.map(route => {
       displayMarker(route.latitude, route.longitude)
       routePathCoordinatesArray.push({lat: route.latitude , lng: route.longitude});
     })
-    console.log("Array passing>>>>>>>",routePathCoordinatesArray)
     displayRoutePath(routePathCoordinatesArray);
   });
 }
@@ -61,8 +60,8 @@ function addLatLng(event) {
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
   path.push(event.latLng);
-  console.log("poly get path>>>>>>>>>> ", path);
-  // displayLocation(path.b[path.b.length - 1]);
+  // console.log(`path.b, lat:`, path.lat());
+  // console.log(`path.b, lng:`, path.lng());
   geocodeLatLng(geocoder, map, infowindow, path.b[path.b.length - 1]);
 
   // Add a new marker at the new plotted point on the polyline.
@@ -152,16 +151,8 @@ function geocodeLatLng(geocoder, map, infowindow, path) {
 }
 
 
-function displayLocation(path) {
-    console.log(`path.b, lat:`, path.lat());
-    console.log(`path.b, lng:`, path.lng());
-    //qs('.latlng')
-}
-
 function displayMarker(routeLat, routeLng) {
-  let routePathCoordinates = [];
   let latLng = {lat: routeLat, lng: routeLng};
-  routePathCoordinates.push(latLng);
   if(latLng !== null) {
     var marker = new google.maps.Marker({
       position: latLng,
@@ -169,11 +160,9 @@ function displayMarker(routeLat, routeLng) {
       title: 'Hello World!'
     });
   }
-
 }
 
 function displayRoutePath(routePathCoordinates) {
-    console.log("After array passed", routePathCoordinates)
    routePathLines = new google.maps.Polyline({
                   path: routePathCoordinates,
                   strokeColor: '#FF0000',
@@ -181,8 +170,4 @@ function displayRoutePath(routePathCoordinates) {
                   strokeWeight: 2
                 });
    routePathLines.setMap(map);
-}
-
-function deleteLatLng(event) {
-
 }

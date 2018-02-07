@@ -1,5 +1,5 @@
 
-function create(address, latitude, longitude) {
+function createRoute(address, latitude, longitude) {
   const tripid = $('#map').data('tripid');
   const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
   // console.log("lat in create========:", latitude)
@@ -29,7 +29,7 @@ function create(address, latitude, longitude) {
   })
 }
 
-function all() {
+function allRoutes() {
   const tripid = $('#map').data('tripid');
   const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
   return new Promise((resolve, reject) => {
@@ -39,7 +39,7 @@ function all() {
   })
 }
 
-all().then(allRoutes => {
+allRoutes().then(allRoutes => {
   allRoutes.map(route =>
     $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
   )
@@ -54,7 +54,7 @@ $('#map').on('click', '.fa.fa-plus-circle', e => {
   console.log("lat========:", lat)
   console.log("lng========:", lng)
   $('#routes').append($(`<div class="single-route"><p>${address}</p></div>`));
-  create(address, lat, lng);
+  createRoute(address, lat, lng);
 
   $('#calendar').fullCalendar('refetchEvents');
   let form = $("#addForm").html();
