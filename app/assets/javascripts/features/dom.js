@@ -27,7 +27,7 @@ const Route = {
     }
     console.log("!!!!!!", dataToSend)
 
-    fetch(
+    return fetch(
       myUrl,
       {
         method: 'POST',
@@ -100,20 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(allRoutes => {
         $('#sortable').empty();
         $('#sortable').append(...renderRoutes(allRoutes));
+        initMap();
       })
   }
 
   reloadRouteList();
 
-  //Create New Route on click of + icon
+  // Create New Route on click of + icon
   $('#map').on('click', '.fa.fa-plus-circle', e => {
     let address = $('#routeInfo .address').html();
     let lat = parseFloat($('#routeInfo .latitude').html());
     let lng = parseFloat($('#routeInfo .longitude').html());
-    console.log("lat========:", lat)
-    console.log("lng========:", lng)
     Route.create(address, lat, lng)
-      .then(data => console.log(data))
       .then(() => reloadRouteList())
 
     // let form = $("#addForm").html();
@@ -125,21 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#sortable').on('click','.fa.fa-minus-square', e => {
     const routeId = $(e.target).data('routeid');
     Route
-    .delete(routeId)
-    .then(() => reloadRouteList())
+      .delete(routeId)
+      .then(() => reloadRouteList())
   });
 
 }) //End of Document.addEventListener
-
-// $('#map').on('click', '.fa.fa-plus-circle', e => {
-//   let address = $('#routeInfo .address').html();
-//   let lat = parseFloat($('#routeInfo .latitude').html());
-//   let lng = parseFloat($('#routeInfo .longitude').html());
-//   console.log("lat========:", lat)
-//   console.log("lng========:", lng)
-//   $('#sortable').append($(`<li class="single-route"><p>${address}</p></li>`));
-//   Route.create(address, lat, lng);
-//
-//   let form = $("#addForm").html();
-//   $("li.single-route:last-child").append(form);
-// });
