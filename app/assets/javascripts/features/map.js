@@ -44,24 +44,24 @@ function initMap() {
   }
 
   all().then(allRoutes => {
+    let routePathCoordinatesArray = [];
     allRoutes.map(route => {
-      // console.log("Route======", route)
-      // console.log("RouteLat>>>>>>", route.latitude)
-      // console.log("RouteLng>>>>>>", route.longitude)
       displayMarker(route.latitude, route.longitude)
+      routePathCoordinatesArray.push({lat: route.latitude , lng: route.longitude});
     })
+    console.log("Array passing>>>>>>>",routePathCoordinatesArray)
+    displayRoutePath(routePathCoordinatesArray);
   });
-
 }
 
 //For Polylines!!!!!!!
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
   path = poly.getPath();
-
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
   path.push(event.latLng);
+  console.log("poly get path>>>>>>>>>> ", path);
   // displayLocation(path.b[path.b.length - 1]);
   geocodeLatLng(geocoder, map, infowindow, path.b[path.b.length - 1]);
 
@@ -124,14 +124,13 @@ function geocodeLatLng(geocoder, map, infowindow, path) {
             }
         }
         address = addressArr.join(', ');
-        console.log(address);
         map.setZoom(11);
         let marker = new google.maps.Marker({
           position: latlng,
           map: map
         });
-        console.log(`path.b, lat:`, path.lat());
-        console.log(`path.b, lng:`, path.lng());
+        // console.log(`path.b, lat:`, path.lat());
+        // console.log(`path.b, lng:`, path.lng());
         let contentString = '<div id="content">'+
            '<div id="routeInfo">' +
            '<span class="address">' + address + '</span>' +
@@ -160,14 +159,28 @@ function displayLocation(path) {
 }
 
 function displayMarker(routeLat, routeLng) {
-  var latLng = {lat: routeLat, lng: routeLng};
-    if(latLng !== null) {
-      var marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        title: 'Hello World!'
-      });
-    }
+  let routePathCoordinates = [];
+  let latLng = {lat: routeLat, lng: routeLng};
+  routePathCoordinates.push(latLng);
+  if(latLng !== null) {
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: 'Hello World!'
+    });
+  }
+
+}
+
+function displayRoutePath(routePathCoordinates) {
+    console.log("After array passed", routePathCoordinates)
+   routePathLines = new google.maps.Polyline({
+                  path: routePathCoordinates,
+                  strokeColor: '#FF0000',
+                  strokeOpacity: 1.0,
+                  strokeWeight: 2
+                });
+   routePathLines.setMap(map);
 }
 
 function deleteLatLng(event) {

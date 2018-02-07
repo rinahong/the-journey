@@ -39,7 +39,7 @@ function all() {
   })
 }
 
-all().then(allRoutes => { console.log("allRoute>>>>",allRoutes)
+all().then(allRoutes => {
   allRoutes.map(route =>
     $('#routes').append(`<div class="single-route"><p>${route.address}</p></div>`)
   )

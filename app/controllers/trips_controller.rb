@@ -1,12 +1,12 @@
 class TripsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_user!, except: [:show]
+  before_action :authorize_user!, except: [:show, :create]
 
   # GET /trips/1
   # GET /trips/1.json
   def show
-    @current_user_like = current_user.likes.find_by_trip_id(@trip)  
+    @current_user_like = current_user.likes.find_by_trip_id(@trip)
   end
 
   # GET /trips/new

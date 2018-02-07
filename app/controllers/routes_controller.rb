@@ -5,7 +5,7 @@ class RoutesController < ApplicationController
   # GET /routes
   # GET /routes.json
   def index
-    @routes = Route.where(trip_id:params[:trip_id])
+    @routes = Route.where(trip_id:params[:trip_id]).order(created_at: :asc)
     render json: @routes
   end
 
