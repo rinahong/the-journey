@@ -1,25 +1,14 @@
-// import qs, qsa from './helpers'
-// import {allRoutes} from './dom';
+
 let poly;
 let map;
 let geocoder;
 let infowindow;
 let path;
 
-function allRoutes() {
-  const tripid = $('#map').data('tripid');
-  const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
-  return new Promise((resolve, reject) => {
-    resolve(fetch(myUrl)
-     .then(res => res.json())
-    )
-  })
-}
-
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
-    center: {lat: 49.879, lng: 13.624}  // Center the map on Chicago, USA.
+    center: {lat: 49.879, lng: 13.624}  // Center the map on Hlohovice, Czechia.
   });
 
   infowindow = new google.maps.InfoWindow;
@@ -44,7 +33,7 @@ function initMap() {
     // map.addListener('click');
   }
 
-  allRoutes().then(allRoutes => {
+  Route.all().then( allRoutes => {
     let routePathCoordinatesArray = [];
     allRoutes.map(route => {
       displayMarker(route.latitude, route.longitude)

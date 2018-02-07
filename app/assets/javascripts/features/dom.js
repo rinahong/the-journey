@@ -1,8 +1,3 @@
-// import {allRoutes} from './dom';
-
-function ready (fn) {
-  document.addEventListener('DOMContentLoaded', fn);
-}
 
 // Helper method to create new node.
 function H (tagName, htmlAttrs = {}, ...elements) {
@@ -25,7 +20,6 @@ const Route = {
       latitude: latitude,
       longitude: longitude
     }
-    console.log("!!!!!!", dataToSend)
 
     return fetch(
       myUrl,
@@ -49,28 +43,14 @@ const Route = {
 
   delete(routeId) {
     const myUrl = `http://localhost:3000/routes/${routeId}`;
-    return new Promise((resolve, reject) => {
-      resolve(fetch(
+    return fetch(
          myUrl,
         {
           method: 'DELETE'
         }
       )
        .then(res => res.json())
-      )
-    })
-  },
-
-  // delete(routeId) {
-  //   const myUrl = `http://localhost:3000/routes/${routeId}`;
-  //   return fetch(
-  //        myUrl,
-  //       {
-  //         method: 'DELETE'
-  //       }
-  //     )
-  //      .then(res => res.json())
-  // }
+  }
 } //End Of Route
 
 function renderRoutes (allRoutes) {
@@ -82,16 +62,6 @@ function renderRoutes (allRoutes) {
     )
   })
 }
-
-// Route.all().then(allRoutes => {
-//   allRoutes.map(route =>
-//     $('#sortable').append(
-//       `<li class="single-route"><span>${route.address}</span>` +
-//       `<i class="fa fa-minus-square" data-routeid="${route.id}" aria-hidden="true"></i>` +
-//       `</li>`
-//     )
-//   )
-// })
 
 document.addEventListener('DOMContentLoaded', () => {
 

@@ -37,7 +37,7 @@
 <%= pluralize(@trip.likes.count, 'like') %>
 
 <br />
- 
+
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', user_path(current_user) %> |
 <%= link_to 'Expense Tracker', trip_expense_trackers_path(@trip) %>
@@ -62,6 +62,8 @@
 
 <%= javascript_include_tag 'features/chart' %>
 <%= javascript_include_tag 'features/calendar' %>
+<%= javascript_include_tag 'features/dom' %>
 <%= javascript_include_tag 'features/map' %>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_SECRET'] %>&callback=initMap"
 async defer></script>
