@@ -46,7 +46,7 @@ const Route = {
     return fetch(
       myUrl,
       {
-        method: 'DELETE'
+        method: 'DELETE',
       }
     )
     .then(res => res.json())
@@ -58,8 +58,9 @@ const Route = {
       .then(res => res.json());
   },
 
-  update(routeId, data) {
-    const myUrl = `http://localhost:3000/routes/${routeId}`;
+  dateUpdater(data) {
+    const tripid = $('#map').data('tripid');
+    const myUrl = `http://localhost:3000//trips/${tripid}/routes/date_updater`;
     return fetch (
       myUrl,
       {
@@ -150,8 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#sortable').on('click','.fa.fa-minus-square', e => {
     const routeId = $(e.target).data('routeid');
+    const routeIndex = $( "li" ).index($(`li#${routeId}`))
+    console.log(routeIndex)
     Route
       .delete(routeId)
+      .then(() => Route.dateUpdater({delete_route_at_index: routeIndex}))
       .then(() => reloadRouteList())
   });
 

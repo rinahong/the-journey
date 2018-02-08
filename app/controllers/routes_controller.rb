@@ -1,9 +1,8 @@
 class RoutesController < ApplicationController
   # before_action :authenticate_user!, except: [:show]
-  before_action :set_route, only: [:show, :edit, :update, :destroy]
+  before_action :set_route, only: [:show, :edit, :destroy]
   # before_action :authorize_user!,
   # GET /routes
-  # GET /routes.json
   def index
     @routes = Route.where(trip_id:params[:trip_id]).order(start_date: :asc)
     render json: @routes
@@ -24,11 +23,6 @@ class RoutesController < ApplicationController
   def edit
   end
 
-  def move
-    r = RouteMover.new(params[:id], params[:new_position])
-    r.move_save!
-  end
-
   # POST /routes
   # POST /routes.json
   def create
@@ -46,12 +40,6 @@ class RoutesController < ApplicationController
 
     route.end_date = route.start_date + route.duration
 
-    p "route.address >>>>>>>>>>>>>>>>>>>> "
-    p route.address
-
-    p "route.trip_id >>>>>>>>>>>>>>>>>>>> "
-    p route.trip_id
-
     may_success = false
 
     if route.save
@@ -59,35 +47,61 @@ class RoutesController < ApplicationController
     end
 
     render json: route
+  end
 
-    # respond_to do |format|
-    #   if @route.save
-    #     format.html { redirect_to @route, notice: 'Route was successfully created.' }
-    #     format.json { render :show, status: :created, location: @route }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @route.errors, status: :unprocessable_entity }
-    #   end
-    # end
+  def move
+    r = RouteMover.new(params[:id], params[:new_position])
+    r.move_save!
   end
 
   # PATCH/PUT /routes/1
   # PATCH/PUT /routes/1.json
   def update
-      if @route.update(route_params)
-        render json: @route
-      else
-        render json: @route.errors, status: :unprocessable_entity
-      end
+    date_updater (params[:delete_route_at_index])
+    render json: :ok
+    # if @route.update(route_params)
+    #   render json: @route
+    # else
+    #   render json: @route.errors, status: :unprocessable_entity
+    # end
   end
 
   # DELETE /routes/1
   # DELETE /routes/1.json
   def destroy
     if @route.destroy
-      render json: :ok
+      render json: :ok  #redirect_to update to update all dates
     else
       head :bad_request
+    end
+  end
+
+  def date_updater
+    trip = Trip.find params[:trip_id]
+    @trip_routes = trip.routes.order(start_date: :asc).to_a
+    dataIndex = params[:delete_route_at_index]
+    puts "============all_trip_routes============================"
+
+    routes_to_update = @trip_routes[dataIndex..@trip_routes.length]
+    prev_route = @trip_routes[dataIndex-1]
+
+    routes_to_update.each_with_index do |each_route, index|
+      if dataIndex == 0
+        puts dataIndex
+        puts each_route.address
+      #   each_route.start_date = trip.start_date
+      #   each_route.end_date = each_route.start_date + each_route.duration
+      #   prev_route = each_route
+      else
+        each_route.start_date = prev_route.end_date
+        each_route.end_date = each_route.start_date + each_route.duration
+        prev_route = each_route
+      end
+    end
+    if routes_to_update.each(&:save)
+      render json: :ok
+    else
+      render json: :unprocessable_entity
     end
   end
 
