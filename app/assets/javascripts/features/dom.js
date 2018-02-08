@@ -52,6 +52,12 @@ const Route = {
     .then(res => res.json())
   },
 
+  get (routeId) {
+    const myUrl = `http://localhost:3000/routes/${routeId}`;
+    return fetch(myUrl)
+      .then(res => res.json());
+  },
+
   update(routeId, data) {
     const myUrl = `http://localhost:3000/routes/${routeId}`;
     return fetch (
@@ -65,6 +71,20 @@ const Route = {
       }
     )
     .then(res => res.json())
+  },
+
+  move(routeId, data) {
+    const myUrl = `http://localhost:3000/routes/${routeId}/move`;
+    return fetch (
+      myUrl,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
+    )
   }
 
 } //End Of Route
@@ -85,52 +105,72 @@ function renderRoutes (allRoutes) {
   }) // End Of allRoutes.map
 } // End of renderRoutes()
 
-function dragStart(event) {
-    event.dataTransfer.setData("Text", event.currentTarget.id);
-    console.log(event.currentTarget)
-    event.currentTarget.style.color = 'green';
-}
-
-function allowDrop(event) {
-    event.currentTarget.style.color = 'blue';
-    event.preventDefault();
-}
-
-function drop(event) {
-    event.preventDefault();
-    var data = event.dataTransfer.getData("Text");
-    event.target.appendChild(document.getElementById(data));
-}
-
 function sortRouteList() {
+  let originalIndexAt = null;
+  let newPositionIndexAt = null;
   $( "#sortable" ).sortable({
+    start: function (event, ui) {
+       // console.log("on start>>>", ui.item.index())
+       originalIndexAt = ui.item.index()
+    },
     update: function( event, ui ) {
       let routeId = ui.item.context.id;
+      newPositionIndexAt = ui.item.index();
       // Route.update(routeId, {address: "rinaChanged"});
-      console.log(ui)
-      console.log()
+      // console.log("after update>>>",ui.item.index())
+      // console.log("update ui>>>>>>",ui)
+      // updateRouteStartDate(originalIndexAt, newPositionIndexAt)
+      Route.move(routeId, {new_position: newPositionIndexAt}).then((res) => {
+        reloadRouteList()
+        // res.json()
+      })
     }
  });
 }
 
+function updateRouteStartDate(originalAt, newPositionAt) {
+  const tripStartDate = $('#routes').data('tripstartdate')
+  if (originalAt > newPositionAt) { //List MoveUp
+    if(newPositionAt === 0) {
+      let routeIDFromList = null;
+      let currentRoute = null;
+      let previousRoute  = null;
+      for (let i = 0; i < $('.single-route').length; i++ ) {
+        routeIDFromList = $('.single-route').eq(i).attr('id');
+        currentRoute = Route.get(routeIDFromList);
+        if (i === 0) { //If first route
+          previousRoute = currentRoute;
+          Route.update(routeIDFromList, {start_date: tripStartDate, end_date: tripStartDate + currentRoute.duration });
+          continue;
+        }
+
+        Route.update(routeIDFromList, {start_date: previousRoute.end_date, end_date: previousRoute.end_date + currentRoute.duration});
+        previousRoute = currentRoute;
+      }
+    } else {
+      console.log("Dont do anything...")
+    }
+  } else { //List MoveDown
+    console.log("Dont do anything...")
+  }
+
+  // console.log("originalAt: ",originalAt, " newPositionAt: ", newPositionAt,
+  // " sortable: ", $('.single-route').eq(newPositionAt).attr('id'))
+}
+
+function reloadRouteList () {
+  Route.all()
+    .then(allRoutes => {
+      $('#sortable').empty();
+      $('#sortable').append(...renderRoutes(allRoutes));
+      initMap();
+
+      sortRouteList();
+    })
+}
 
 //Jquery Events Handler
 document.addEventListener('DOMContentLoaded', () => {
-
-  function reloadRouteList () {
-    Route.all()
-      .then(allRoutes => {
-        $('#sortable').empty();
-        $('#sortable').append(...renderRoutes(allRoutes));
-        initMap();
-        let index = null;
-        $('li.single-route').on('mousedown', e => {
-          index = $( "li" ).index(e.currentTarget);
-          console.log("=====list Index", index);
-        })
-        sortRouteList();
-      })
-  }
 
   reloadRouteList();
 

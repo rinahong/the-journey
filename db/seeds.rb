@@ -49,12 +49,10 @@ users.each do |user|
       tags_arr.push(tags.sample)
     end
     s_d = DateTime.new(2018,2,01) + rand(1...50).days
-    e_d = s_d + rand(1...10).days
     Trip.create(
       title: Faker::Address.country,
       note: Faker::HarryPotter.quote,
       start_date: s_d,
-      end_date: e_d,
       user_id: user.id,
       tag_list: tags_arr
     )
@@ -67,14 +65,21 @@ puts Cowsay.say("Created #{trips.count} trips", :ghostbusters)
 
 trips.each do |trip|
   rand(2..5).times.each do
-    s_d = trip.start_date + rand(1..3).days
-    e_d = s_d + 1.days
+    if trip.routes.empty?
+      s_d = trip.start_date
+    else
+      s_d = trip.routes.last.end_date
+    end
+    d = rand(1..4).days
+    e_d = s_d + d
+    
     Route.create(
       address: "#{trip.title}",
       latitude: 39.2780017  + rand(1...12),
       longitude: -6.1203521 + rand(1...36),
       start_date: s_d,
       end_date: e_d,
+      duration: d,
       trip_id: trip.id
     )
   end

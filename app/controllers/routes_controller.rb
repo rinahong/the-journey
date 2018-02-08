@@ -12,6 +12,7 @@ class RoutesController < ApplicationController
   # GET /routes/1
   # GET /routes/1.json
   def show
+    render json: @route
   end
 
   # GET /routes/new
@@ -21,6 +22,11 @@ class RoutesController < ApplicationController
 
   # GET /routes/1/edit
   def edit
+  end
+
+  def move
+    r = RouteMover.new(params[:id], params[:new_position])
+    r.move!
   end
 
   # POST /routes
@@ -34,7 +40,11 @@ class RoutesController < ApplicationController
       route.start_date = trip.routes.last.end_date
     end
 
-    route.end_date = route.start_date + 2.days
+    if route.duration.nil?
+      route.duration = 2.days
+    end
+
+    route.end_date = route.start_date + route.duration
 
     p "route.address >>>>>>>>>>>>>>>>>>>> "
     p route.address

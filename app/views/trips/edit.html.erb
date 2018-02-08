@@ -19,7 +19,7 @@ ul {
 <%= link_to 'Back', trips_path %>
 
 <div class="row">
-<div id="routes" class="col-3"><h3>Your Routes</h3>
+<div id="routes" class="col-3" data-tripstartdate="<%= @trip.start_date %>"><h3>Your Routes</h3>
    <!-- ondrop="drop(event)" ondragover="allowDrop(event)" -->
   <ol id="sortable">
   </ol>
