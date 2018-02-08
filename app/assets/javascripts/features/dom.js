@@ -89,7 +89,6 @@ const Route = {
 
 } //End Of Route
 
-
 function renderRoutes (allRoutes) {
   return allRoutes.map(route => {
     return H( 'li',
@@ -109,17 +108,9 @@ function sortRouteList() {
   let originalIndexAt = null;
   let newPositionIndexAt = null;
   $( "#sortable" ).sortable({
-    start: function (event, ui) {
-       // console.log("on start>>>", ui.item.index())
-       originalIndexAt = ui.item.index()
-    },
     update: function( event, ui ) {
       let routeId = ui.item.context.id;
       newPositionIndexAt = ui.item.index();
-      // Route.update(routeId, {address: "rinaChanged"});
-      // console.log("after update>>>",ui.item.index())
-      // console.log("update ui>>>>>>",ui)
-      // updateRouteStartDate(originalIndexAt, newPositionIndexAt)
       Route.move(routeId, {new_position: newPositionIndexAt}).then((res) => {
         reloadRouteList()
         // res.json()
@@ -128,43 +119,14 @@ function sortRouteList() {
  });
 }
 
-function updateRouteStartDate(originalAt, newPositionAt) {
-  const tripStartDate = $('#routes').data('tripstartdate')
-  if (originalAt > newPositionAt) { //List MoveUp
-    if(newPositionAt === 0) {
-      let routeIDFromList = null;
-      let currentRoute = null;
-      let previousRoute  = null;
-      for (let i = 0; i < $('.single-route').length; i++ ) {
-        routeIDFromList = $('.single-route').eq(i).attr('id');
-        currentRoute = Route.get(routeIDFromList);
-        if (i === 0) { //If first route
-          previousRoute = currentRoute;
-          Route.update(routeIDFromList, {start_date: tripStartDate, end_date: tripStartDate + currentRoute.duration });
-          continue;
-        }
-
-        Route.update(routeIDFromList, {start_date: previousRoute.end_date, end_date: previousRoute.end_date + currentRoute.duration});
-        previousRoute = currentRoute;
-      }
-    } else {
-      console.log("Dont do anything...")
-    }
-  } else { //List MoveDown
-    console.log("Dont do anything...")
-  }
-
-  // console.log("originalAt: ",originalAt, " newPositionAt: ", newPositionAt,
-  // " sortable: ", $('.single-route').eq(newPositionAt).attr('id'))
-}
-
+// Get all routes and reload with new data. Call initMap to update
 function reloadRouteList () {
   Route.all()
     .then(allRoutes => {
       $('#sortable').empty();
       $('#sortable').append(...renderRoutes(allRoutes));
       initMap();
-
+      // Sort routes and update new data into db
       sortRouteList();
     })
 }

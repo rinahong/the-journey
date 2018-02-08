@@ -26,7 +26,7 @@ class RoutesController < ApplicationController
 
   def move
     r = RouteMover.new(params[:id], params[:new_position])
-    r.move!
+    r.move_save!
   end
 
   # POST /routes
