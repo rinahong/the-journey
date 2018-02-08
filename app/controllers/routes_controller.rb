@@ -41,7 +41,7 @@ class RoutesController < ApplicationController
     end
 
     if route.duration.nil?
-      route.duration = 2.days
+      route.duration = rand(1..4).days
     end
 
     route.end_date = route.start_date + route.duration

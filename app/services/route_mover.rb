@@ -34,7 +34,7 @@ class RouteMover
         else
           prev_route = trip_routes[index-1]
           each_route.start_date = prev_route.end_date
-          each_route.end_date = each_route.start_date + prev_route.duration
+          each_route.end_date = each_route.start_date + each_route.duration
         end
       end
     end
