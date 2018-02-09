@@ -1,0 +1,23 @@
+<%= div_for(expense_tracker) do %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= expense_tracker.category %>
+    </div>
+
+    <div class="col-md-2">
+      <%= expense_tracker.date %>
+    </div>
+
+    <div class="col-md-3">
+      <%= expense_tracker.description %>
+    </div>
+
+    <div class="col-md-1">
+      <%= expense_tracker.price %>
+    </div>
+
+    <div class="col-md-2">
+      <%= link_to "Edit", [:edit, expense_tracker], remote: true, class: "btn btn-link btn-sm" %>
+    </div>
+  </div>
+<% end %>

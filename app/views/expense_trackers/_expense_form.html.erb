@@ -1,0 +1,42 @@
+<%= div_for(expense_tracker) do %>
+  <%= simple_form_for(expense_tracker, remote: true) do |f| %>
+
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.input :category, placeholder: "Category" %>
+      </div>
+
+      <div class="col-md-2">
+        <%= f.input :date, placeholder: "Date" %>
+      </div>
+
+      <div class="col-md-3">
+        <%= f.input :description, placeholder: "Description" %>
+      </div>
+
+      <div class="col-md-2">
+        <%= f.input :price, placeholder: "Price" %>
+      </div>
+
+      <div class="col-md-2">
+        <%= f.button :submit, class: "btn-sm" %>
+
+        <% if expense_tracker.persisted? %>
+          <%= link_to "Cancel", [expense_tracker], remote: true, class: "btn btn-link-muted btn-sm" %>
+        <% else %>
+          <%= link_to "Cancel", [:contacts], remote: true, class: "btn btn-link-muted btn-sm" %>
+        <% end %>
+
+        <% if expense_tracker.persisted? %>
+          <%= link_to [expense_tracker],
+                      method: :delete,
+                      remote: true,
+                      data: { confirm: "Are you sure to delete this expense data?" },
+                      class: "btn btn-link-danger btn-sm pull-right" do %>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
