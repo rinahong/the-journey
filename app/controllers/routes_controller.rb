@@ -56,15 +56,13 @@ class RoutesController < ApplicationController
 
   # PATCH/PUT /routes/1
   # PATCH/PUT /routes/1.json
-  def update
-    date_updater (params[:delete_route_at_index])
-    render json: :ok
+  # def update
     # if @route.update(route_params)
     #   render json: @route
     # else
     #   render json: @route.errors, status: :unprocessable_entity
     # end
-  end
+  # end
 
   # DELETE /routes/1
   # DELETE /routes/1.json
