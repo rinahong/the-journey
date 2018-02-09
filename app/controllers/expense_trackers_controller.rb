@@ -49,8 +49,6 @@ class ExpenseTrackersController < ApplicationController
 
     respond_to do |format|
       if @expense_tracker.save
-        puts "================Im in create and if block==============="
-        # format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully created.' }
         format.js { render 'add_expense_data_sjr'}
       else
         format.html { render :new }

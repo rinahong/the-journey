@@ -1,11 +1,3 @@
-<%= simple_form_for @expense_tracker, url: trip_expense_trackers_path(@trip) do |form| %>
-  <%= form.input :category %>
-  <%= form.input :date %>
-  <%= form.input :description %>
-  <%= form.input :price %>
-  <%= form.submit class: 'btn btn-primary' %>
-<% end %>
-
 
 <h1>Expense Trackers</h1>
 <%= link_to "New ExpenseTracker", add_form_path, {method: :post,  remote: true} %>
