@@ -14,6 +14,9 @@ Rails.application.routes.draw do
         patch :date_updater
       end
     end
+    # member do
+    #   patch :update_all_routes
+    # end
     resources :expense_trackers, shallow: true
     resources :likes, only: [:create, :destroy], shallow: true
   end

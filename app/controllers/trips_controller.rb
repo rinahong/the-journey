@@ -3,7 +3,6 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
   before_action :authorize_user!, except: [:show, :create]
 
-
   # GET /trips/1
   # GET /trips/1.json
   def show
@@ -47,11 +46,15 @@ class TripsController < ApplicationController
   # PATCH/PUT /trips/1
   # PATCH/PUT /trips/1.json
   def update
-    @tags = params[:tag_list]
-    if @trip.update(trip_params)
-      redirect_to @trip, notice: 'Trip was successfully updated.'
-    else
-      render :edit, alert: "Couldn't Update..."
+    @tags = params[:tag_list];
+    respond_to do |format|
+      if @trip.update(trip_params)
+        format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
+        format.json { render :show, status: :ok, location: @trip }
+      else
+        format.html { render :edit }
+        format.json { render json: @trip.errors, status: :unprocessable_entity }
+      end
     end
   end
 

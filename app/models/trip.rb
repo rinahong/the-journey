@@ -9,9 +9,5 @@ class Trip < ApplicationRecord
   validates :title, presence: true
 
   acts_as_taggable
-
-  def check
-
-  end
-
+  
 end
