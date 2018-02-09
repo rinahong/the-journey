@@ -91,16 +91,17 @@ const Route = {
 } //End Of Route
 
 function renderRoutes (allRoutes) {
-  return allRoutes.map(route => {
+  return allRoutes.map(route => { console.log(route.start_date)
     return H( 'li',
               {
                 'class': 'single-route',
                 'id': route.id
               },
-              H( 'span', null, route.address),
+              H( 'span', null, route.address, route.start_date, route.end_date),
               H( 'i',
                 {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}
-              )
+              ),
+              H( 'hr', null)
     ) // End Of OuterMost H()
   }) // End Of allRoutes.map
 } // End of renderRoutes()
