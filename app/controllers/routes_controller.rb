@@ -81,29 +81,29 @@ class RoutesController < ApplicationController
     @trip_routes = trip.routes.order(start_date: :asc).to_a
     dataIndex = params[:delete_route_at_index]
 
-    if dataIndex == 0
-      first_route = @trip_routes[0]
-      first_route.start_date = trip.start_date
-      first_route.end_date = first_route.start_date + first_route.duration
-      first_route.save
-      routes_to_update = @trip_routes[1..@trip_routes.length]
-      prev_route = first_route
-    else
-      routes_to_update = @trip_routes[dataIndex..@trip_routes.length]
-      prev_route = @trip_routes[dataIndex-1]
+    unless @trip_routes.empty?
+      if dataIndex == 0
+        first_route = @trip_routes[0]
+        first_route.start_date = trip.start_date
+        first_route.end_date = first_route.start_date + first_route.duration
+        first_route.save
+        routes_to_update = @trip_routes[1..@trip_routes.length]
+        prev_route = first_route
+      else
+        routes_to_update = @trip_routes[dataIndex..@trip_routes.length]
+        prev_route = @trip_routes[dataIndex-1]
+      end
+
+      routes_to_update.each_with_index do |each_route, index|
+          each_route.start_date = prev_route.end_date
+          each_route.end_date = each_route.start_date + each_route.duration
+          prev_route = each_route
+      end
+
+      routes_to_update.each(&:save)
     end
 
-    routes_to_update.each_with_index do |each_route, index|
-        each_route.start_date = prev_route.end_date
-        each_route.end_date = each_route.start_date + each_route.duration
-        prev_route = each_route
-    end
-
-    if routes_to_update.each(&:save)
-      render json: :ok
-    else
-      render json: :unprocessable_entity
-    end
+    render json: :ok
   end
 
   private
