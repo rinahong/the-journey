@@ -97,7 +97,9 @@ function renderRoutes (allRoutes) {
                 'class': 'single-route',
                 'id': route.id
               },
-              H( 'span', null, route.address, route.start_date, route.end_date),
+              H( 'span', null, route.address,),
+              H( 'p', null, route.start_date),
+              H( 'p', null, route.end_date),
               H( 'i',
                 {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}
               ),
