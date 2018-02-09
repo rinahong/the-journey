@@ -94,10 +94,12 @@ class ExpenseTrackersController < ApplicationController
     end
 
     def find_trip
-      @trip = Trip.find_by(user_id:current_user)
-      # @trip = Trip.find params[:expense_tracker][:trip_id]
-      # @trip = Trip.find params[:trip_id]
-      # binding.pry
+      # @trip = Trip.find_by(user_id:current_user)
+      # @trip = Trip.find_by(id: params[:trip_id])
+      params[:trip_id]
+      @trip = Trip.find params[:trip_id]
+      hello = params[:trip_id]
+      binding.pry
     end
 
 end
