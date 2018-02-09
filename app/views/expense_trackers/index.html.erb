@@ -1,38 +1,11 @@
-<%= simple_form_for @expense_tracker, url: trip_expense_trackers_path(@trip) do |form| %>
-  <%= form.input :category %>
-  <%= form.input :date %>
-  <%= form.input :description %>
-  <%= form.input :price %>
-  <%= form.submit class: 'btn btn-primary' %>
-<% end %>
-
-
 <h1>Expense Trackers</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Date</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Trip</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<%= link_to "New ExpenseTracker", add_form_path, {method: :post,  remote: true} %>
+<%= render "header" %>
+<hr />
+<div id="expense_form_sjr">
+  <div id="expense_show_sjr">
     <% @expense_trackers.each do |expense_tracker| %>
-      <tr>
-        <td><%= expense_tracker.category %></td>
-        <td><%= expense_tracker.date %></td>
-        <td><%= expense_tracker.description %></td>
-        <td><%= expense_tracker.price %></td>
-        <td><%= link_to 'Edit', edit_expense_tracker_path(expense_tracker) %></td>
-        <td><%= link_to 'Destroy', expense_tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <%= render "expense_trackers/expense_show", expense_tracker: expense_tracker, trip: @trip %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
+  </div>
+</div>
