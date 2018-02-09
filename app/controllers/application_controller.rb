@@ -21,4 +21,5 @@ class ApplicationController < ActionController::Base
       redirect_to new_sessions_path, alert: 'You must sign in or sign up first!'
     end
   end
+
 end

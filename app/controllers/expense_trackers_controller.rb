@@ -5,19 +5,15 @@ class ExpenseTrackersController < ApplicationController
   # GET /expense_trackers
   # GET /expense_trackers.json
   def index
-    # @expense_tracker = ExpenseTracker.new
-    # expenses_in_the_trip = ExpenseTracker.where(trip_id:params[:trip_id])
-    # @expense_trackers = expenses_in_the_trip.order(date: :asc)
-    #
-    # respond_to do |format|
-    #   format.json { render json: @expense_trackers }
-    #   format.html { @expense_trackers }
-    # end
-
     @expense_tracker = ExpenseTracker.new
-     respond_to do |format|
-       format.js { shared_render :index, @expense_tracker }
-     end
+    expenses_in_the_trip = ExpenseTracker.where(trip_id: params[:trip_id])
+    @expense_trackers = expenses_in_the_trip.order(date: :asc)
+
+    respond_to do |format|
+      format.json { render json: @expense_trackers }
+      format.html { @expense_trackers }
+    end
+    # render json: @expense_trackers
   end
 
   # GET /expense_trackers/1
@@ -28,6 +24,16 @@ class ExpenseTrackersController < ApplicationController
   # GET /expense_trackers/new
   def new
     @expense_tracker = ExpenseTracker.new
+  end
+
+  def add_form_sjr
+    @expense_tracker = ExpenseTracker.new
+    @expense_tracker.trip = @trip
+    # binding.pry
+    respond_to do |format|
+      format.js { render 'add_form_sjr' }
+    end
+    # binding.pry
   end
 
   # GET /expense_trackers/1/edit
