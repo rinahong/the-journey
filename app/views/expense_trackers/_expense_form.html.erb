@@ -1,0 +1,27 @@
+<%= simple_form_for @expense_tracker, url: trip_expense_trackers_path(@trip), remote: true do |f| %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= f.input :category, placeholder: "Category" %>
+    </div>
+
+    <div class="col-md-2">
+      <%= f.input :date, placeholder: "Date" %>
+    </div>
+
+    <div class="col-md-3">
+      <%= f.input :description, placeholder: "Description" %>
+    </div>
+
+    <div class="col-md-2">
+      <%= f.input :price, placeholder: "Price" %>
+    </div>
+
+    <div class="col-md-2">
+      <%= f.button :submit, class: "btn-sm" %>
+    </div>
+
+    <div class="col-md-2">
+      <%#= link_to "Edit", [:edit, @expense_tracker], remote: true, class: "btn btn-link btn-sm" %>
+    </div>
+  </div>
+<% end %>

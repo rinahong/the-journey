@@ -1,12 +1,12 @@
 class ExpenseTrackersController < ApplicationController
-  before_action :find_trip, only: [:index, :edit, :update, :destroy]
+  before_action :find_trip, only: [:index, :edit, :update, :destroy, :add_form_sjr]
   before_action :set_expense_tracker, only: [:show, :edit, :update, :destroy]
 
   # GET /expense_trackers
   # GET /expense_trackers.json
   def index
     @expense_tracker = ExpenseTracker.new
-    expenses_in_the_trip = ExpenseTracker.where(trip_id:params[:trip_id])
+    expenses_in_the_trip = ExpenseTracker.where(trip_id: params[:trip_id])
     @expense_trackers = expenses_in_the_trip.order(date: :asc)
 
     respond_to do |format|
@@ -26,6 +26,16 @@ class ExpenseTrackersController < ApplicationController
     @expense_tracker = ExpenseTracker.new
   end
 
+  def add_form_sjr
+    @expense_tracker = ExpenseTracker.new
+    @expense_tracker.trip = @trip
+    # binding.pry
+    respond_to do |format|
+      format.js { render 'add_form_sjr' }
+    end
+    # binding.pry
+  end
+
   # GET /expense_trackers/1/edit
   def edit
   end
@@ -39,8 +49,7 @@ class ExpenseTrackersController < ApplicationController
 
     respond_to do |format|
       if @expense_tracker.save
-        format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully created.' }
-        format.json { render :show, status: :created, location: @expense_tracker }
+        format.js { render 'add_expense_data_sjr'}
       else
         format.html { render :new }
         format.json { render json: @expense_tracker.errors, status: :unprocessable_entity }
@@ -86,6 +95,9 @@ class ExpenseTrackersController < ApplicationController
 
     def find_trip
       @trip = Trip.find_by(user_id:current_user)
+      # @trip = Trip.find params[:expense_tracker][:trip_id]
+      # @trip = Trip.find params[:trip_id]
+      # binding.pry
     end
 
 end

@@ -21,13 +21,18 @@ all()
         expense_chart_data[expenseCategory] = expense.price;
       }
     })
-    console.log("all_expenses hash", expense_chart_data)
   })
   .then(() => {
-    console.log("second then hash", expense_chart_data)
+    let counter = 0;
+    const colorArray = [];
+    do {
+      colorArray.push("#"+((1<<24)*Math.random()|0).toString(16));
+      counter++;
+    } while (Object.keys(expense_chart_data).length > counter );
     const data = {
         datasets: [{
-            data: Object.values(expense_chart_data)
+            data: Object.values(expense_chart_data),
+            backgroundColor: colorArray
         }],
 
         // These labels appear in the legend and in the tooltips when hovering different arcs
@@ -40,6 +45,3 @@ all()
         // options: 'rotation'
     });
   })
-
-
-// Object.values(expense_chart_data)
