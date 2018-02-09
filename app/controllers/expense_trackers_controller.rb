@@ -1,5 +1,5 @@
 class ExpenseTrackersController < ApplicationController
-  before_action :find_trip, only: [:index, :edit, :update, :destroy]
+  before_action :find_trip, only: [:index, :edit, :update, :destroy, :add_form_sjr]
   before_action :set_expense_tracker, only: [:show, :edit, :update, :destroy]
 
   # GET /expense_trackers
@@ -49,8 +49,9 @@ class ExpenseTrackersController < ApplicationController
 
     respond_to do |format|
       if @expense_tracker.save
-        format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully created.' }
-        format.json { render :show, status: :created, location: @expense_tracker }
+        puts "================Im in create and if block==============="
+        # format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully created.' }
+        format.js { render 'add_expense_data_sjr'}
       else
         format.html { render :new }
         format.json { render json: @expense_tracker.errors, status: :unprocessable_entity }
@@ -96,6 +97,9 @@ class ExpenseTrackersController < ApplicationController
 
     def find_trip
       @trip = Trip.find_by(user_id:current_user)
+      # @trip = Trip.find params[:expense_tracker][:trip_id]
+      # @trip = Trip.find params[:trip_id]
+      # binding.pry
     end
 
 end

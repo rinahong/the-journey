@@ -8,10 +8,13 @@
 
 
 <h1>Expense Trackers</h1>
-<%= link_to "New ExpenseTracker", add_form_path, remote: :true %>
+<%= link_to "New ExpenseTracker", add_form_path, {method: :post,  remote: true} %>
 <%= render "header" %>
-<div id="expense_show_sjr">
-  <% @expense_trackers.each do |expense_tracker| %>
-    <%= render "expense_trackers/expense_show", expense_tracker: expense_tracker %>
-  <% end %>
+<hr />
+<div id="expense_form_sjr">
+  <div id="expense_show_sjr">
+    <% @expense_trackers.each do |expense_tracker| %>
+      <%= render "expense_trackers/expense_show", expense_tracker: expense_tracker, trip: @trip %>
+    <% end %>
+  </div>
 </div>

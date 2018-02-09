@@ -1,6 +1,6 @@
 class Trip < ApplicationRecord
   belongs_to :user
-  has_one :expense_tracker, dependent: :destroy
+  has_many :expense_tracker, dependent: :destroy
   has_many :routes, dependent: :destroy
 
   has_many :likes, dependent: :destroy

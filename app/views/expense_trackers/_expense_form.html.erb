@@ -1,5 +1,4 @@
-
-<%= simple_form_for [@trip, @expense_tracker], url: trip_expense_trackers_path(@trip), remote: true do |f| %>
+<%= simple_form_for @expense_tracker, url: trip_expense_trackers_path(@trip), remote: true do |f| %>
   <div class="row">
     <div class="col-md-2">
       <%= f.input :category, placeholder: "Category" %>

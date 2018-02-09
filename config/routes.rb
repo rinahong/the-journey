@@ -18,5 +18,5 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy], shallow: true
   end
 
-  get '/add_form' => "expense_trackers#add_form_sjr"
+  post '/add_form' => "expense_trackers#add_form_sjr"
 end
