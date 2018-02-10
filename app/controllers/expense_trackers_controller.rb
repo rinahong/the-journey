@@ -1,5 +1,5 @@
 class ExpenseTrackersController < ApplicationController
-  before_action :find_trip, only: [:index, :edit, :update, :destroy, :add_form_sjr]
+  before_action :find_trip, only: [:index, :create, :edit, :update, :destroy]
   before_action :set_expense_tracker, only: [:show, :edit, :update, :destroy]
 
   # GET /expense_trackers
@@ -8,7 +8,6 @@ class ExpenseTrackersController < ApplicationController
     @expense_tracker = ExpenseTracker.new
     expenses_in_the_trip = ExpenseTracker.where(trip_id: params[:trip_id])
     @expense_trackers = expenses_in_the_trip.order(date: :asc)
-
     respond_to do |format|
       format.json { render json: @expense_trackers }
       format.html { @expense_trackers }
@@ -26,14 +25,14 @@ class ExpenseTrackersController < ApplicationController
     @expense_tracker = ExpenseTracker.new
   end
 
+  # Post /trips/:id/add_form  -> member of trip    
   def add_form_sjr
     @expense_tracker = ExpenseTracker.new
+    @trip = Trip.find params[:id]
     @expense_tracker.trip = @trip
-    # binding.pry
     respond_to do |format|
       format.js { render 'add_form_sjr' }
     end
-    # binding.pry
   end
 
   # GET /expense_trackers/1/edit
@@ -46,7 +45,6 @@ class ExpenseTrackersController < ApplicationController
     @expense_tracker = ExpenseTracker.new expense_tracker_params
     @trip = Trip.find params[:trip_id]
     @expense_tracker.trip = @trip
-
     respond_to do |format|
       if @expense_tracker.save
         format.js { render 'add_expense_data_sjr'}
@@ -94,12 +92,7 @@ class ExpenseTrackersController < ApplicationController
     end
 
     def find_trip
-      # @trip = Trip.find_by(user_id:current_user)
-      # @trip = Trip.find_by(id: params[:trip_id])
-      params[:trip_id]
       @trip = Trip.find params[:trip_id]
-      hello = params[:trip_id]
-      binding.pry
     end
 
 end
