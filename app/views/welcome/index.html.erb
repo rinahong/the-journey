@@ -1,6 +1,4 @@
-<div>
-  <%= image_tag 'santorini.jpg', class:"home-bg" %>
-</div>
+
 <% @trips.each do |trip| %>
   <% route_locations = [] %>
   <% trip.routes.order(start_date: :asc).each do |route| %>

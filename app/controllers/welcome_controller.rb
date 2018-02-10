@@ -1,4 +1,5 @@
 class WelcomeController < ApplicationController
+  layout "home_application"
   def index
     tags = ActsAsTaggableOn::Tag.most_used(3)
     @trips = []
