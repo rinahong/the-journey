@@ -162,4 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(() => reloadRouteList())
   });
 
+
+  $('.carousel').carousel({
+    interval: false
+  })
 }) //End of Document.addEventListener

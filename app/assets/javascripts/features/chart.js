@@ -41,7 +41,20 @@ all()
 
     let myDoughnutChart = new Chart(ctx, {
         type: 'doughnut',
-        data: data
+        data: data,
+        options: {
+            layout: {
+                padding: {
+                    left: 50,
+                    right: 0,
+                    top: 20,
+                    bottom: 0
+                }
+            },
+            legend: {
+              position: 'bottom'
+          }
+        }
         // options: 'rotation'
     });
   })

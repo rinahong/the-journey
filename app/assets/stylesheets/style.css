@@ -1,3 +1,12 @@
+.home-bg {
+  height: 85vh;
+  width: 100%;
+  margin: 0;
+  opacity: 0.7;
+  filter: alpha(opacity=80);
+  background-size: cover;
+}
+
 #map {
  height: 500px;
  width: 100%;
@@ -5,4 +14,26 @@
 
 .has-error > .help-block {
   color: red;
+}
+
+#tripShowCarousel {
+  padding: 30px 10px;
+}
+
+#tripShowInfo {
+  background-color: grey;
+  padding: 100px 0;
+  text-align: center;
+  height: 530px;
+}
+
+.borderingDiv {
+  width: 45vw;
+  border-style: outset;
+}
+
+.flexingRow {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
