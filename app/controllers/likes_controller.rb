@@ -5,6 +5,7 @@ class LikesController < ApplicationController
     like = Like.new(trip: trip, user: current_user)
 
     if like.save
+      trip.update(like_count: trip.like_count + 1)
       redirect_to trip
     else
       redirect_to trip, alert: 'Couldn\'t like the trip!'

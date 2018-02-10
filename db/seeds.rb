@@ -54,7 +54,8 @@ users.each do |user|
       note: Faker::HarryPotter.quote,
       start_date: s_d,
       user_id: user.id,
-      tag_list: tags_arr
+      tag_list: tags_arr,
+      like_count: rand(0..100)
     )
   end
 end
@@ -72,7 +73,7 @@ trips.each do |trip|
     end
     d = rand(1..4).days
     e_d = s_d + d
-    
+
     Route.create(
       address: "#{trip.title}",
       latitude: 39.2780017  + rand(1...12),
@@ -103,5 +104,18 @@ expenses = ExpenseTracker.all
 puts Cowsay.say("Created #{routes.count} routes", :moose)
 puts Cowsay.say("Created #{expenses.count} expenses", :kitty)
 
+rand(50..150).times.each do
+  trip = trips.sample
+  like = Like.new(
+      trip_id: trip.id,
+      user_id: users.sample.id
+    )
+  if like.save
+    trip.update(like_count: trip.like_count + 1)
+  end
+end
+
+likes = Like.all
+puts Cowsay.say("Created #{likes.count} likes", :tux)
 
 puts "Use #{user_not_admin.email} and #{PASSWORD} for testing"

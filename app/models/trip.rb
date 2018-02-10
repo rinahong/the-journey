@@ -9,5 +9,7 @@ class Trip < ApplicationRecord
   validates :title, presence: true
 
   acts_as_taggable
+  
+  validates :like_count, numericality: {greater_than_or_equal_to: 0}
 
 end

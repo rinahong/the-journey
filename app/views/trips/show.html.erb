@@ -34,7 +34,7 @@
 <% else %>
   <%= link_to fa_icon("thumbs-o-up 2x"), trip_likes_path(@trip), method: :post %>
 <% end %>
-<%= pluralize(@trip.likes.count, 'like') %>
+<%= pluralize(@trip.like_count, 'like') %>
 
 <br />
 

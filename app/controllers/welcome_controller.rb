@@ -1,17 +1,18 @@
 class WelcomeController < ApplicationController
   def index
-    tags = ActsAsTaggableOn::Tag.most_used(5)
+    tags = ActsAsTaggableOn::Tag.most_used(3)
     @trips = []
     tags.each do |tag|
       tag.taggings.each do |tagging|
         trip = Trip.find tagging.taggable_id
-        # TODO: Find the highest likes (top 10) trips
         unless @trips.include? trip
           @trips.push(trip)
         end
-
       end
     end
+
+    @trip_highest_likes = Trip.all.order(like_count: :desc)[0..4]
+
   end
 
   def about

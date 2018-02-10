@@ -10,3 +10,18 @@
   </div>
   <%= link_to trip.title, trip_path(trip) %>
 <% end %>
+
+<hr />
+<hr />
+<hr />
+
+<% @trip_highest_likes.each do |trip_with_likes| %>
+  <% route_locations = [] %>
+  <% trip_with_likes.routes.order(start_date: :asc).each do |route| %>
+    <% route_locations << route.lat_lng_string%>
+  <% end %>
+  <div>
+    <img style="border-radius:3px;" src="https://maps.googleapis.com/maps/api/staticmap?size=200x300&amp;mobile=true&path=color:0x333333ff|weight:3<%=route_locations.join()%>&markers=color:red|label:S<%=route_locations.first%>&markers=color:red|label:E<%=route_locations.last%>&key=<%=ENV['GOOGLE_STATIC_MAP_API_SECRET']%>&style=feature:administrative%7Celement:geometry.stroke%7Ccolor:0xb8b8b8%7Cvisibility:on%7Cweight:1&style=feature:administrative%7Celement:labels.text.fill%7Ccolor:0x6195a0&style=feature:administrative.province%7Celement:geometry.stroke%7Cvisibility:off&style=feature:landscape%7Celement:geometry%7Ccolor:0xfffef5&style=feature:landscape.man_made%7Clightness:-5&style=feature:landscape.natural.terrain%7Cvisibility:off&style=feature:poi%7Cvisibility:off&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0xbae5ce%7Cvisibility:on&style=feature:road%7Csaturation:-100%7Clightness:45%7Cvisibility:simplified&style=feature:road.arterial%7Cvisibility:off&style=feature:road.highway%7Cvisibility:off&amp;style=feature:transit%7Cvisibility:simplified&amp;style=feature:water%7Ccolor:0xc2f1f5%7Csaturation:35%7Clightness:40%7Cgamma:0.42%7Cvisibility:on&amp;style=feature:water%7Celement:labels.text.fill%7Ccolor:0xadadad%7Cvisibility:on&amp;scale=2">
+  </div>
+  <%= link_to trip_with_likes.title, trip_path(trip_with_likes) %>
+<% end %>
