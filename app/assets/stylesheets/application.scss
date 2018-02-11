@@ -33,6 +33,22 @@ input {
   font-family: arial, sans-serif;
 }
 
+tr:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+
+th {
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  border-right: 1px solid black;
+}
+
+td {
+  font-size: 22px;
+  padding-left: 15px;
+}
+
 .logo {
   width: 60px;
   height: 60px;
