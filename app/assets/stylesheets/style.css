@@ -3,13 +3,13 @@
   src: url(/assets/Traveling-Through.otf) format("truetype");
 }
 
-/*=========== Layout: Home_appliction.html.erb ==============*/
+/*=========== Common Layout ==============*/
 .nav-center {
   justify-content: center;
   display: flex;
 }
 
-/* welcome: Nav "a" tag*/
+/* Nav > li > link_to*/
 .nav-anchor{
   text-decoration: none;
   font-size: 25px;
@@ -17,7 +17,7 @@
   margin-left: 10px;
 }
 
-/* welcome: carousel images */
+/* home_application: carousel images */
 .home-carousel {
   height: 80vh;
   width: 100%;
@@ -26,13 +26,23 @@
   filter: alpha(opacity=80);
 }
 
-/* welcome: anchor style */
-.link-style {
+/* home_application: anchor style */
+.link-style-button {
   font-weight: bold;
   font-size: 30px;
-  color: black;
-  border: 3px solid black;
+  color: white;
+  background-color: #403636;
   padding: 10px 50px;
+  border-radius: 10px;
+}
+
+/* application: custom hr tag*/
+hr.curly-lines {
+  height: 6px;
+	background: url(http://ibrahimjabbari.com/english/images/hr-12.png) repeat-x 0 0;
+  border: 0;
+  margin-top: 0;
+  margin-bottom: 3rem;
 }
 
 /* welcome: button center */
@@ -92,6 +102,18 @@
 }
 
 
+/* ======== User#Show: vertical line ===============*/
+.user-profile {
+  border-right: 1px dashed #333;
+}
+
+.my-trips {
+  margin-left: 50px;
+}
+
+
+
+/* =============================================Event Listener ====================*/
 .scrollToTop {
   display: none;
   position: fixed;
@@ -103,12 +125,4 @@
 
 .scrollToTop:hover {
   background-color: #555;
-}
-
-hr.curly-lines {
-  height: 6px;
-	background: url(http://ibrahimjabbari.com/english/images/hr-12.png) repeat-x 0 0;
-  border: 0;
-  margin-top: 0;
-  margin-bottom: 3rem;
 }

@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-sm-3 user-profile">
     <p>
       <strong>Username:</strong>
       <%= @user.username %>
@@ -13,25 +13,45 @@
 
     <%= link_to 'Edit', edit_user_path(@user) %> |
     <%= link_to 'Back', users_path %>
+
+
   </div>
-  <div class="col-sm-9">
-    <h3>My Trips</h3>
+
+  <div class="col-sm-8 my-trips">
+    <span>My Trips</span>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal">
       New Trip
     </button>
-    <% @trips.each do |trip| %>
-      <div class="trip-list-item">
-        <h5><%= link_to trip.title, trip_path(trip) %></h5>
-      </div>
-    <% end %>
+    <div class="row">
+      <% @trips.each do |trip| %>
+        <% route_locations = [] %>
+        <% trip.routes.order(start_date: :asc).each do |route| %>
+          <% route_locations << route.lat_lng_string %>
+        <% end %>
+
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <img style="border-radius:3px;" src="https://maps.googleapis.com/maps/api/staticmap?size=150x200&amp;mobile=true&path=color:0x333333ff|weight:3<%=route_locations.join()%>&markers=color:red|label:S<%=route_locations.first%>&markers=color:red|label:E<%=route_locations.last%>&key=<%=ENV['GOOGLE_STATIC_MAP_API_SECRET']%>&style=feature:administrative%7Celement:geometry.stroke%7Ccolor:0xb8b8b8%7Cvisibility:on%7Cweight:1&style=feature:administrative%7Celement:labels.text.fill%7Ccolor:0x6195a0&style=feature:administrative.province%7Celement:geometry.stroke%7Cvisibility:off&style=feature:landscape%7Celement:geometry%7Ccolor:0xfffef5&style=feature:landscape.man_made%7Clightness:-5&style=feature:landscape.natural.terrain%7Cvisibility:off&style=feature:poi%7Cvisibility:off&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0xbae5ce%7Cvisibility:on&style=feature:road%7Csaturation:-100%7Clightness:45%7Cvisibility:simplified&style=feature:road.arterial%7Cvisibility:off&style=feature:road.highway%7Cvisibility:off&amp;style=feature:transit%7Cvisibility:simplified&amp;style=feature:water%7Ccolor:0xc2f1f5%7Csaturation:35%7Clightness:40%7Cgamma:0.42%7Cvisibility:on&amp;style=feature:water%7Celement:labels.text.fill%7Ccolor:0xadadad%7Cvisibility:on&amp;scale=2">
+            <div class="card-body">
+              <p><%= trip.title %></p>
+              <p><%= trip.user.username %></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <%= link_to 'View', trip_path(trip), class:"btn btn-sm btn-outline-secondary" %>
+                  <%= link_to 'Edit', edit_trip_path(trip), class:"btn btn-sm btn-outline-secondary" %>
+                </div>
+                <small class="text-muted">
+                  <%= image_tag 'hearts.png', style: 'width: 33px; height: 33px; border-radius: 5px;' %>
+                  <%= pluralize(trip.like_count, 'like') %>
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
-
-
-<h1>My Page </h1>
-
-
-
 
 
   <div class="modal fade" id="tripModal" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel" aria-hidden="true">
