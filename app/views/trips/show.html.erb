@@ -1,24 +1,31 @@
 <div class="trip-show-container">
-  <main class="map-api">
-    <section>
-      <div class="heart-center inline-display">
+  <section class="row" style="margin-bottom:17px;">
+    <div class="col-4">
+      <%= link_to fa_icon("angle-double-left 3x"), user_path(current_user), class:"backToPrevious" %>
+    </div>
+
+    <div class="col-4">
+      <div class="heart-center">
         <% if @current_user_like %>
-          <%= link_to fa_icon("heart 3x"), like_path(@current_user_like), method: :delete %>
+        <%= link_to fa_icon("heart 3x"), like_path(@current_user_like, trip_id: @trip), method: :delete %>
         <% else %>
-          <%= link_to fa_icon("heart-o 3x"), trip_likes_path(@trip), method: :post %>
+        <%= link_to fa_icon("heart-o 3x"), trip_likes_path(@trip), method: :post %>
         <% end %>
         <%= pluralize(@trip.like_count, 'like') %>
       </div>
+    </div>
 
-      <div class="float-right inline-display" data-toggle="modal" data-target='#TripInfoModal'>
-        <%= fa_icon "paper-plane 2x"  %>
-        <span>Trip Info</span>
+    <div class="col-4">
+      <div style="float:right;">
+        <%= link_to fa_icon("angle-double-right 3x"), edit_trip_path(@trip), class:"go-to-forward"%>
       </div>
+    </div>
 
-      <!-- BootStrap Modal: Trip Info -->
-      <%= render 'trip_info_modal', trip: @trip %>
-    </section>
+    <!-- BootStrap Modal: Trip Info -->
+    <%= render 'trip_info_modal', trip: @trip %>
+  </section>
 
+  <main class="map-api">
     <section id="map" data-tripid="<%= @trip.id %>"></section>
     <div class="geocode-form">
       <input class="form-control" id="address" type="textbox" value="Sydney, NSW">
@@ -33,6 +40,17 @@
     <%= link_to 'Back', user_path(current_user) %> |
     <%= link_to 'Expense Tracker', trip_expense_trackers_path(@trip) %>
   </div>
+
+  <!-- BootStrap Modal Button: Trip Info -->
+  <div class="col-4" data-toggle="modal" data-target='#TripInfoModal'>
+    <div class="papaer-plane" style="padding-left:90%;">
+      <%= fa_icon "paper-plane 2x"  %>
+      <span>Trip Info</span>
+    </div>
+  </div>
+
+  <!-- BootStrap Modal: Trip Info -->
+  <%= render 'trip_info_modal', trip: @trip %>
 
   <div class="flexingRow">
     <div id="chart" class="borderingDiv">

@@ -72,13 +72,37 @@ hr.curly-lines {
 
 /* Trip#Show: Heart Icon */
 .heart-center {
-  margin-bottom: 10px;
-  margin-left: 50%;
-  margin-right: 25vw;
+  padding-left: 37%;
 }
 
 /* Trip#Show: Geocode button */
 
+
+
+.backToPrevious {
+  padding-top: 22px;
+  padding-bottom: 4px;
+  padding-right: 15px;
+  padding-left: 12px;
+  margin-bottom: 0;
+  border-radius: 4px;
+}
+
+.backToPrevious:hover {
+  background-color: #555;
+}
+
+.go-to-forward {
+  padding-top: 22px;
+  padding-bottom: 10px;
+  padding-right: 20px;
+  padding-left: 12px;
+  border-radius: 4px;
+}
+
+.go-to-forward:hover {
+  background-color: #555;
+}
 
 
 
@@ -124,12 +148,13 @@ hr.curly-lines {
   display: inline-block;
 }
 
-.float-right {
-  float: right;
-  padding-right: 35px;
+.paper-plane {
+  /*padding-left: 10%;*/
+  padding-left: 5%;
+  padding-top: 2%
 }
 
-div.title {
+.title {
   font-weight: bold;
   font-size: 35px;
 }

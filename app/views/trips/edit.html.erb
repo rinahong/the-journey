@@ -3,28 +3,37 @@
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
 <div class="trip-show-container">
-  <div class="inline-display title" style="margin-left:45%;">Edit Your Journey</div>
-  <!-- BootStrap Modal Button: Edit Current Trip -->
-  <div class="float-right inline-display" data-toggle="modal" data-target='#TripInfoModal'>
-    <%= fa_icon "paper-plane 2x"  %>
-    <span>Trip Info</span>
-  </div>
-  <%= link_to 'Show', @trip %>
+  <section class="row">
+    <div class="col-4">
+      <%= link_to fa_icon("angle-double-left 3x"), @trip, class:"backToPrevious" %>
+    </div>
+
+    <div class="col-4 row">
+      <p class="title" style="padding-left:27%">Edit Your Journey</p>
+    </div>
+
+    <!-- BootStrap Modal Button: Trip Info -->
+    <div class="col-4" data-toggle="modal" data-target='#TripInfoModal'>
+      <div style="padding-left:90%;">
+        <%= fa_icon "paper-plane 2x"  %>
+        <span>Trip Info</span>
+      </div>
+    </div>
+  </seciton>
 </div>
 
 
-<div class="row" style="margin-bottom: 70px;">
-  <div id="routes" class="col-2" data-tripstartdate="<%= @trip.start_date %>"><h3>Your Routes</h3>
-    <ol id="sortable">
-    </ol>
-  </div>
-  <div class="col-9" style="margin-left:70px;">
-    <div class="latlng"></div>
+<div class="row" style="margin-bottom: 100px;">
+  <div class="col-9" style="margin-left:20px;">
     <div id="floating-panel">
       <input id="address" type="textbox" value="Sydney, NSW">
       <input id="submit" type="button" value="Geocode">
     </div>
     <div id="map" data-tripid="<%= @trip.id %>" data-clickable="true"></div>
+  </div>
+  <div id="routes" class="col-2" data-tripstartdate="<%= @trip.start_date %>"><h3>Your Routes</h3>
+    <ol id="sortable">
+    </ol>
   </div>
 </div>
 

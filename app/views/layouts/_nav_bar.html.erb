@@ -2,9 +2,10 @@
 <div class="nav-center">
   <nav class="navbar navbar-expand-sm">
     <%= link_to image_tag("logo.gif", border: 0, class:"logo"), home_path, class:"navbar-brand nav-anchor" %>
-    <button class="navbar-toggler" style="background-color:black" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="navbar-toggler" style="background-color:none"type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">>
+      <%= fa_icon "bars 2x" %>
+    </div>
+
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
