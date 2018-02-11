@@ -1,7 +1,7 @@
 <div class="trip-show-container">
   <main class="map-api">
-    <section class="row">
-      <div class="heart-center">
+    <section>
+      <div class="heart-center inline-display">
         <% if @current_user_like %>
           <%= link_to fa_icon("heart 3x"), like_path(@current_user_like), method: :delete %>
         <% else %>
@@ -10,14 +10,22 @@
         <%= pluralize(@trip.like_count, 'like') %>
       </div>
 
-      <div class="geocode-form">
-        <input class="form-control" id="address" type="textbox" value="Sydney, NSW">
-        <span class="input-group-btn">
-          <button class="btn btn-default" id="submit" type="button">GeoCode!</button>
-        </span>
+      <div class="float-right inline-display" data-toggle="modal" data-target='#TripInfoModal'>
+        <%= fa_icon "paper-plane 2x"  %>
+        <span>Trip Info</span>
       </div>
+
+      <!-- BootStrap Modal: Trip Info -->
+      <%= render 'trip_info_modal', trip: @trip %>
     </section>
+
     <section id="map" data-tripid="<%= @trip.id %>"></section>
+    <div class="geocode-form">
+      <input class="form-control" id="address" type="textbox" value="Sydney, NSW">
+      <span class="input-group-btn">
+        <button class="btn btn-default" id="submit" type="button">GeoCode!</button>
+      </span>
+    </div>
   </main>
 
   <div class="row">
@@ -34,7 +42,6 @@
       <div id="calendar" data-tripid="<%= @trip.id %>"></div>
     <div>
   </div>
-
 </div>
 
 <%= javascript_include_tag 'features/chart' %>

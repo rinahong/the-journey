@@ -120,13 +120,16 @@ hr.curly-lines {
 }
 
 
-
+.inline-display {
+  display: inline-block;
+}
 
 .float-right {
   float: right;
+  padding-right: 35px;
 }
 
-span.title {
+div.title {
   font-weight: bold;
   font-size: 35px;
 }

@@ -2,10 +2,10 @@
 <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-<div class="container">
-  <span class="title">Edit Your Journey</span>
+<div class="trip-show-container">
+  <div class="inline-display title" style="margin-left:45%;">Edit Your Journey</div>
   <!-- BootStrap Modal Button: Edit Current Trip -->
-  <div class="float-right" data-toggle="modal" data-target='#TripInfoModal'>
+  <div class="float-right inline-display" data-toggle="modal" data-target='#TripInfoModal'>
     <%= fa_icon "paper-plane 2x"  %>
     <span>Trip Info</span>
   </div>
@@ -30,49 +30,7 @@
 
 
 <!-- BootStrap Modal: Trip Info -->
-<div class="modal fade" id="TripInfoModal" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="tripModalLabel">Trip Info</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="trip-info">
-          <table style="width:100%">
-             <tr>
-                 <th>Title:</th>
-                 <td><%= @trip.title %></td>
-             </tr>
-             <tr>
-                 <th>Note:</th>
-                 <td><%= @trip.note %></td>
-             </tr>
-             <tr>
-                 <th>Start Date:</th>
-                 <td><%= @trip.start_date %></td>
-             </tr>
-             <tr>
-                 <th>End Date:</th>
-                 <td><%= @trip.end_date %></td>
-             </tr>
-             <tr>
-                 <th>Tag Lists:</th>
-                 <td><%= @trip.tag_list %></td>
-             </tr>
-         </table>
-          <div class="float-right" data-toggle="modal" data-target='#editTripModal'>
-            <%= fa_icon "edit 2x"  %>
-            <span>Edit Trip Info</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+<%= render 'trip_info_modal', trip: @trip %>
 
 <!-- BootStrap Modal: Edit Current Trip -->
 <div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel" aria-hidden="true">
