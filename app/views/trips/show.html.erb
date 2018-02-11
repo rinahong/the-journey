@@ -1,83 +1,41 @@
-
-<main id="tripShowCarousel">
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    </ol>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <section class="map-api">
-          <div id="floating-panel">
-            <input id="address" type="textbox" value="Sydney, NSW">
-            <input id="submit" type="button" value="Geocode">
-          </div>
-          <div id="map" data-tripid="<%= @trip.id %>"></div>
-        </section>
+<div class="trip-show-container">
+  <main class="map-api">
+    <section class="row">
+      <div class="heart-center">
+        <% if @current_user_like %>
+          <%= link_to fa_icon("heart 3x"), like_path(@current_user_like), method: :delete %>
+        <% else %>
+          <%= link_to fa_icon("heart-o 3x"), trip_likes_path(@trip), method: :post %>
+        <% end %>
+        <%= pluralize(@trip.like_count, 'like') %>
       </div>
-      <div class="carousel-item">
-        <section id="tripShowInfo">
-          <p>
-            <strong>Title:</strong><%= @trip.title %>
-          </p>
 
-          <p>
-            <strong>Trip Owner:</strong><%= @trip.user.username %>
-          </p>
-
-          <p>
-            <strong>Note:</strong><%= @trip.note %>
-          </p>
-
-          <p>
-            <strong>Start date:</strong><%= @trip.start_date %>
-          </p>
-
-          <p>
-            <strong>End date:</strong><%= @trip.end_date %>
-          </p>
-
-          <p>
-            <strong>Tags:</strong><%= @trip.tag_list %>
-          </p>
-        </section>
+      <div class="geocode-form">
+        <input class="form-control" id="address" type="textbox" value="Sydney, NSW">
+        <span class="input-group-btn">
+          <button class="btn btn-default" id="submit" type="button">GeoCode!</button>
+        </span>
       </div>
+    </section>
+    <section id="map" data-tripid="<%= @trip.id %>"></section>
+  </main>
+
+  <div class="row">
+    <%= link_to 'Edit', edit_trip_path(@trip) %> |
+    <%= link_to 'Back', user_path(current_user) %> |
+    <%= link_to 'Expense Tracker', trip_expense_trackers_path(@trip) %>
+  </div>
+
+  <div class="flexingRow">
+    <div id="chart" class="borderingDiv">
+      <canvas id="donutChart" data-tripid="<%= @trip.id %>"></canvas>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
+    <div class="borderingDiv">
+      <div id="calendar" data-tripid="<%= @trip.id %>"></div>
+    <div>
   </div>
 
-  <% if @current_user_like %>
-    <%= link_to fa_icon("thumbs-up 2x"), like_path(@current_user_like), method: :delete %>
-  <% else %>
-    <%= link_to fa_icon("thumbs-o-up 2x"), trip_likes_path(@trip), method: :post %>
-  <% end %>
-  <%= pluralize(@trip.like_count, 'like') %>
-
-  <br />
-
-  <%= link_to 'Edit', edit_trip_path(@trip) %> |
-  <%= link_to 'Back', user_path(current_user) %> |
-  <%= link_to 'Expense Tracker', trip_expense_trackers_path(@trip) %>
-
-  <hr />
-</main>
-<div class="flexingRow">
-  <div id="chart" class="borderingDiv">
-    <canvas id="donutChart" data-tripid="<%= @trip.id %>"></canvas>
-  </div>
-  <div class="borderingDiv">
-    <div id="calendar" data-tripid="<%= @trip.id %>"></div>
-  <div>
 </div>
-
-
 
 <%= javascript_include_tag 'features/chart' %>
 <%= javascript_include_tag 'features/calendar' %>

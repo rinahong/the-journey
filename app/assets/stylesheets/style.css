@@ -42,7 +42,6 @@ hr.curly-lines {
 	background: url(http://ibrahimjabbari.com/english/images/hr-12.png) repeat-x 0 0;
   border: 0;
   margin-top: 0;
-  margin-bottom: 3rem;
 }
 
 .home-content{
@@ -66,20 +65,25 @@ hr.curly-lines {
  width: 100%;
 }
 
-/*Trip#Show*/
-#tripShowCarousel {
-  padding: 30px 10px;
+/* Trip#Show: Outermost div */
+.trip-show-container {
+  margin: 0 20px;
 }
 
-/*Trip#Show: Trips Info carousel layout*/
-#tripShowInfo {
-  background-color: grey;
-  padding: 100px 0;
-  text-align: center;
-  height: 530px;
+/* Trip#Show: Heart Icon */
+.heart-center {
+  margin-bottom: 10px;
+  margin-left: 50%;
+  margin-right: 25vw;
 }
 
-/*Trip#Show: Chart and Calendar*/
+/* Trip#Show: Geocode button */
+
+
+
+
+
+/* Trip#Show: Chart and Calendar */
 .flexingRow {
   display: flex;
   justify-content: space-around;
@@ -92,17 +96,31 @@ hr.curly-lines {
   border-style: outset;
 }
 
+#calendar {
+  font-family: helvetica;
+}
 
 
-/* ======== User#Show: vertical line ===============*/
+
+
+/* =========== User View ============== */
+/*  User#Show: vertical line */
 .user-profile {
   padding-left: 50px;
 }
 
-/* ======== User#Show: trips div ===============*/
+/* User#Show: trips div */
 .my-trips {
   margin-left: 50px;
 }
+
+/* User#Show: First div margin-top */
+.space-from-top {
+  margin-top: 3rem;
+}
+
+
+
 
 .float-right {
   float: right;
