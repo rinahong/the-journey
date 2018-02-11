@@ -105,7 +105,7 @@ hr.curly-lines {
 
 /* ======== User#Show: vertical line ===============*/
 .user-profile {
-  border-right: 1px dashed #333;
+  padding-left: 50px;
 }
 
 /* ======== User#Show: trips div ===============*/
