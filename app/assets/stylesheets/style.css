@@ -102,15 +102,25 @@ hr.curly-lines {
 }
 
 
+
 /* ======== User#Show: vertical line ===============*/
 .user-profile {
   border-right: 1px dashed #333;
 }
 
+/* ======== User#Show: trips div ===============*/
 .my-trips {
   margin-left: 50px;
 }
 
+.float-right {
+  float: right;
+}
+
+span.title {
+  font-weight: bold;
+  font-size: 35px;
+}
 
 
 /* =============================================Event Listener ====================*/

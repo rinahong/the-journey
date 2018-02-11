@@ -18,10 +18,15 @@
   </div>
 
   <div class="col-sm-8 my-trips">
-    <span>My Trips</span>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tripModal">
-      New Trip
-    </button>
+    <div style="margin-bottom: 16px;">
+      <span class="title">MY TRIPS</span>
+      <div class="float-right" data-toggle="modal" data-target='#tripModal'>
+        <%= fa_icon "paper-plane 2x"  %>
+        <span>New Trip</span>
+      </div>
+
+    </div>
+
     <div class="row">
       <% @trips.each do |trip| %>
         <% route_locations = [] %>
