@@ -104,3 +104,11 @@
 .scrollToTop:hover {
   background-color: #555;
 }
+
+hr.curly-lines {
+  height: 6px;
+	background: url(http://ibrahimjabbari.com/english/images/hr-12.png) repeat-x 0 0;
+  border: 0;
+  margin-top: 0;
+  margin-bottom: 3rem;
+}
