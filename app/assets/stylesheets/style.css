@@ -1,67 +1,71 @@
-/* welcome#index: background-image */
-.home-bg {
+@font-face {
+  font-family: "Traveling-Through";
+  src: url(/assets/Traveling-Through.otf) format("truetype");
+}
+
+/*=========== Layout: Home_appliction.html.erb ==============*/
+.nav-center {
+  justify-content: center;
+  display: flex;
+}
+
+/* welcome: Nav "a" tag*/
+.nav-anchor{
+  text-decoration: none;
+  font-family: "Traveling-Through", arial, sans-serif;
+  font-size: 25px;
+  color: black;
+  margin-left: 10px;
+}
+
+/* welcome: carousel images */
+.home-carousel {
   height: 80vh;
   width: 100%;
   margin: 0;
-  background: url('santorini.jpg') no-repeat center center fixed;
   opacity: 0.8;
   filter: alpha(opacity=80);
-  background-size: cover;
 }
 
-/* welcome#index: button center */
-.center
+/* welcome: anchor style */
+.link-style {
+  /*margin-bottom: 10px;*/
+  font-family: "Traveling-Through", arial, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  color: black;
+  border: 3px solid black;
+  padding: 10px 50px;
+}
+
+/* welcome: button center */
+/*.center
 {
    justify-content: center;
    align-items: center;
    display: flex;
    height: 60vh;
+}*/
+
+
+/* ========= Simple_form error messge ========= */
+.has-error > .help-block {
+  color: red;
 }
 
-/* welcome#index: anchor style */
-.link-style {
-  margin: 0 2px;
-  text-decoration: none;
-  color: white;
-  border: 1px solid white;
-  padding: 5px 50px;
-
-}
-
-/*Button to SignOut*/
-.sign-out-btn{
-  background: none;
-  border: none;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #007bff;
-  padding: .5rem 1rem;
-}
-
-/* welcome#index: Nav "a" tag*/
-.nav-anchor{
-  text-decoration: none;
-  color: white;
-  margin: 7px 10px;
-  display: inline-block;
-  /*padding: .5rem 1rem;*/
-}
-
-
+/*=========== Trip View ==============*/
+/*Google Map Api Size*/
 #map {
  height: 500px;
  width: 100%;
 }
 
-.has-error > .help-block {
-  color: red;
-}
-
+/*Trip#Show*/
 #tripShowCarousel {
   padding: 30px 10px;
 }
 
+/*Trip#Show: Trips Info carousel layout*/
 #tripShowInfo {
   background-color: grey;
   padding: 100px 0;
@@ -69,13 +73,15 @@
   height: 530px;
 }
 
-.borderingDiv {
-  width: 45vw;
-  border-style: outset;
-}
-
+/*Trip#Show: Chart and Calendar*/
 .flexingRow {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+
+/*Trip#Show: Chart and Calendar*/
+.borderingDiv {
+  width: 45vw;
+  border-style: outset;
 }

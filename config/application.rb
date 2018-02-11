@@ -27,5 +27,8 @@ module TheJourney
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.assets.enabled = true
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

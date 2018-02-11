@@ -18,3 +18,17 @@
 
 @import 'bootstrap';
 @import "font-awesome";
+
+@font-face {
+  font-family: "Traveling-Through";
+  src: url('/assets/Traveling-Through');
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+}
