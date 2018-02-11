@@ -47,6 +47,15 @@
    height: 60vh;
 }*/
 
+.home-content{
+  padding-top: 30px;
+}
+
+.home-trip-list > h3 {
+  font-family: "Traveling-Through", arial, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+}
 
 /* ========= Simple_form error messge ========= */
 .has-error > .help-block {
