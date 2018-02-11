@@ -49,7 +49,7 @@ class TripsController < ApplicationController
     @tags = params[:tag_list];
     respond_to do |format|
       if @trip.update(trip_params)
-        format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
+        format.html { redirect_to edit_trip_path(@trip), notice: 'Trip was successfully updated.' }
         format.json { render :show, status: :ok, location: @trip }
       else
         format.html { render :edit }

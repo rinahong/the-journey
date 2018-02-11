@@ -1,35 +1,19 @@
-<%= form_for @trip do |form| %>
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :trip_title %>
+<%= simple_form_for @trip do |f| %>
+  <div class="form-group">
+    <%= f.input :title, class:"form-control" %>
   </div>
-
-  <div class="field">
-    <%= form.label :note %>
-    <%= form.text_area :note, id: :trip_note %>
+  <div class="form-group">
+    <%= f.input :note, class:"form-control" %>
   </div>
-
-  <div class="field">
-    <%= form.label :start_date %>
-    <%= form.datetime_select :start_date, id: :trip_start_date %>
+  <div class="form-group">
+    <%= f.input :start_date, class:"form-control" %>
   </div>
-
-  <div class="field">
-    <%= form.label :end_date %>
-    <%= form.datetime_select :end_date, id: :trip_end_date %>
+  <div class="form-group">
+    <%= f.input :end_date, class:"form-control" %>
   </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :trip_user_id %>
+  <div class="form-group">
+    <p>Tag List</p>
+    <%= f.text_field :tag_list, value: f.object.tag_list.to_s, class:"form-control" %>
   </div>
-
-  <div class="field">
-    <%= form.label :tag_list %>
-    <%= form.text_field :tag_list, value: form.object.tag_list.to_s %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= f.submit 'Submit!', class:"btn btn-primary float-right"%>
 <% end %>

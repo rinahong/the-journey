@@ -2,36 +2,89 @@
 <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-<style>
-ul {
-    float: left;
-    margin: 15px;
-    padding: 10px;
-    border: 1px solid #aaaaaa;
-}
-</style>
+<div class="container">
+  <span class="title">Edit Your Journey</span>
+  <!-- BootStrap Modal Button: Edit Current Trip -->
+  <div class="float-right" data-toggle="modal" data-target='#TripInfoModal'>
+    <%= fa_icon "paper-plane 2x"  %>
+    <span>Trip Info</span>
+  </div>
+  <%= link_to 'Show', @trip %>
+</div>
 
-
-<h1>Editing Trip</h1>
-
-<%= render 'form', trip: @trip %>
-<%= link_to 'Show', @trip %> |
-<%= link_to 'Back', trips_path %>
 
 <div class="row">
-<div id="routes" class="col-3" data-tripstartdate="<%= @trip.start_date %>"><h3>Your Routes</h3>
-  <ol id="sortable">
-  </ol>
-</div>
-<div class="col-9">
-  <div class="latlng"></div>
-  <div id="floating-panel">
-    <input id="address" type="textbox" value="Sydney, NSW">
-    <input id="submit" type="button" value="Geocode">
+  <div id="routes" class="col-3" data-tripstartdate="<%= @trip.start_date %>"><h3>Your Routes</h3>
+    <ol id="sortable">
+    </ol>
   </div>
-  <div id="map" data-tripid="<%= @trip.id %>" data-clickable="true"></div>
+  <div class="col-9">
+    <div class="latlng"></div>
+    <div id="floating-panel">
+      <input id="address" type="textbox" value="Sydney, NSW">
+      <input id="submit" type="button" value="Geocode">
+    </div>
+    <div id="map" data-tripid="<%= @trip.id %>" data-clickable="true"></div>
+  </div>
 </div>
+
+
+<!-- BootStrap Modal: Trip Info -->
+<div class="modal fade" id="TripInfoModal" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tripModalLabel">Trip Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="trip-info">
+          <p>
+            <strong>Title:</strong><%= @trip.title %>
+          </p>
+          <p>
+            <strong>Note:</strong><%= @trip.note %>
+          </p>
+          <p>
+            <strong>Start Date:</strong><%= @trip.start_date %>
+          </p>
+          <p>
+            <strong>End Date:</strong><%= @trip.end_date %>
+          </p>
+          <p>
+            <strong>Tag Lists</strong><%= @trip.tag_list %>
+          </p>
+          <div class="float-right" data-toggle="modal" data-target='#editTripModal'>
+            <%= fa_icon "edit 2x"  %>
+            <span>Edit Trip Info</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<!-- BootStrap Modal: Edit Current Trip -->
+<div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tripModalLabel">Edit Trip</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'form', trip: @trip %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <div id="addForm" style="display:none">
   <%= form_for @route, url: trip_routes_path(@trip)  do |f| %>
@@ -42,7 +95,6 @@ ul {
     <%= f.submit 'Sign In!', class:"btn btn-primary"%>
   <% end %>
 </div>
-
 
 
 <%= javascript_include_tag 'features/dom' %>

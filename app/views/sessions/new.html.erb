@@ -1,15 +1,14 @@
+
 <div class="container">
   <div class="center">
-    <%= form_for :session, url: sessions_path do |f| %>
+    <%= simple_form_for :session, url: sessions_path do |f| %>
       <h2>Sign In</h2>
 
       <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, class:"form-control" %>
+        <%= f.input :email, class:"form-control" %>
       </div>
       <div class="form-group">
-        <%= f.label :password %>
-        <%= f.password_field :password, class:"form-control" %>
+        <%= f.input :password, class:"form-control" %>
       </div>
       <%= f.submit 'Sign In!', class:"btn btn-primary"%>
     <% end %>
