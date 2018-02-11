@@ -123,7 +123,13 @@ span.title {
 }
 
 
-/* =============================================Event Listener ====================*/
+/* ================================= some features ====================*/
+.flash-size {
+  font-size: 25px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .scrollToTop {
   display: none;
   position: fixed;
