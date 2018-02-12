@@ -1,7 +1,12 @@
 <div class="trip-show-container">
   <section class="row" style="margin-bottom:17px;">
     <div class="col-4">
-      <%= link_to fa_icon("angle-double-left 3x"), user_path(current_user), class:"backToPrevious" %>
+      <% if can?(:crud, @trip) %>
+        <div class="backToPrevious">
+          <%= link_to fa_icon("angle-double-left 3x"), user_path(current_user)  %>
+          <span> My Page </span>
+        </div>
+      <% end %>
     </div>
 
     <div class="col-4">
@@ -17,7 +22,12 @@
 
     <div class="col-4">
       <div style="float:right;">
-        <%= link_to fa_icon("angle-double-right 3x"), edit_trip_path(@trip), class:"go-to-forward"%>
+        <% if can?(:crud, @trip) %>
+          <div class="go-to-forward">
+            <span> Edit Trip </span>
+            <%= link_to fa_icon("angle-double-right 3x"), edit_trip_path(@trip) %>
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -37,7 +47,6 @@
 
   <div class="row">
     <%= link_to 'Edit', edit_trip_path(@trip) %> |
-    <%= link_to 'Back', user_path(current_user) %> |
     <%= link_to 'Expense Tracker', trip_expense_trackers_path(@trip) %>
   </div>
 
