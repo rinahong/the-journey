@@ -35,28 +35,35 @@
     <%= render 'trip_info_modal', trip: @trip %>
   </section>
 
-  <main class="map-api">
+  <main class="map-api" style="margin-bottom:5px;">
     <section id="map" data-tripid="<%= @trip.id %>"></section>
-    <div class="geocode-form">
-      <input class="form-control" id="address" type="textbox" value="Sydney, NSW">
+  </main>
+
+  <div class="row">
+    <div class="col-md-6 geocode-form">
+      <input id="address" type="textbox" value="Sydney, NSW">
       <span class="input-group-btn">
         <button class="btn btn-default" id="submit" type="button">GeoCode!</button>
       </span>
     </div>
-  </main>
+    <div class="col-md-6 row" style="padding-left:30%">
+      <div class="expense-tracker">
+        <%= link_to fa_icon("credit-card 2x"), trip_expense_trackers_path(@trip) %>
+        <span>Expense Tracker</span> |
+      </div>
 
-  <div class="row">
-    <%= link_to 'Edit', edit_trip_path(@trip) %> |
-    <%= link_to 'Expense Tracker', trip_expense_trackers_path(@trip) %>
-  </div>
-
-  <!-- BootStrap Modal Button: Trip Info -->
-  <div class="col-4" data-toggle="modal" data-target='#TripInfoModal'>
-    <div class="papaer-plane" style="padding-left:90%;">
-      <%= fa_icon "paper-plane 2x"  %>
-      <span>Trip Info</span>
+      <!-- BootStrap Modal Button: Trip Info -->
+      <div data-toggle="modal" data-target='#TripInfoModal'>
+        <div class="papaer-plane">
+           | <%= fa_icon "paper-plane 2x"  %>
+          <span>Trip Info</span>
+        </div>
+      </div>
     </div>
   </div>
+
+<hr />
+
 
   <!-- BootStrap Modal: Trip Info -->
   <%= render 'trip_info_modal', trip: @trip %>
