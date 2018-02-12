@@ -1,23 +1,26 @@
 <%= simple_form_for @expense_tracker, url: trip_expense_trackers_path(@trip), remote: true do |f| %>
   <div class="row">
     <div class="col-md-2">
-      <%= f.input :category, placeholder: "Category" %>
+      <%= f.input :category, placeholder: "Category", label: false %>
     </div>
 
     <div class="col-md-2">
-      <%= f.input :date, placeholder: "Date" %>
+      <%= f.input :date, placeholder: "Date", label: false %>
     </div>
 
     <div class="col-md-3">
-      <%= f.input :description, placeholder: "Description" %>
+      <%= f.input :description, placeholder: "Description", label: false %>
     </div>
 
     <div class="col-md-2">
-      <%= f.input :price, placeholder: "Price" %>
+      <%= f.input :price, placeholder: "Price", label: false %>
     </div>
 
     <div class="col-md-2">
-      <%= f.button :submit, class: "btn-sm" %>
+      <button type="submit" style="border:none;background:none;">
+          <%= fa_icon "plus-circle 2x" %>
+      </button>
+      <%= fa_icon("times-circle 2x") %>
     </div>
 
     <div class="col-md-2">

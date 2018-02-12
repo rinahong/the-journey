@@ -1,12 +1,49 @@
 
-<h1>Expense Trackers</h1>
-<%= link_to "New ExpenseTracker", add_form_trip_path(@trip), {method: :post, remote: true} %>
-<%= render "header" %>
-<hr />
-<div id="expense_form_sjr">
-  <div id="expense_show_sjr">
-    <% @expense_trackers.each do |expense_tracker| %>
-      <%= render "expense_trackers/expense_show", expense_tracker: expense_tracker, trip: @trip %>
-    <% end %>
+<div class="trip-show-container">
+  <section class="row">
+    <div class="col-4">
+      <div class="backToPrevious">
+        <%= link_to fa_icon("angle-double-left 3x"), @trip %>
+        <span> OverView </span>
+      </div>
+    </div>
+
+    <div class="col-4 row">
+      <p class="title" style="padding-left:27%">Track Your Expense</p>
+    </div>
+
+    <div class="col-4">
+      <div style="margin-top:5px;padding-left:77%;">
+        <span> New Expense </span>
+        <%= link_to fa_icon("file-o 3x"), add_form_trip_path(@trip), {method: :post, remote: true, class:"new_expense_icon"} %>
+      </div>
+    </div>
+  </seciton>
+</div>
+<div class="container">
+  <hr style="height:1px;border:none;margin-top:1rem;background-color:#333;" />
+  <%= render "header" %>
+  <hr style="height:1px;border:none;margin-top:0;background-color:#333;" />
+  <div id="expense_form_sjr" style="font-family:arial">
+    <div id="expense_show_sjr">
+      <% @expense_trackers.each do |expense_tracker| %>
+        <%= render "expense_trackers/expense_show", expense_tracker: expense_tracker, trip: @trip %>
+      <% end %>
+    </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+     // $('.new_expense_icon').on('click', e => {
+     //   $('.new_expense_icon').prop('disabled', true);
+     //    if(close button or create button clicked the make it false) {
+     //       $('.new_expense_icon').prop('disabled', false);
+     //    }
+     // });
+
+     $('#expense_form_sjr').on('click', '.fa-times-circle', e => {
+        $('#new_expense_tracker.simple_form.new_expense_tracker').remove();
+     });
+  });
+</script>

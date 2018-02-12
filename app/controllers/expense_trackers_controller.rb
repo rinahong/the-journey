@@ -1,5 +1,5 @@
 class ExpenseTrackersController < ApplicationController
-  before_action :find_trip, only: [:index, :create, :edit, :update, :destroy]
+  before_action :find_trip, only: [:index, :create, :edit, :update]
   before_action :set_expense_tracker, only: [:show, :edit, :update, :destroy]
 
   # GET /expense_trackers
@@ -15,17 +15,12 @@ class ExpenseTrackersController < ApplicationController
     # render json: @expense_trackers
   end
 
-  # GET /expense_trackers/1
-  # GET /expense_trackers/1.json
-  def show
-  end
+  # # GET /expense_trackers/new
+  # def new
+  #   @expense_tracker = ExpenseTracker.new
+  # end
 
-  # GET /expense_trackers/new
-  def new
-    @expense_tracker = ExpenseTracker.new
-  end
-
-  # Post /trips/:id/add_form  -> member of trip    
+  # Post /trips/:id/add_form  -> member of trip
   def add_form_sjr
     @expense_tracker = ExpenseTracker.new
     @trip = Trip.find params[:id]
@@ -73,10 +68,15 @@ class ExpenseTrackersController < ApplicationController
   # DELETE /expense_trackers/1
   # DELETE /expense_trackers/1.json
   def destroy
-    @expense_tracker.destroy
     respond_to do |format|
-      format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully destroyed.' }
-      format.json { head :no_content }
+      if @expense_tracker.destroy
+        puts "=============destry success????==============="
+        format.js { render 'remove_expense_data_sjr'}
+      else
+        puts "=============destry fail????==============="
+        format.html { redirect_to trip_expense_trackers_path(@expense_tracker.trip), alert: 'Couldn\'t like the trip!' }
+        format.json { render json: @expense_tracker.errors, status: :unprocessable_entity }
+      end
     end
   end
 
