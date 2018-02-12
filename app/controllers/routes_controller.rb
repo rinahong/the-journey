@@ -1,5 +1,5 @@
 class RoutesController < ApplicationController
-  # before_action :authenticate_user!, except: [:show]
+  # before_action :authenticate_user!
   before_action :set_route, only: [:show, :edit, :destroy]
   # before_action :authorize_user!,
   # GET /routes

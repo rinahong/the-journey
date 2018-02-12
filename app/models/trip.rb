@@ -9,7 +9,14 @@ class Trip < ApplicationRecord
   validates :title, presence: true
 
   acts_as_taggable
-  
+
   validates :like_count, numericality: {greater_than_or_equal_to: 0}
 
+  validate :end_date_validation
+
+  def end_date_validation
+    if end_date.present? && end_date < start_date
+      errors.add(:end_date, "can't before the start date")
+    end
+  end
 end

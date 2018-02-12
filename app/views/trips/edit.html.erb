@@ -50,17 +50,6 @@
 
 
 
-<div id="addForm" style="display:none">
-  <%= form_for @route, url: trip_routes_path(@trip)  do |f| %>
-    <div class="form-group">
-      <%= f.label :start_date %>
-      <%= f.text_field :start_date, data:{ provide:'datepicker' } %>
-    </div>
-    <%= f.submit 'Sign In!', class:"btn btn-primary"%>
-  <% end %>
-</div>
-
-
 <%= javascript_include_tag 'features/dom' %>
 <%= javascript_include_tag 'features/map' %>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_SECRET'] %>&callback=initMap"

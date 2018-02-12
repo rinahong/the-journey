@@ -35,8 +35,6 @@ gem 'faker', github: 'stympy/faker'
 gem 'jquery-rails'
 gem 'bootstrap'
 gem "font-awesome-rails"
-gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails',
-                              :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'acts-as-taggable-on', '~> 4.0'
