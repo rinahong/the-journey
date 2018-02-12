@@ -7,12 +7,6 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @current_user_like = current_user.likes.find_by_trip_id(@trip)
-    puts "================username======================="
-    puts current_user.username
-    puts "================trip title======================="
-    puts @trip.title
-    puts "================like id======================="
-    puts @current_user_like
   end
 
   # GET /trips/new
