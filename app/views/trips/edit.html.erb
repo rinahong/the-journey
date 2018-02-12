@@ -5,7 +5,10 @@
 <div class="trip-show-container">
   <section class="row">
     <div class="col-4">
-      <%= link_to fa_icon("angle-double-left 3x"), @trip, class:"backToPrevious" %>
+      <div class="backToPrevious">
+        <%= link_to fa_icon("angle-double-left 3x"), @trip %>
+        <span> OverView </span>
+      </div>
     </div>
 
     <div class="col-4 row">
@@ -43,21 +46,7 @@
 <%= render 'trip_info_modal', trip: @trip %>
 
 <!-- BootStrap Modal: Edit Current Trip -->
-<div class="modal fade" id="editTripModal" tabindex="-1" role="dialog" aria-labelledby="tripModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="tripModalLabel">Edit Trip</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" style="font-family:arial">
-        <%= render 'form', trip: @trip %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render 'edit_trip_info_modal', trip: @trip %>
 
 
 

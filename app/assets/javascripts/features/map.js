@@ -167,7 +167,7 @@ function displayRoutePath(routePathCoordinates) {
                       repeat: '15%'
                     }
                   ],
-                  strokeColor: '#FF0000',
+                  strokeColor: '#DC143C',
                   strokeOpacity: 1.0,
                   strokeWeight: 2
                 });

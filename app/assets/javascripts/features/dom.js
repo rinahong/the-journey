@@ -91,14 +91,14 @@ const Route = {
 } //End Of Route
 
 function renderRoutes (allRoutes) {
-  return allRoutes.map(route => { console.log(route.start_date)
+  return allRoutes.map(route => {
     return H( 'li',
               {
                 'class': 'single-route',
                 'id': route.id
               },
               H( 'h5', null,
-                H( 'strong', null, route.address)
+                H( 'strong', null, route.address + "====== "+route.id)
               ),
               H( 'p', null, `${route.start_date.slice(0, 10)} ~ ${route.end_date.slice(0, 10)}`),
               H( 'i',
@@ -155,8 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#sortable').on('click','.fa.fa-minus-square', e => {
     const routeId = $(e.target).data('routeid');
-    const routeIndex = $( "li" ).index($(`li#${routeId}`))
-    console.log(routeIndex)
+    console.log("route Id =====> ", routeId)
+    const routeIndex = $( "li.single-route" ).index($(`li.single-route#${routeId}`))
+    console.log("route Index =====> ", routeIndex)
     Route
       .delete(routeId)
       .then(() => Route.dateUpdater({delete_route_at_index: routeIndex}))

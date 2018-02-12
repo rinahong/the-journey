@@ -61,6 +61,9 @@
   <!-- BootStrap Modal: Trip Info -->
   <%= render 'trip_info_modal', trip: @trip %>
 
+  <!-- BootStrap Modal: Edit Current Trip -->
+  <%= render 'edit_trip_info_modal', trip: @trip %>
+
   <div class="flexingRow">
     <div id="chart" class="borderingDiv">
       <canvas id="donutChart" data-tripid="<%= @trip.id %>"></canvas>
