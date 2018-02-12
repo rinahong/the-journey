@@ -1,34 +1,32 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @route.address %>
-</p>
+<div class="row space-from-top">
+  <div class="col-sm-3" style="border-right: 1px dashed #333;">
+    <div class="user-profile">
+      <p>
+        <strong>Trip:</strong><%= @route.trip.title %>
+      </p>
+      <p>
+        <strong>Route Address:</strong><%= @route.address %>
+      </p>
+      <p>
+        <strong>Start date:</strong><%= @route.start_date %>
+      </p>
+      <p>
+        <strong>End date:</strong><%= @route.end_date %>
+      </p>
+    </div>
+  </div>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @route.latitude %>
-</p>
+  <div class="col-sm-8 my-trips">
+    <div style="margin-bottom: 15px;">
+      <div class="title inline-display">My Notes</div>
+      <div class="paper-plane inline-display">
+        <%= fa_icon "file-o 2x"  %>
+        <span>New note </span>
+      </div>
+    </div>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @route.longitude %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @route.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @route.end_date %>
-</p>
-
-<p>
-  <strong>Trip:</strong>
-  <%= @route.trip %>
-</p>
-
-<%#= link_to 'Edit', edit_route_path(@route) %> |
-<%#= link_to 'Back', routes_path %>
+    <div class="row">
+    </div>
+  </div>
+</div>

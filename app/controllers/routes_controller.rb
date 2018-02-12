@@ -11,7 +11,11 @@ class RoutesController < ApplicationController
   # GET /routes/1
   # GET /routes/1.json
   def show
-    render json: @route
+    respond_to do |format|
+      format.json {@route}
+      format.html {render :show}
+    end
+    # render json: @route
   end
 
   # GET /routes/new
