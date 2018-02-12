@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       collection do
         patch :date_updater
       end
+      resources :stickynotes, only: [:index, :create, :update, :destroy], shallow: true
     end
     # member do
     #   patch :update_all_routes
