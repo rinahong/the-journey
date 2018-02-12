@@ -97,13 +97,13 @@ function renderRoutes (allRoutes) {
                 'class': 'single-route',
                 'id': route.id
               },
-              H( 'h5', null,
-                H( 'strong', null, route.address + "====== "+route.id)
+              H( 'p', null,
+                H( 'i',
+                  {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}
+                ),
+                H( 'strong', {'style': 'font-size:20px;margin-left: 5px;'}, route.address)
               ),
               H( 'p', null, `${route.start_date.slice(0, 10)} ~ ${route.end_date.slice(0, 10)}`),
-              H( 'i',
-                {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}
-              ),
               H( 'hr', null)
     ) // End Of OuterMost H()
   }) // End Of allRoutes.map
