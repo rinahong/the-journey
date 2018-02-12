@@ -24,15 +24,18 @@
         <div class="card mb-3 box-shadow">
           <img style="border-radius:3px;height:350px;" src="https://maps.googleapis.com/maps/api/staticmap?size=150x200&amp;mobile=true&path=color:0x333333ff|weight:3<%=route_locations.join()%>&markers=color:red|label:S<%=route_locations.first%>&markers=color:red|label:E<%=route_locations.last%>&key=<%=ENV['GOOGLE_STATIC_MAP_API_SECRET']%>&style=feature:administrative%7Celement:geometry.stroke%7Ccolor:0xb8b8b8%7Cvisibility:on%7Cweight:1&style=feature:administrative%7Celement:labels.text.fill%7Ccolor:0x6195a0&style=feature:administrative.province%7Celement:geometry.stroke%7Cvisibility:off&style=feature:landscape%7Celement:geometry%7Ccolor:0xfffef5&style=feature:landscape.man_made%7Clightness:-5&style=feature:landscape.natural.terrain%7Cvisibility:off&style=feature:poi%7Cvisibility:off&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0xbae5ce%7Cvisibility:on&style=feature:road%7Csaturation:-100%7Clightness:45%7Cvisibility:simplified&style=feature:road.arterial%7Cvisibility:off&style=feature:road.highway%7Cvisibility:off&amp;style=feature:transit%7Cvisibility:simplified&amp;style=feature:water%7Ccolor:0xc2f1f5%7Csaturation:35%7Clightness:40%7Cgamma:0.42%7Cvisibility:on&amp;style=feature:water%7Celement:labels.text.fill%7Ccolor:0xadadad%7Cvisibility:on&amp;scale=2">
           <div class="card-body">
-            <p><%= trip_with_likes.title %></p>
-            <p><%= trip_with_likes.user.username %></p>
+            <h5><strong><%= trip_with_likes.title %></strong></h5>
+            <!-- <p><%= trip_with_likes.user.username %></p> -->
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
                 <%= link_to 'View', trip_path(trip_with_likes), class:"btn btn-sm btn-outline-secondary" %>
               </div>
               <small class="text-muted">
-                <%= image_tag 'hearts.png', style: 'width: 33px; height: 33px; border-radius: 5px;' %>
-                <%= pluralize(trip_with_likes.like_count, 'like') %>
+                <div>
+                  <h6 style="margin-bottom:0;text-align:right;"><strong><%= trip_with_likes.user.username %></strong></h6>
+                  <%= image_tag 'hearts.png', style: 'width: 33px; height: 33px; border-radius: 5px;' %>
+                  <%= pluralize(trip_with_likes.like_count, 'like') %>
+                </div>
               </small>
             </div>
           </div>
@@ -58,7 +61,7 @@
         <div class="card mb-3 box-shadow">
           <img style="border-radius:3px;height:350px;" src="https://maps.googleapis.com/maps/api/staticmap?size=150x200&amp;mobile=true&path=color:0x333333ff|weight:3<%=route_locations.join()%>&markers=color:red|label:S<%=route_locations.first%>&markers=color:red|label:E<%=route_locations.last%>&key=<%=ENV['GOOGLE_STATIC_MAP_API_SECRET']%>&style=feature:administrative%7Celement:geometry.stroke%7Ccolor:0xb8b8b8%7Cvisibility:on%7Cweight:1&style=feature:administrative%7Celement:labels.text.fill%7Ccolor:0x6195a0&style=feature:administrative.province%7Celement:geometry.stroke%7Cvisibility:off&style=feature:landscape%7Celement:geometry%7Ccolor:0xfffef5&style=feature:landscape.man_made%7Clightness:-5&style=feature:landscape.natural.terrain%7Cvisibility:off&style=feature:poi%7Cvisibility:off&style=feature:poi.park%7Celement:geometry.fill%7Ccolor:0xbae5ce%7Cvisibility:on&style=feature:road%7Csaturation:-100%7Clightness:45%7Cvisibility:simplified&style=feature:road.arterial%7Cvisibility:off&style=feature:road.highway%7Cvisibility:off&amp;style=feature:transit%7Cvisibility:simplified&amp;style=feature:water%7Ccolor:0xc2f1f5%7Csaturation:35%7Clightness:40%7Cgamma:0.42%7Cvisibility:on&amp;style=feature:water%7Celement:labels.text.fill%7Ccolor:0xadadad%7Cvisibility:on&amp;scale=2">
           <div class="card-body">
-            <p><%= trip.title %></p>
+            <h5><strong><%= trip.title %></strong></h5>
             <p><%= trip.user.username %></p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
