@@ -1,0 +1,5 @@
+const StickyNote = {
+  all() {
+    fetch
+  }
+}
