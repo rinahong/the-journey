@@ -4,8 +4,8 @@ class CreateRoutes < ActiveRecord::Migration[5.1]
       t.string :address
       t.float :latitude
       t.float :longitude
-      t.datetime :start_date
-      t.datetime :end_date
+      t.date :start_date
+      t.date :end_date
       t.references :trip, foreign_key: true
 
       t.timestamps

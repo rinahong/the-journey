@@ -48,7 +48,7 @@ users.each do |user|
     rand(0..4).times.each do
       tags_arr.push(tags.sample)
     end
-    s_d = DateTime.new(2018,2,01) + rand(1...50).days
+    s_d = Date.new(2018,2,01) + rand(1...50).days
     Trip.create(
       title: Faker::Address.country,
       note: Faker::HarryPotter.quote,
@@ -71,8 +71,8 @@ trips.each do |trip|
     else
       s_d = trip.routes.last.end_date
     end
-    d = rand(1..4).days
-    e_d = s_d + d
+    d = rand(1..4)
+    e_d = s_d + d.days
 
     Route.create(
       address: "#{trip.title}",

@@ -24,13 +24,10 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
-    if params[:start_date].present?
-      @trip.start_date = params[:start_date]
-    else
+    unless @trip.start_date.present?
       @trip.start_date = DateTime.now() + 1.month
     end
-
-      @trip.end_date = @trip.start_date + 2.weeks
+    @trip.end_date = @trip.start_date + 2.weeks
 
     respond_to do |format|
       if @trip.save
