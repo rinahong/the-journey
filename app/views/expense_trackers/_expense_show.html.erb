@@ -1,12 +1,8 @@
 <div class="row <%= expense_tracker.id %>">
   <div class="col-md-1">
     <div style="padding-left:50px;">
-      <%#= link_to fa_icon("minus-square"), expense_tracker_path(expense_tracker), method: :delete %>
       <%= link_to fa_icon("minus-square"), expense_tracker_path(expense_tracker), {method: :delete, remote: true} %>
     </div>
-  </div>
-  <div class="col-md-2"> for testing id:
-    <%= expense_tracker.id %>
   </div>
   <div class="col-md-2">
     <%= expense_tracker.category %>

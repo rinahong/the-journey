@@ -70,10 +70,9 @@ class ExpenseTrackersController < ApplicationController
   def destroy
     respond_to do |format|
       if @expense_tracker.destroy
-        puts "=============destry success????==============="
-        format.js { render 'remove_expense_data_sjr'}
+        @expense_trackers = @expense_tracker.trip.expense_trackers.order(date: :asc)
+        format.js { render 'remove_expense_data_sjr', expense_trackers: @expense_trackers}
       else
-        puts "=============destry fail????==============="
         format.html { redirect_to trip_expense_trackers_path(@expense_tracker.trip), alert: 'Couldn\'t like the trip!' }
         format.json { render json: @expense_tracker.errors, status: :unprocessable_entity }
       end
