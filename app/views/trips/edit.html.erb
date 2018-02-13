@@ -41,14 +41,15 @@
   </div>
 </div>
 
+<div>
+  <p class="scrollToTop" onclick="topFunction()"><%= fa_icon("angle-double-up 2x") %></p>
+</div>
 
 <!-- BootStrap Modal: Trip Info -->
 <%= render 'trip_info_modal', trip: @trip %>
 
 <!-- BootStrap Modal: Edit Current Trip -->
 <%= render 'edit_trip_info_modal', trip: @trip %>
-
-
 
 <%= javascript_include_tag 'features/dom' %>
 <%= javascript_include_tag 'features/map' %>

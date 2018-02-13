@@ -101,6 +101,7 @@ hr.curly-lines {
 
 /* Trip#Show: Chart and Calendar */
 .flexingRow {
+  /*width: 96%;*/
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -108,7 +109,7 @@ hr.curly-lines {
 
 /*Trip#Show: Chart and Calendar*/
 .borderingDiv {
-  width: 45vw;
+  width: 43vw;
   border-style: outset;
 }
 

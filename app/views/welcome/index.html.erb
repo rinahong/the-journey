@@ -1,17 +1,16 @@
 <div class="container home-content">
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <%= link_to 'Favorites Trips', home_path + "#favorites", class:"nav-anchor" %> |
+      <%= link_to 'Favorites Trips', home_path + "#favorites", class:"nav-anchor" %> /
     </li>
   <li class="nav-item">
-    <%= link_to 'Highest Tabs', home_path + "#most_used_tags" , class:"nav-anchor" %>
+    <%= link_to 'Most Used Tags', home_path + "#most_used_tags" , class:"nav-anchor" %>
   </li>
   </ul>
 </div>
 
 <div class="container home-content">
   <h3 id="favorites"> The Journey's Favorites</h3>
-
 
   <div class="row">
     <% @trip_highest_likes.each do |trip_with_likes| %>
