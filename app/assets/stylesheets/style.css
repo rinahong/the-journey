@@ -183,7 +183,8 @@ hr.curly-lines {
   border: none;
   background-color: crimson;
   color: white;
-  float:right;
+  /*float:right;*/
+
 }
 
 

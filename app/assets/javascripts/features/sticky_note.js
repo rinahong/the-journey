@@ -90,12 +90,29 @@ function renderStickyNotes (allStickyNotes) {
   }) // End Of allStickyNotes.map
 } // End of renderRoutes()
 
+function sortStickyNoteList() {
+  let newPositionIndexAt = null;
+  $( ".sticky-note-content-list#sortable" ).sortable({
+    cancel: "p,button",
+    update: function( event, ui ) {
+      let stickyNoteId = ui.item.context.id;
+      newPositionIndexAt = ui.item.index();
+      console.log("sorting!")
+      // Route.move(stickyNoteId, {new_position: newPositionIndexAt}).then((res) => {
+      //   reloadRouteList()
+      //   // res.json()
+      // })
+    }
+ });
+}
+
 // Get all sticky notes when reload
 function reloadStickyNotes () {
   StickyNote.all()
     .then(allStickyNotes => {
       $('.sticky-note-content-list').empty();
       $('.sticky-note-content-list').append(...renderStickyNotes(allStickyNotes));
+      sortStickyNoteList();
     })
 }
 
