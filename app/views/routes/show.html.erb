@@ -1,6 +1,6 @@
 
 <div class="row space-from-top">
-  <div class="col-sm-3" style="border-right: 1px dashed #333;">
+  <div class="col-sm-2" style="border-right: 1px dashed #333;">
     <div class="user-profile">
       <p>
         <strong>Trip:</strong><%= @route.trip.title %>
@@ -17,16 +17,20 @@
     </div>
   </div>
 
-  <div class="col-sm-8 my-trips">
+  <div class="col-sm-9 my-trips">
     <div style="margin-bottom: 15px;">
       <div class="title inline-display" id="route-show" data-routeid="<%= @route.id %>">My Notes</div>
-      <div class="paper-plane inline-display">
+      <div class="font-awesome-icon inline-display new-sticky-note-icon">
         <%= fa_icon "file-o 2x"  %>
         <span>New note </span>
       </div>
     </div>
 
-    <div class="row">
+    <div class="col-md-12" style="background-color:white;height:500px;">
+      <ol class="sticky-note-content-list row" id=" sortable" style="padding-left:0">
+      </ol>
     </div>
   </div>
 </div>
+
+<%= javascript_include_tag 'features/sticky_note' %>

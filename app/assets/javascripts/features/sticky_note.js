@@ -1,3 +1,15 @@
+
+// Helper method to create new node.
+function H (tagName, htmlAttrs = {}, ...elements) {
+  const newElement = document.createElement(tagName);
+  for (let attribute in htmlAttrs) {
+    newElement.setAttribute(attribute, htmlAttrs[attribute])
+  }
+  newElement.append(...elements);
+
+  return newElement;
+}
+
 // Ajax for StickyNote Object: create, all, delete
 const StickyNote = {
   create(note, index_at) {
@@ -37,5 +49,74 @@ const StickyNote = {
       }
     )
     .then(res => res.json())
-  }
+  },
+
+  // update(data, and sticky note id) {
+  //   const myUrl = `http://localhost:3000/stickynotes/${stickynoteId}`;
+  //   return fetch (
+  //     myUrl,
+  //     {
+  //       method: 'PATCH',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(data)
+  //     }
+  //   )
+  //   .then(res => res.json())
+  // }
+
 } //End Of StickyNote
+
+function renderStickyNotes (allStickyNotes) {
+  console.log(allStickyNotes)
+  return allStickyNotes.map(singleNote => {
+    return H( 'li',
+              {
+                'class': 'single-sticky-note sticky-note-box',
+                'id': singleNote.id
+              },
+              H( 'div', null,
+                H( 'p',
+                  {'contenteditable':'true'},
+                  singleNote.note
+                )
+              )
+    ) // End Of OuterMost H()
+  }) // End Of allStickyNotes.map
+} // End of renderRoutes()
+
+// Get all sticky notes when reload
+function reloadStickyNotes () {
+  StickyNote.all()
+    .then(allStickyNotes => {
+      $('.sticky-note-content-list').empty();
+      $('.sticky-note-content-list').append(...renderStickyNotes(allStickyNotes));
+    })
+}
+
+//Jquery Events Handler
+document.addEventListener('DOMContentLoaded', () => {
+
+  reloadStickyNotes();
+
+  $('.new-sticky-note-icon').on('click', e => {
+    let index_at_for_new_note = $('.sticky-note-content-list > li').length;
+    // New StickyNote's index will be the one increment of the last list index.
+    // Therefore, New StickyNote's index is numOfList's value.
+    StickyNote.create("Your Note Here: ", index_at_for_new_note)
+      .then(() => reloadStickyNotes());
+  });
+
+  // $('#sortable').on('click','.fa.fa-minus-square', e => {
+  //   const routeId = $(e.target).data('routeid');
+  //   console.log("route Id =====> ", routeId)
+  //   const routeIndex = $( "li.single-route" ).index($(`li.single-route#${routeId}`))
+  //   console.log("route Index =====> ", routeIndex)
+  //   Route
+  //     .delete(routeId)
+  //     .then(() => Route.dateUpdater({delete_route_at_index: routeIndex}))
+  //     .then(() => reloadRouteList())
+  // });
+
+}) //End of Document.addEventListener

@@ -140,8 +140,7 @@ hr.curly-lines {
   display: inline-block;
 }
 
-.paper-plane {
-  /*padding-left: 10%;*/
+.font-awesome-icon{
   padding-left: 5%;
   padding-top: 2%
 }
@@ -171,4 +170,11 @@ hr.curly-lines {
 
 .scrollToTop:hover {
   background-color: #555;
+}
+
+.sticky-note-box {
+  margin: 5px;
+  background-color: #FFFACD;
+  height: 200px;
+  width: 200px;
 }
