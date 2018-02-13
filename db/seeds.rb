@@ -98,10 +98,10 @@ trips.each do |trip|
 end
 
 
-routes = Route.all
+# routes = Route.all
 expenses = ExpenseTracker.all
 
-puts Cowsay.say("Created #{routes.count} routes", :moose)
+# puts Cowsay.say("Created #{routes.count} routes", :moose)
 puts Cowsay.say("Created #{expenses.count} expenses", :kitty)
 
 rand(50..150).times.each do

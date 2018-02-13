@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180210022635) do
+ActiveRecord::Schema.define(version: 20180213011139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 20180210022635) do
     t.datetime "updated_at", null: false
     t.integer "duration"
     t.index ["trip_id"], name: "index_routes_on_trip_id"
+  end
+
+  create_table "stickynotes", force: :cascade do |t|
+    t.text "note"
+    t.integer "index_at"
+    t.bigint "route_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_stickynotes_on_route_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -98,5 +107,6 @@ ActiveRecord::Schema.define(version: 20180210022635) do
   add_foreign_key "likes", "trips"
   add_foreign_key "likes", "users"
   add_foreign_key "routes", "trips"
+  add_foreign_key "stickynotes", "routes"
   add_foreign_key "trips", "users"
 end

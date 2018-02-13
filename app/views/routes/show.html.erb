@@ -1,32 +1,51 @@
+<div class="trip-show-container" style="margin-bottom:10px;">
+  <section class="row">
+    <div class="col-6">
+      <div class="backToPrevious" style="width:80px;">
+        <%= link_to fa_icon("angle-double-left 3x"), edit_trip_path(@route.trip) %>
+        <span> Edit Trip </span>
+      </div>
+    </div>
+    <!-- BootStrap Modal Button: Trip Info -->
+    <div class="col-6" data-toggle="modal" data-target='#TripInfoModal'>
+      <div class="go-to-forward" style="float:right">
+        <span> OverView </span>
+        <%= link_to fa_icon("angle-double-right 3x"), @route.trip %>
+      </div>
+    </div>
+  </seciton>
+</div>
 
-<div class="row space-from-top">
-  <div class="col-sm-3" style="border-right: 1px dashed #333;">
+<div class="row">
+  <div class="col-sm-2" style="border-right: 1px dashed #333;">
     <div class="user-profile">
-      <p>
-        <strong>Trip:</strong><%= @route.trip.title %>
-      </p>
-      <p>
-        <strong>Route Address:</strong><%= @route.address %>
-      </p>
-      <p>
-        <strong>Start date:</strong><%= @route.start_date %>
-      </p>
-      <p>
-        <strong>End date:</strong><%= @route.end_date %>
-      </p>
+      <h1 style="margin-top:10px;"><strong>*<%= @route.trip.title %>*</strong></h1>
+      <h4>
+        <strong>Address:</strong><%= @route.address %>
+      </h4>
+      <h4>
+        <strong>StartDate:</strong><%= @route.start_date %>
+      </h4>
+      <h4>
+        <strong>EndDate:</strong><%= @route.end_date %>
+      </h4>
     </div>
   </div>
 
-  <div class="col-sm-8 my-trips">
+  <div class="col-sm-9 my-trips">
     <div style="margin-bottom: 15px;">
-      <div class="title inline-display">My Notes</div>
-      <div class="paper-plane inline-display">
+      <div class="title inline-display" id="route-show" data-routeid="<%= @route.id %>">My Notes</div>
+      <div class="font-awesome-icon inline-display new-sticky-note-icon">
         <%= fa_icon "file-o 2x"  %>
         <span>New note </span>
       </div>
     </div>
 
-    <div class="row">
+    <div class="col-md-12" id="note-container" style="background-color:white;height:500px;">
+      <ol class="sticky-note-content-list row" id=" sortable" style="padding-left:0">
+      </ol>
     </div>
   </div>
 </div>
+
+<%= javascript_include_tag 'features/sticky_note' %>

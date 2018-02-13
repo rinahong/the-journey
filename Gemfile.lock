@@ -31,6 +31,11 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    active_model_serializers (0.10.7)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (5.1.4)
       activesupport (= 5.1.4)
       globalid (>= 0.3.6)
@@ -59,6 +64,8 @@ GEM
     builder (3.2.3)
     byebug (10.0.0)
     cancancan (2.1.3)
+    case_transform (0.2)
+      activesupport
     chart-js-rails (0.1.4)
       railties (> 3.1)
     coderay (1.1.2)
@@ -95,6 +102,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    jsonapi-renderer (0.2.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -167,8 +175,6 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
-    simple-form-datepicker (0.1.3)
-      simple_form
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -205,6 +211,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   acts-as-taggable-on (~> 4.0)
   bcrypt (~> 3.1.7)
   bootstrap
@@ -228,7 +235,6 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.4)
   sass-rails (~> 5.0)
-  simple-form-datepicker
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
