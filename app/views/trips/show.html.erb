@@ -46,19 +46,24 @@
         <button class="btn btn-default" id="submit" type="button">GeoCode!</button>
       </span>
     </div>
-    <div class="col-md-6 row" style="padding-left:33%">
-      <div class="expense-tracker">
-        <%= link_to fa_icon("credit-card 2x"), trip_expense_trackers_path(@trip) %>
-        <span>Expense Tracker</span> |
-      </div>
+    <div class="col-md-6">
+      <div class="row" style="z-index:10;position:absolute;right:50px;top:0;">
+        <% if can?(:crud, @trip) %>
+          <div class="expense-tracker">
+            <%= link_to fa_icon("credit-card 2x"), trip_expense_trackers_path(@trip) %>
+            <span>Expense Tracker</span> |
+          </div>
+        <% end %>
 
-      <!-- BootStrap Modal Button: Trip Info -->
-      <div data-toggle="modal" data-target='#TripInfoModal'>
-        <div class="papaer-plane">
-           | <%= fa_icon "paper-plane 2x"  %>
-          <span>Trip Info</span>
+        <!-- BootStrap Modal Button: Trip Info -->
+        <div data-toggle="modal" data-target='#TripInfoModal'>
+          <div class="papaer-plane">
+             | <%= fa_icon "paper-plane 2x"  %>
+            <span>Trip Info</span>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 

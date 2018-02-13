@@ -47,5 +47,9 @@ class Ability
     #   user = route.trip.user
     # end
 
+    can :crud, ExpenseTracker do |expense_tracker|
+      user == expense_tracker.trip.user
+    end
+
   end
 end
