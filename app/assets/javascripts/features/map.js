@@ -163,7 +163,6 @@ function displayRoutePath(routePathCoordinates) {
                   icons: [
                     {
                       icon: lineSymbol,
-                      //offset: '20%',
                       repeat: '15%'
                     }
                   ],

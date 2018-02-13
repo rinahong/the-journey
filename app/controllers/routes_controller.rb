@@ -47,11 +47,11 @@ class RoutesController < ApplicationController
     end
 
     route.end_date = route.start_date + route.duration.days
-
     may_success = false
 
     if route.save
       may_success = true
+      trip.update(end_date: route.end_date)
     end
 
     render json: route

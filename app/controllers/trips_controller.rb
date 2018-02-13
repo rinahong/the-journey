@@ -55,7 +55,7 @@ class TripsController < ApplicationController
         format.html { redirect_to edit_trip_path(@trip), notice: 'Trip was successfully updated.' }
         format.json { render :show, status: :ok, location: @trip }
       else
-        format.html { render :edit }
+        format.html { redirect_to edit_trip_path(@trip), alert: @trip.errors.full_messages.join(', ') }
         format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
     end

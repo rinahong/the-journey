@@ -121,7 +121,6 @@ function sortRouteList() {
       newPositionIndexAt = ui.item.index();
       Route.move(routeId, {new_position: newPositionIndexAt}).then((res) => {
         reloadRouteList()
-        // res.json()
       })
     }
  });

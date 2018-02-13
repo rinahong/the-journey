@@ -1,4 +1,7 @@
 <%= simple_form_for @trip do |f| %>
+  <% if @trip.errors.present? %>
+    <p><%= @trip.errors.full_messages.join(', ') %></p>
+  <% end %>
   <div class="form-group">
     <%= f.input :title, class:"form-control" %>
   </div>
