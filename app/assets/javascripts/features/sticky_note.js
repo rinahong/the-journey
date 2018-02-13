@@ -98,8 +98,9 @@ function sortStickyNoteList() {
       let stickyNoteId = ui.item.context.id;
       newPositionIndexAt = ui.item.index();
       console.log("sorting!")
-      // Route.move(stickyNoteId, {new_position: newPositionIndexAt}).then((res) => {
-      //   reloadRouteList()
+      //Todo: update index
+      // StickyNote.updateIndexAt(stickyNoteId, {new_position: newPositionIndexAt}).then((res) => {
+      //   reloadStickyNotes()
       //   // res.json()
       // })
     }
