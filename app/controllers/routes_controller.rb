@@ -4,9 +4,13 @@ class RoutesController < ApplicationController
   # before_action :authorize_user!,
   # GET /routes
   def index
+    # @routes = Route.all
+    # @trip = Trip.find params[:trip_id]
     @routes = Route.where(trip_id:params[:trip_id]).order(start_date: :asc)
+    # binding.pry
     render json: @routes
   end
+
 
   # GET /routes/1
   # GET /routes/1.json
@@ -113,6 +117,7 @@ class RoutesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_route
+      # @trip = Trip.find(params[:id])
       @route = Route.find(params[:id])
     end
 

@@ -32,29 +32,15 @@ class StickynotesController < ApplicationController
      else
        render json: @stickynote.errors, status: :unprocessable_entity
      end
-
-    # respond_to do |format|
-    #   if @stickynote.save
-    #     format.html { redirect_to @stickynote, notice: 'Stickynote was successfully created.' }
-    #     format.json { render :show, status: :created, location: @stickynote }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @stickynote.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # PATCH/PUT /stickynotes/1
   # PATCH/PUT /stickynotes/1.json
   def update
-    respond_to do |format|
-      if @stickynote.update(stickynote_params)
-        format.html { redirect_to @stickynote, notice: 'Stickynote was successfully updated.' }
-        format.json { render :show, status: :ok, location: @stickynote }
-      else
-        format.html { render :edit }
-        format.json { render json: @stickynote.errors, status: :unprocessable_entity }
-      end
+    if @stickynote.update(stickynote_params)
+      render json: @stickynote
+    else
+      render json: @stickynote.errors, status: :unprocessable_entity
     end
   end
 

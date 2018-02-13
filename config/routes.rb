@@ -16,9 +16,7 @@ Rails.application.routes.draw do
       end
       resources :stickynotes, only: [:index, :create, :update, :destroy], shallow: true
     end
-    # member do
-    #   patch :update_all_routes
-    # end
+
     resources :expense_trackers, only: [:destroy], shallow: true, defaults: {format: :js}
     resources :expense_trackers, only: [:index, :edit, :create, :update], shallow: true
     resources :likes, only: [:create, :destroy], shallow: true

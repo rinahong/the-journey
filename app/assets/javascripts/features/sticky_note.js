@@ -51,25 +51,28 @@ const StickyNote = {
     .then(res => res.json())
   },
 
-  // update(data, and sticky note id) {
-  //   const myUrl = `http://localhost:3000/stickynotes/${stickynoteId}`;
-  //   return fetch (
-  //     myUrl,
-  //     {
-  //       method: 'PATCH',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(data)
-  //     }
-  //   )
-  //   .then(res => res.json())
-  // }
+  update(note, index_at, stickynoteId) {
+    const myUrl = `http://localhost:3000/stickynotes/${stickynoteId}`;
+    const dataToUpdate = {
+      note: note,
+      index_at: index_at
+    }
+    return fetch (
+      myUrl,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataToUpdate)
+      }
+    )
+    .then(res => res.json())
+  }
 
 } //End Of StickyNote
 
 function renderStickyNotes (allStickyNotes) {
-  console.log(allStickyNotes)
   return allStickyNotes.map(singleNote => {
     return H( 'li',
               {
@@ -78,7 +81,7 @@ function renderStickyNotes (allStickyNotes) {
               },
               H( 'div', null,
                 H( 'p',
-                  {'contenteditable':'true'},
+                  {'id':singleNote.id, 'contenteditable':'true'},
                   singleNote.note
                 )
               )
@@ -106,6 +109,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Therefore, New StickyNote's index is numOfList's value.
     StickyNote.create("Your Note Here: ", index_at_for_new_note)
       .then(() => reloadStickyNotes());
+  });
+
+  $('#note-container').on('keyup', e => {
+    let stickynoteId = $(e.target).attr('id');
+    let noteDetails = $(e.target).html();
+    let stickyNotelistIndex = $( ".sticky-note-content-list > li" ).index($(`#${stickynoteId}`));
+    console.log(noteDetails + "==="+stickynoteId)
+    StickyNote.update(noteDetails, stickyNotelistIndex, stickynoteId);
   });
 
   // $('#sortable').on('click','.fa.fa-minus-square', e => {
