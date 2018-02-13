@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get('/', { to: 'welcome#index', as: :home })
   get('/about', { to: 'welcome#about', as: :about })
 
@@ -13,10 +14,9 @@ Rails.application.routes.draw do
       collection do
         patch :date_updater
       end
+      resources :stickynotes, only: [:index, :create, :update, :destroy], shallow: true
     end
-    # member do
-    #   patch :update_all_routes
-    # end
+
     resources :expense_trackers, only: [:destroy], shallow: true, defaults: {format: :js}
     resources :expense_trackers, only: [:index, :edit, :create, :update], shallow: true
     resources :likes, only: [:create, :destroy], shallow: true

@@ -1,6 +1,6 @@
 class Route < ApplicationRecord
   belongs_to :trip
-  has_many :routes
+  has_many :stickynotes, dependent: :destroy
 
   def lat_lng_string
     "|#{latitude},#{longitude}"

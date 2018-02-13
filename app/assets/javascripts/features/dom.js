@@ -92,6 +92,7 @@ const Route = {
 
 function renderRoutes (allRoutes) {
   return allRoutes.map(route => {
+    let myRouteUrl = `http://localhost:3000/routes/${route.id}`
     return H( 'li',
               {
                 'class': 'single-route',
@@ -101,9 +102,11 @@ function renderRoutes (allRoutes) {
                 H( 'i',
                   {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}
                 ),
-                H( 'strong', {'style': 'font-size:20px;margin-left: 5px;'}, route.address)
+                // H( 'strong', {'style': 'font-size:20px;margin-left: 5px;'}, route.title),
+                // H( 'strong', {'style': 'font-size:20px;margin-left: 5px;'}, `<%= link_to ${route.title}, route_path(route.id) %>`)
+                H( 'a', {'style': 'font-size:20px;margin-left: 5px;', 'href':myRouteUrl}, route.title)
               ),
-              H( 'p', null, `${route.start_date.slice(0, 10)} ~ ${route.end_date.slice(0, 10)}`),
+              H( 'p', null, `${route.start} ~ ${route.end}`),
               H( 'hr', null)
     ) // End Of OuterMost H()
   }) // End Of allRoutes.map
