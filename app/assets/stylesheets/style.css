@@ -178,3 +178,15 @@ hr.curly-lines {
   height: 200px;
   width: 200px;
 }
+
+.delete-button {
+  border: none;
+  background-color: crimson;
+  color: white;
+  float:right;
+}
+
+
+ol.sticky-note-content-list  {
+  list-style-type: none;
+}

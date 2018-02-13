@@ -40,8 +40,8 @@ const StickyNote = {
        .then(res => res.json())
   },
 
-  delete(stickynoteId) {
-    const myUrl = `http://localhost:3000/stickynotes/${stickynoteId}`;
+  delete(stickyNoteId) {
+    const myUrl = `http://localhost:3000/stickynotes/${stickyNoteId}`;
     return fetch(
       myUrl,
       {
@@ -51,8 +51,8 @@ const StickyNote = {
     .then(res => res.json())
   },
 
-  update(note, index_at, stickynoteId) {
-    const myUrl = `http://localhost:3000/stickynotes/${stickynoteId}`;
+  update(note, index_at, stickyNoteId) {
+    const myUrl = `http://localhost:3000/stickynotes/${stickyNoteId}`;
     const dataToUpdate = {
       note: note,
       index_at: index_at
@@ -80,6 +80,7 @@ function renderStickyNotes (allStickyNotes) {
                 'id': singleNote.id
               },
               H( 'div', null,
+                H( 'button', {'class':'delete-button', 'id':singleNote.id}, 'X'),
                 H( 'p',
                   {'id':singleNote.id, 'contenteditable':'true'},
                   singleNote.note
@@ -115,19 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let stickynoteId = $(e.target).attr('id');
     let noteDetails = $(e.target).html();
     let stickyNotelistIndex = $( ".sticky-note-content-list > li" ).index($(`#${stickynoteId}`));
-    console.log(noteDetails + "==="+stickynoteId)
     StickyNote.update(noteDetails, stickyNotelistIndex, stickynoteId);
   });
 
-  // $('#sortable').on('click','.fa.fa-minus-square', e => {
-  //   const routeId = $(e.target).data('routeid');
-  //   console.log("route Id =====> ", routeId)
-  //   const routeIndex = $( "li.single-route" ).index($(`li.single-route#${routeId}`))
-  //   console.log("route Index =====> ", routeIndex)
-  //   Route
-  //     .delete(routeId)
-  //     .then(() => Route.dateUpdater({delete_route_at_index: routeIndex}))
-  //     .then(() => reloadRouteList())
-  // });
+  $('.sticky-note-content-list').on('click','.delete-button', e => {
+    let deleteNoteId = $(e.target).attr('id')
+    console.log("helloe button clicked", deleteNoteId)
+    StickyNote
+      .delete(deleteNoteId)
+      .then(() => reloadStickyNotes())
+  });
 
 }) //End of Document.addEventListener

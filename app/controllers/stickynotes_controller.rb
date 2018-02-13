@@ -47,10 +47,10 @@ class StickynotesController < ApplicationController
   # DELETE /stickynotes/1
   # DELETE /stickynotes/1.json
   def destroy
-    @stickynote.destroy
-    respond_to do |format|
-      format.html { redirect_to stickynotes_url, notice: 'Stickynote was successfully destroyed.' }
-      format.json { head :no_content }
+    if @stickynote.destroy
+      render json: :ok 
+    else
+      head :bad_request
     end
   end
 
