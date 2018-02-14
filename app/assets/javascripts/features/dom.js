@@ -157,9 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#sortable').on('click','.fa.fa-minus-square', e => {
     const routeId = $(e.target).data('routeid');
-    console.log("route Id =====> ", routeId)
     const routeIndex = $( "li.single-route" ).index($(`li.single-route#${routeId}`))
-    console.log("route Index =====> ", routeIndex)
     Route
       .delete(routeId)
       .then(() => Route.dateUpdater({delete_route_at_index: routeIndex}))
