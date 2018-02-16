@@ -159,9 +159,4 @@ $(document).ready(() => {
       .then(() => Route.dateUpdater({delete_route_at_index: routeIndex}))
       .then(() => reloadRouteList())
   });
-
-
-  $('.carousel').carousel({
-    interval: false
-  })
 }) //End of Document.addEventListener
