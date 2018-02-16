@@ -118,7 +118,7 @@ function reloadStickyNotes () {
 }
 
 //Jquery Events Handler
-document.addEventListener('DOMContentLoaded', () => {
+$(document).ready(() => {
 
   reloadStickyNotes();
 

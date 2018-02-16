@@ -138,7 +138,7 @@ function reloadRouteList () {
 }
 
 //Jquery Events Handler
-document.addEventListener('DOMContentLoaded', () => {
+$(document).ready(() => {
 
   reloadRouteList();
 
