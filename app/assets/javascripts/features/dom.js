@@ -102,8 +102,6 @@ function renderRoutes (allRoutes) {
                 H( 'i',
                   {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}
                 ),
-                // H( 'strong', {'style': 'font-size:20px;margin-left: 5px;'}, route.title),
-                // H( 'strong', {'style': 'font-size:20px;margin-left: 5px;'}, `<%= link_to ${route.title}, route_path(route.id) %>`)
                 H( 'a', {'style': 'font-size:20px;margin-left: 5px;', 'href':myRouteUrl}, route.title)
               ),
               H( 'p', null, `${route.start} ~ ${route.end}`),
@@ -112,6 +110,7 @@ function renderRoutes (allRoutes) {
   }) // End Of allRoutes.map
 } // End of renderRoutes()
 
+// Re-order routes and update start and end dates
 function sortRouteList() {
   let originalIndexAt = null;
   let newPositionIndexAt = null;
@@ -150,9 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let lng = parseFloat($('#routeInfo .longitude').html());
     Route.create(address, lat, lng)
       .then(() => reloadRouteList())
-
-    // let form = $("#addForm").html();
-    // $("li.single-route:last-child").append(form);
   });
 
   $('#sortable').on('click','.fa.fa-minus-square', e => {
