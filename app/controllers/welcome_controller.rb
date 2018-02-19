@@ -15,6 +15,4 @@ class WelcomeController < ApplicationController
     @trip_highest_likes = Trip.all.order(like_count: :desc)[0..3]
   end
 
-  def about
-  end
 end

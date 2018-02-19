@@ -9,13 +9,9 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <%= link_to 'ABOUT', about_path, class:"nav-anchor" %>
-        </li>
-
         <% if user_signed_in? %>
           <li class="nav-item">
-            <span class="nav-anchor"> / HELLO,</span> <span class="nav-anchor" style="font-weight:bold"><%= current_user.username.upcase %><span>
+            <span class="nav-anchor"> HELLO,</span> <span class="nav-anchor" style="font-weight:bold"><%= current_user.username.upcase %><span>
           </li>
           <li class="nav-item">
             <%= link_to '/ MY PAGE', user_path(current_user), class:"nav-anchor" %>

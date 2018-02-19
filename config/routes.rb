@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   get('/', { to: 'welcome#index', as: :home })
-  get('/about', { to: 'welcome#about', as: :about })
 
   resources :users, except: [:index]
   resource :sessions, only: [:new, :create, :destroy]
@@ -24,7 +23,5 @@ Rails.application.routes.draw do
       post '/add_form' => "expense_trackers#add_form_sjr"
     end
   end
-
-  # post '/add_form' => "expense_trackers#add_form_sjr"
 
 end
