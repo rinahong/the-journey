@@ -11,7 +11,6 @@ class TripsController < ApplicationController
 
   # GET /trips/1/edit
   def edit
-    @route = Route.new
   end
 
   # POST /trips
