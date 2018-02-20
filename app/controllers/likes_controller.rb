@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :destroy]
+
   def create
     trip= Trip.find params[:trip_id]
     like = Like.new(trip: trip, user: current_user)

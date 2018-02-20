@@ -1,28 +1,12 @@
 class StickynotesController < ApplicationController
   before_action :set_stickynote, only: [:show, :edit, :update, :destroy]
 
-  # GET /stickynotes
   # GET /stickynotes.json
   def index
     @stickynotes = Stickynote.where(route_id:params[:route_id]).order(index_at: :asc)
     render json: @stickynotes
   end
 
-  # GET /stickynotes/1
-  # GET /stickynotes/1.json
-  def show
-  end
-
-  # GET /stickynotes/new
-  def new
-    @stickynote = Stickynote.new
-  end
-
-  # GET /stickynotes/1/edit
-  def edit
-  end
-
-  # POST /stickynotes
   # POST /stickynotes.json
   def create
     @stickynote = Stickynote.new(stickynote_params)
@@ -34,7 +18,6 @@ class StickynotesController < ApplicationController
      end
   end
 
-  # PATCH/PUT /stickynotes/1
   # PATCH/PUT /stickynotes/1.json
   def update
     if @stickynote.update(stickynote_params)
@@ -44,11 +27,10 @@ class StickynotesController < ApplicationController
     end
   end
 
-  # DELETE /stickynotes/1
   # DELETE /stickynotes/1.json
   def destroy
     if @stickynote.destroy
-      render json: :ok 
+      render json: :ok
     else
       head :bad_request
     end
