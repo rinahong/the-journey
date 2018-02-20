@@ -1,3 +1,4 @@
+#TODO adding edit and updating expense_tracker
 class ExpenseTrackersController < ApplicationController
   before_action :find_trip, only: [:index, :create, :edit, :update]
   before_action :set_expense_tracker, only: [:show, :edit, :update, :destroy]
@@ -8,17 +9,7 @@ class ExpenseTrackersController < ApplicationController
     @expense_tracker = ExpenseTracker.new
     expenses_in_the_trip = ExpenseTracker.where(trip_id: params[:trip_id])
     @expense_trackers = expenses_in_the_trip.order(date: :asc)
-    respond_to do |format|
-      format.json { render json: @expense_trackers }
-      format.html { @expense_trackers }
-    end
-    # render json: @expense_trackers
   end
-
-  # # GET /expense_trackers/new
-  # def new
-  #   @expense_tracker = ExpenseTracker.new
-  # end
 
   # Post /trips/:id/add_form  -> member of trip
   def add_form_sjr
@@ -31,11 +22,10 @@ class ExpenseTrackersController < ApplicationController
   end
 
   # GET /expense_trackers/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /expense_trackers
-  # POST /expense_trackers.json
   def create
     @expense_tracker = ExpenseTracker.new expense_tracker_params
     @trip = Trip.find params[:trip_id]
@@ -44,26 +34,25 @@ class ExpenseTrackersController < ApplicationController
       if @expense_tracker.save
         format.js { render 'add_expense_data_sjr'}
       else
-        format.html { render :new }
-        format.json { render json: @expense_tracker.errors, status: :unprocessable_entity }
+        format.html { render :index, alert: "Cound't create the expense tracker" }
       end
     end
   end
 
   # PATCH/PUT /expense_trackers/1
   # PATCH/PUT /expense_trackers/1.json
-  def update
-    @trip = @expense_tracker.trip
-    respond_to do |format|
-      if @expense_tracker.update(expense_tracker_params)
-        format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully updated.' }
-        format.json { render :show, status: :ok, location: @expense_tracker }
-      else
-        format.html { render :edit }
-        format.json { render json: @expense_tracker.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   @trip = @expense_tracker.trip
+  #   respond_to do |format|
+  #     if @expense_tracker.update(expense_tracker_params)
+  #       format.html { redirect_to trip_expense_trackers_path(@trip), notice: 'Expense tracker was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @expense_tracker }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @expense_tracker.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /expense_trackers/1
   # DELETE /expense_trackers/1.json
