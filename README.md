@@ -3,7 +3,7 @@
 
 ### One step closer to your journey
 
-![logo](/logo.gif)
+<img src="logo.gif" alt="logo" style="width: 100px;"/>
 
 The journey is web application on where you can manage your trip by organizing routes, adding notes, tracking your expenses.
 
