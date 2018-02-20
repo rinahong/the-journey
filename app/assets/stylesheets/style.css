@@ -192,3 +192,5 @@ hr.curly-lines {
 ol.sticky-note-content-list  {
   list-style-type: none;
 }
+
+img[alt=logo] { width: 50px; }

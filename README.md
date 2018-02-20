@@ -3,8 +3,7 @@
 
 ### One step closer to your journey
 
-<!-- ![logo](https://github.com/rhong1006/portfolio-the-journey/blob/master/app/assets/images/logo.gif) -->
-![logo](images/logo.gif)
+![logo](app/assets/images/logo.gif)
 
 The journey is web application on where you can manage your trip by organizing routes, adding notes, tracking your expenses.
 
