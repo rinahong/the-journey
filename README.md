@@ -1,24 +1,39 @@
 # README
+# The Journey: Trip Planner
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### One step closer to your journey
 
-Things you may want to cover:
+![alt text](https://github.com/rhong1006/portfolio-the-journey/blob/master/app/assets/images/logo.gif)
 
-* Ruby version
+The journey is web application on where you can manage your trip by organizing routes, adding notes, tracking your expenses.
 
-* System dependencies
+The App allows users to share their trip ideas with others, as well as looking up other trip ideas by searching tag names.
 
-* Configuration
+Visitors to the site would able to see a list of trips with highest like counts and most used tag names.
 
-* Database creation
+## Setup:
+```
+Run the following commands in the project directory:
 
-* Database initialization
+$ bundle
+$ rails db:create
+$ rails db:migrate
+$ rails db:seed (If you want to use a seed data)
+$ rails s
 
-* How to run the test suite
+Open on localhost:3000
+If you have seeded data, then could be able to use test user.
+ email: t@t.t
+ password: 123
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+## Technologies used:
+- Ruby on Rails
+- Javascript
+- jQuery
+- Ajax
+- Bootstrap
+- PostgreSQL
 
-* Deployment instructions
-
-* ...
+## Contributor:
+* Rina Hong  https://www.linkedin.com/in/rinahong/
