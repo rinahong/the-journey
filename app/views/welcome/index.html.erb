@@ -49,7 +49,7 @@
 
   <h3 id="most_used_tags"> The Journey's Highest tags name</h3>
   <div class="row">
-    <% @trips.each do |trip| %>
+    <% @trip_tags_most_used.each do |trip| %>
       <% route_locations = [] %>
       <% trip.routes.order(start_date: :asc).each do |route| %>
         <% route_locations << route.lat_lng_string %>
