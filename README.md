@@ -1,9 +1,8 @@
 # README
-# The Journey: Trip Planner
+# The Journey: Trip Planner <img src="app/assets/images/logo.gif" width="48">
 
 ### One step closer to your journey
 
-![logo](app/assets/images/logo.gif)
 
 The journey is web application on where you can manage your trip by organizing routes, adding notes, tracking your expenses.
 

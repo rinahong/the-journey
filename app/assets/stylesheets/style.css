@@ -185,12 +185,9 @@ hr.curly-lines {
   background-color: crimson;
   color: white;
   /*float:right;*/
-
 }
 
 
 ol.sticky-note-content-list  {
   list-style-type: none;
 }
-
-img[alt=logo] { width: 50px; }
