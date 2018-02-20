@@ -11,20 +11,20 @@
       <ul class="navbar-nav">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <span class="nav-anchor"> HELLO,</span> <span class="nav-anchor" style="font-weight:bold"><%= current_user.username.upcase %><span>
+            <span class="nav-anchor"> HELLO,</span> <span class="nav-anchor" style="font-weight:bold"><%= current_user.username.upcase %> <span>
           </li>
           <li class="nav-item">
-            <%= link_to '/ MY PAGE', user_path(current_user), class:"nav-anchor" %>
+            <%= link_to '/ MY PAGE /', user_path(current_user), class:"nav-anchor" %>
           </li>
           <li class="nav-item">
-            <%= link_to '/ SIGN OUT', sessions_path, method: :delete, class:"nav-anchor"  %>
+            <%= link_to 'SIGN OUT', sessions_path, method: :delete, class:"nav-anchor"  %>
           </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to '/ SIGN IN', new_sessions_path, class:"nav-anchor" %>
+            <%= link_to 'SIGN IN /', new_sessions_path, class:"nav-anchor" %>
           </li>
           <li class="nav-item">
-            <%= link_to '/ SIGN UP', new_user_path, class:"nav-anchor" %>
+            <%= link_to 'SIGN UP', new_user_path, class:"nav-anchor" %>
           </li>
         <% end %>
       </ul>
