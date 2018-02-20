@@ -8,7 +8,5 @@ class RouteSerializer < ActiveModel::Serializer
 
   def url
       "http://localhost:3000" + route_path(object.id)
-      # json.url route_path(trip.id, r, format: :html)
-      # self: route_url(object.trip_id, object, format: :html)
   end
 end

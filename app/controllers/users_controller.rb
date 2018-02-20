@@ -1,3 +1,4 @@
+  #TODO When Admin feature added, Destroy method will be used. (Now not using destroy)
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
@@ -41,7 +42,6 @@ class UsersController < ApplicationController
     end
   end
 
-  #TODO Not using this method until I create Admin
   # DELETE /users/1
   def destroy
     @user.destroy

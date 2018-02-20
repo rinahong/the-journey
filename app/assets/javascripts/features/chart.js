@@ -26,6 +26,7 @@ all()
     let counter = 0;
     const colorArray = [];
     do {
+      // Random rgb generator
       colorArray.push("#"+((1<<24)*Math.random()|0).toString(16));
       counter++;
     } while (Object.keys(expense_chart_data).length > counter );
@@ -55,6 +56,5 @@ all()
               position: 'bottom'
           }
         }
-        // options: 'rotation'
     });
   })
