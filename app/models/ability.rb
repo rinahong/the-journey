@@ -43,9 +43,9 @@ class Ability
       like.user == user
     end
 
-    # can :crud, Route do |route|
-    #   user = route.trip.user
-    # end
+    can :crud, Route do |route|
+      user == route.trip.user
+    end
 
     can :crud, ExpenseTracker do |expense_tracker|
       user == expense_tracker.trip.user

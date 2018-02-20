@@ -1,16 +1,14 @@
+# TODO: DATE UPDATING WHEN CHANGE DURATION
 class RoutesController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:show]
   before_action :set_route, only: [:show, :edit, :destroy]
-  # before_action :authorize_user!,
-  # GET /routes
+  before_action :authorize_user!, only: [:show]
+
+  # GET /routes.json
   def index
-    # @routes = Route.all
-    # @trip = Trip.find params[:trip_id]
     @routes = Route.where(trip_id:params[:trip_id]).order(start_date: :asc)
-    # binding.pry
     render json: @routes
   end
-
 
   # GET /routes/1
   # GET /routes/1.json
@@ -19,39 +17,32 @@ class RoutesController < ApplicationController
       format.json {@route}
       format.html {render :show}
     end
-    # render json: @route
   end
 
-  # GET /routes/new
-  def new
-    @route = Route.new
-  end
-
-  # GET /routes/1/edit
-  def edit
-  end
-
-  # POST /routes
   # POST /routes.json
   def create
     route = Route.new route_params
     trip = Trip.find params[:trip_id]
+
     if trip.routes.empty?
+      # If it's the first route of the trip,
       route.start_date = trip.start_date
     else
+      # If it's not first route of the trip, then route's start_date = previous route's end_date
       route.start_date = trip.routes.last.end_date
     end
 
+    # Default duration is 3 days
     if route.duration.nil?
-      route.duration = rand(1..4)
+      route.duration = 3
     end
 
     route.end_date = route.start_date + route.duration.days
-    may_success = false
 
     if route.save
-      may_success = true
       trip.update(end_date: route.end_date)
+    else
+      flash.now[:alert] = 'Something went wrong. Please try again'
     end
 
     render json: route
@@ -64,50 +55,57 @@ class RoutesController < ApplicationController
 
   # PATCH/PUT /routes/1
   # PATCH/PUT /routes/1.json
-  def update
-    date_updater (params[:delete_route_at_index])
-    render json: :ok
-    # if @route.update(route_params)
-    #   render json: @route
-    # else
-    #   render json: @route.errors, status: :unprocessable_entity
-    # end
-  end
+  # def update
+  #   date_updater (params[:delete_route_at_index])
+  #   render json: :ok
+  #   # if @route.update(route_params)
+  #   #   render json: @route
+  #   # else
+  #   #   render json: @route.errors, status: :unprocessable_entity
+  #   # end
+  # end
 
-  # DELETE /routes/1
   # DELETE /routes/1.json
   def destroy
     if @route.destroy
-      render json: :ok  #redirect_to update to update all dates
+      render json: :ok
     else
       head :bad_request
     end
   end
 
+  #Update all routes' start_date and end_date if any of changes(delete) happen in trip routes.
   def date_updater
     trip = Trip.find params[:trip_id]
     @trip_routes = trip.routes.order(start_date: :asc).to_a
     dataIndex = params[:delete_route_at_index]
 
+    # If there is at least one route in the trip
     unless @trip_routes.empty?
+      # If the first route is deleted in the trip,
       if dataIndex == 0
+        # Next one becomes the first route of the trip
         first_route = @trip_routes[0]
+        # Update start and end dates
         first_route.start_date = trip.start_date
         first_route.end_date = first_route.start_date + first_route.duration
         first_route.save
+
+        # Get rest of all elements from index at 1
         routes_to_update = @trip_routes[1..@trip_routes.length]
         prev_route = first_route
-      else
+      else # Get all elements from the dataIndex
         routes_to_update = @trip_routes[dataIndex..@trip_routes.length]
         prev_route = @trip_routes[dataIndex-1]
       end
 
+      #Iterate the all elements to update start and end dates
       routes_to_update.each_with_index do |each_route, index|
           each_route.start_date = prev_route.end_date
           each_route.end_date = each_route.start_date + each_route.duration
           prev_route = each_route
       end
-
+      # Save all chagnes
       routes_to_update.each(&:save)
     end
 
@@ -117,7 +115,6 @@ class RoutesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_route
-      # @trip = Trip.find(params[:id])
       @route = Route.find(params[:id])
     end
 
@@ -127,9 +124,11 @@ class RoutesController < ApplicationController
     end
 
     def authorize_user!
+      route = Route.find params[:id]
+      trip = route.trip
       unless can?(:crud, @route)
         flash[:alert] = "Access Desined: Not authorized to manage this route"
-        redirect_to home_path
+        redirect_to trip_path(trip)
       end
     end
 end
