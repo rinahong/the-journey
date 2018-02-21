@@ -9,7 +9,7 @@
         <a class="nav-anchor nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">The Journey's Favorites</a>
       </li>
       <li class="nav-anchor tag-form" style="width:40%;margin-left:50px">
-        <%= form_for :tags, method: :get, url: home_path do |f| %>
+        <%= form_for :tags, method: :get, url: trips_path do |f| %>
           <fieldset class="row">
             <div class="col-xs-4">
               <%= f.collection_select(

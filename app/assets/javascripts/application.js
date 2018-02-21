@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery3
+//= require chosen-jquery
 //= require popper
 //= require bootstrap-sprockets
 //= require moment

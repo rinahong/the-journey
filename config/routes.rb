@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users, except: [:index]
   resource :sessions, only: [:new, :create, :destroy]
 
-  resources :trips, except: [:index, :new] do
+  resources :trips, except: [:new] do
     resources :routes, except: [:new, :edit], shallow: true do
       member do
         patch :move
