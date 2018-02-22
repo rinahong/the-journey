@@ -86,6 +86,20 @@ const Route = {
         body: JSON.stringify(data)
       }
     )
+  },
+
+  duration_update(routeId, data) {
+    const myUrl = `http://localhost:3000/routes/${routeId}/duration_update`;
+    return fetch (
+      myUrl,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
+    )
   }
 
 } //End Of Route
@@ -173,6 +187,21 @@ $(document).ready(() => {
       .delete(routeId)
       .then(() => Route.dateUpdater({delete_route_at_index: routeIndex}))
       .then(() => reloadRouteList())
+  });
+
+
+  $('#sortable').on('change', e => {
+    const routeId = $(e.target).data('routeid');
+    const indexAt = $('#sortable li').index($(`#${routeId}`));
+    const duration = $(e.target).val();
+    if(duration === 'other') {
+      //Change dropdown list to a form.
+      // When submit, add the new value to dropdown list and make it as default
+    }
+    Route.duration_update(routeId, {new_position: indexAt, new_duration: duration})
+    .then((res) => {
+      reloadRouteList()
+    })
   });
 
 

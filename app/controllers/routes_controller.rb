@@ -1,7 +1,7 @@
 # TODO: DATE UPDATING WHEN CHANGE DURATION
 class RoutesController < ApplicationController
   before_action :authenticate_user!, only: [:show]
-  before_action :set_route, only: [:show, :edit, :destroy]
+  before_action :set_route, only: [:show, :edit, :destroy, :move, :duration_update]
   before_action :authorize_user!, only: [:show]
 
   # GET /routes.json
@@ -49,21 +49,17 @@ class RoutesController < ApplicationController
   end
 
   def move
-    r = RouteMover.new(params[:id], params[:new_position])
+    # passing @route.id but this doesn't do anything
+    r = RouteMover.new(params[:id], params[:new_position], @route.duration)
     r.move_save!
   end
 
-  # PATCH/PUT /routes/1
-  # PATCH/PUT /routes/1.json
-  # def update
-  #   date_updater (params[:delete_route_at_index])
-  #   render json: :ok
-  #   # if @route.update(route_params)
-  #   #   render json: @route
-  #   # else
-  #   #   render json: @route.errors, status: :unprocessable_entity
-  #   # end
-  # end
+  def duration_update
+    r = RouteMover.new(@route.id, params[:new_position], params[:new_duration])
+    r.duration_save!
+    @routes = Route.where(trip_id:params[:trip_id]).order(start_date: :asc)
+    render json: @routes
+  end
 
   # DELETE /routes/1.json
   def destroy

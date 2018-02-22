@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :routes, except: [:new, :edit], shallow: true do
       member do
         patch :move
+        patch :duration_update
       end
       collection do
         patch :date_updater
