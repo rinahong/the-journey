@@ -104,9 +104,31 @@ const Route = {
 
 } //End Of Route
 
+function generateOption (days, selected) {
+  if(selected) {
+    return H('option', {'value': days,'selected':'selected'}, days )
+  }
+  return H('option', {'value': days}, days )
+}
+
+function genMulOptions(count, duration) {
+  console.log(duration)
+  result = [];
+  for(let i = 1; i <= count; i++) {
+    if(i === duration) {
+      result.push(generateOption(i, true));
+    } else {
+      result.push(generateOption(i, false));
+    }
+  }
+  return result;
+}
+
+
 function renderRoutes (allRoutes) {
   return allRoutes.map(route => {
-    let myRouteUrl = `http://localhost:3000/routes/${route.id}`
+    let myRouteUrl = `http://localhost:3000/routes/${route.id}`;
+    let i = 1;
     return H( 'li',
               {
                 'class': 'single-route',
@@ -121,23 +143,49 @@ function renderRoutes (allRoutes) {
               H( 'div', null,
                 `${route.start} ~ ${route.end}`,
                 H( 'select', {'id': `duration-select-${route.id}`, 'data-routeid': route.id, 'style': 'margin-left:10px;'},
-                  H('option', {'value': '1'}, '1 day' ),
-                  H('option', {'value': '2'}, '2 days' ),
-                  H('option', {'value': '3'}, '3 days' ),
-                  H('option', {'value': '4'}, '4 days' ),
-                  H('option', {'value': '5'}, '5 days' ),
-                  H('option', {'value': '6'}, '6 days' ),
-                  H('option', {'value': '7'}, '7 days' ),
-                  H('option', {'value': '8'}, '8 days' ),
-                  H('option', {'value': '9'}, '9 days' ),
-                  H('option', {'value': '10'}, '10 days' ),
-                  H('option', {'value': 'other'}, 'other' )
+                  ...genMulOptions(30, route.duration)
                 )
               ),
               H( 'hr', null)
     ) // End Of OuterMost H()
   }) // End Of allRoutes.map
 } // End of renderRoutes()
+
+
+// function renderRoutes (allRoutes) {
+//   return allRoutes.map(route => {
+//     let myRouteUrl = `http://localhost:3000/routes/${route.id}`
+//     return H( 'li',
+//               {
+//                 'class': 'single-route',
+//                 'id': route.id
+//               },
+//               H( 'p', null,
+//                 H( 'i',
+//                   {'class': 'fa fa-minus-square', 'data-routeid': route.id, 'aria-hidden': true}
+//                 ),
+//                 H( 'a', {'style': 'font-size:20px;margin-left: 5px;', 'href':myRouteUrl}, route.title)
+//               ),
+//               H( 'div', null,
+//                 `${route.start} ~ ${route.end}`,
+//                 H( 'select', {'id': `duration-select-${route.id}`, 'data-routeid': route.id, 'style': 'margin-left:10px;'},
+//                   H('option', {'value': '1'}, '1 day' ),
+//                   H('option', {'value': '2', 'selected':"selected"}, '2 days' ),
+//                   H('option', {'value': '3'}, '3 days' ),
+//                   H('option', {'value': '4'}, '4 days' ),
+//                   H('option', {'value': '5'}, '5 days' ),
+//                   H('option', {'value': '6'}, '6 days' ),
+//                   H('option', {'value': '7'}, '7 days' ),
+//                   H('option', {'value': '8'}, '8 days' ),
+//                   H('option', {'value': '9'}, '9 days' ),
+//                   H('option', {'value': '10'}, '10 days' ),
+//                   H('option', {'value': 'other'}, 'other' )
+//                 )
+//               ),
+//               H( 'hr', null)
+//     ) // End Of OuterMost H()
+//   }) // End Of allRoutes.map
+// } // End of renderRoutes()
 
 // Re-order routes and update start and end dates
 function sortRouteList() {
@@ -147,9 +195,8 @@ function sortRouteList() {
     update: function( event, ui ) {
       let routeId = ui.item.context.id;
       newPositionIndexAt = ui.item.index();
-      Route.move(routeId, {new_position: newPositionIndexAt}).then((res) => {
-        reloadRouteList()
-      })
+      Route.move(routeId, {new_position: newPositionIndexAt})
+      .then((res) => reloadRouteList())
     }
  });
 }
@@ -183,8 +230,7 @@ $(document).ready(() => {
   $('#sortable').on('click','.fa.fa-minus-square', e => {
     const routeId = $(e.target).data('routeid');
     const routeIndex = $( "li.single-route" ).index($(`li.single-route#${routeId}`))
-    Route
-      .delete(routeId)
+    Route.delete(routeId)
       .then(() => Route.dateUpdater({delete_route_at_index: routeIndex}))
       .then(() => reloadRouteList())
   });
@@ -199,9 +245,7 @@ $(document).ready(() => {
       // When submit, add the new value to dropdown list and make it as default
     }
     Route.duration_update(routeId, {new_position: indexAt, new_duration: duration})
-    .then((res) => {
-      reloadRouteList()
-    })
+      .then((res) => reloadRouteList())
   });
 
 
