@@ -14,6 +14,10 @@ class Trip < ApplicationRecord
 
   validate :end_date_validation
 
+  scope :search_by_tag, -> (tag_array) {
+    joins(:taggings).where("taggings.tag_id IN (:tags)", tags: tag_array).distinct
+  }
+
   def end_date_validation
     if end_date.present? && end_date < start_date
       errors.add(:end_date, "can't before the start date")
