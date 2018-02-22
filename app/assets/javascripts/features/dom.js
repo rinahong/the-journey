@@ -91,6 +91,13 @@ const Route = {
 } //End Of Route
 
 function renderRoutes (allRoutes) {
+  let duration_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'other'];
+  let option = ``;
+  for(let i = 0; i < duration_array.length; i++) {
+      option += `<option value=${duration_array[i]}> ${duration_array[i]} </option>`;
+  }
+  console.log(option);
+  console.log(option[0]);
   return allRoutes.map(route => {
     let myRouteUrl = `http://localhost:3000/routes/${route.id}`
     return H( 'li',
@@ -104,7 +111,22 @@ function renderRoutes (allRoutes) {
                 ),
                 H( 'a', {'style': 'font-size:20px;margin-left: 5px;', 'href':myRouteUrl}, route.title)
               ),
-              H( 'p', null, `${route.start} ~ ${route.end}`),
+              H( 'div', null,
+                `${route.start} ~ ${route.end}`,
+                H( 'select', {'id': `duration-select-${route.id}`, 'data-routeid': route.id, 'style': 'margin-left:10px;'},
+                  H('option', {'value': '1'}, '1 day' ),
+                  H('option', {'value': '2'}, '2 days' ),
+                  H('option', {'value': '3'}, '3 days' ),
+                  H('option', {'value': '4'}, '4 days' ),
+                  H('option', {'value': '5'}, '5 days' ),
+                  H('option', {'value': '6'}, '6 days' ),
+                  H('option', {'value': '7'}, '7 days' ),
+                  H('option', {'value': '8'}, '8 days' ),
+                  H('option', {'value': '9'}, '9 days' ),
+                  H('option', {'value': '10'}, '10 days' ),
+                  H('option', {'value': 'other'}, 'other' )
+                )
+              ),
               H( 'hr', null)
     ) // End Of OuterMost H()
   }) // End Of allRoutes.map
@@ -159,4 +181,6 @@ $(document).ready(() => {
       .then(() => Route.dateUpdater({delete_route_at_index: routeIndex}))
       .then(() => reloadRouteList())
   });
+
+
 }) //End of Document.addEventListener
