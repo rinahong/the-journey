@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   def new
+    if user_signed_in?
+      redirect_to trips_path, alert: "You already signed in"
+    end
   end
 
   def create
@@ -16,7 +19,7 @@ class SessionsController < ApplicationController
 
   def destroy
    session[:user_id] = nil
-   redirect_to home_path, notice: 'Signed Out!'
+   redirect_to trips_path, notice: 'Signed Out!'
   end
 
   private

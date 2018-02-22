@@ -27,15 +27,15 @@ class ApplicationController < ActionController::Base
 
   protected
     def not_found # when no route matches
-      redirect_to home_path, alert: 'COULDN\'T FIND THE PAGE'
+      redirect_to trips_path, alert: 'COULDN\'T FIND THE PAGE'
     end
 
     def record_not_found(error)
-      redirect_to home_path, alert: error.message
+      redirect_to trips_path, alert: error.message
     end
 
     def standard_error(error)
-      redirect_to home_path, alert: error.message
+      redirect_to trips_path, alert: error.message
     end
 
     def record_invalid(error)
@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
          message: message
        }
      end
-     redirect_to home_path, alert: errors.message
+     redirect_to trips_path, alert: errors.message
     end
 
 end

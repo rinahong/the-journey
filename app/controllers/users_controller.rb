@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     if user_signed_in?
-      redirect_to home_path, alert: "You already have an account!"
+      redirect_to trips_path, alert: "You already have an account!"
     else
       @user = User.new
     end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to home_path, notice: 'User was successfully created.'
+      redirect_to new_sessions_path, notice: 'User was successfully created.'
     else
       render :new
     end
@@ -62,7 +62,7 @@ class UsersController < ApplicationController
     def authorize_user!
       unless can?(:rud, @user)
         flash[:alert] = "Access Desined: Not authorized to view this account"
-        redirect_to home_path
+        redirect_to trips_path
       end
     end
 end

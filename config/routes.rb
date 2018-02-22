@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get('/', { to: 'welcome#index', as: :home })
+  get('/', { to: 'trips#index'})
 
   resources :users, except: [:index]
   resource :sessions, only: [:new, :create, :destroy]

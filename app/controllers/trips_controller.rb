@@ -9,16 +9,20 @@ class TripsController < ApplicationController
     @trip_tags_most_used = []
     @trip_highest_likes = []
     begin
-      # Get params matching tags
+      # Get params matching tags, tag_list
       tag_list_ids = params[:tags][:tag_list]
+      # First one is always empty string. Not an tag id.
+      # If tag list has at least one tag name to search
       if tag_list_ids.length > 1
         # Remove first empty string element in tag_list array
         tag_list_ids.shift
         @trip_tags_most_used = Trip.search_by_tag(tag_list_ids)
       else
+        #If user sumbit search tag form with empty input. Then return all Trips
         @trip_tags_most_used = Trip.all.order(like_count: :desc)
       end
     rescue
+      #Return All trips which contain the most_used tag names
       tags = ActsAsTaggableOn::Tag.most_used(3)
       tags.each do |tag|
         tag.taggings.each do |tagging|
@@ -27,13 +31,10 @@ class TripsController < ApplicationController
             @trip_tags_most_used.push(trip)
           end
         end
-        puts "========in rescue... why???=========="
       end
       @trip_highest_likes = Trip.all.order(like_count: :desc)[0..3]
     end
-
   end
-
 
 
   # GET /trips/1
@@ -104,7 +105,7 @@ class TripsController < ApplicationController
     def authorize_user!
       unless can?(:crud, @trip)
         flash[:alert] = "Access Desined: Not authorized to manage this trip"
-        redirect_to home_path
+        redirect_to trips_path
       end
     end
 
