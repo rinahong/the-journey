@@ -91,13 +91,6 @@ const Route = {
 } //End Of Route
 
 function renderRoutes (allRoutes) {
-  let duration_array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'other'];
-  let option = ``;
-  for(let i = 0; i < duration_array.length; i++) {
-      option += `<option value=${duration_array[i]}> ${duration_array[i]} </option>`;
-  }
-  console.log(option);
-  console.log(option[0]);
   return allRoutes.map(route => {
     let myRouteUrl = `http://localhost:3000/routes/${route.id}`
     return H( 'li',

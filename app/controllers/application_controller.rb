@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :record_invalid
 
+  def not_found # when no route matches
+    redirect_to trips_path, alert: 'COULDN\'T FIND THE PAGE'
+  end
+
   def user_signed_in?
     if session[:user_id].present? && current_user.nil?
       session[:user_id] = nil
@@ -26,10 +30,6 @@ class ApplicationController < ActionController::Base
     end
 
   protected
-    def not_found # when no route matches
-      redirect_to trips_path, alert: 'COULDN\'T FIND THE PAGE'
-    end
-
     def record_not_found(error)
       redirect_to trips_path, alert: error.message
     end
