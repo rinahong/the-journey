@@ -22,9 +22,7 @@ class RouteMover
   end
 
   def duration_save!
-    puts " inside of duration save!!!!!!!!!!!!!!!!!!!!!!!!"
-    route.duration = new_duration
-    route.save
+    change_the_duration_in_trip_routes
     recalculate_trip_route_dates
     save_trips
   end
@@ -32,28 +30,32 @@ class RouteMover
 
   private
     def move_route_to_index!(index)
-      trip_routes.insert(index, trip_routes.delete_at(initial_position))
+      @trip_routes.insert(index, @trip_routes.delete_at(initial_position))
+    end
+
+    def change_the_duration_in_trip_routes
+      route.duration = new_duration
+      route.end_date = route.start_date + new_duration.to_i.days
+      route.save!
+      @trip_routes = trip.routes.order(start_date: :asc).to_a
     end
 
     def recalculate_trip_route_dates
-      trip_routes.each_with_index do |each_route, index|
-        if index < new_position
-          next
+      @trip_routes.each_with_index do |each_route, index|
+        if index == 0
+          each_route.start_date = trip.start_date
+          each_route.end_date = each_route.start_date + each_route.duration
         else
-          if index == 0
-            each_route.start_date = trip.start_date
-            each_route.end_date = each_route.start_date + each_route.duration
-          else
-            prev_route = trip_routes[index-1]
-            each_route.start_date = prev_route.end_date
-            each_route.end_date = each_route.start_date + each_route.duration
-          end
+          prev_route = @trip_routes[index-1]
+          each_route.start_date = prev_route.end_date
+          each_route.end_date = each_route.start_date + each_route.duration
         end
       end
     end
 
+
     def save_trips
-      trip_routes.each(&:save)
+      @trip_routes.each(&:save)
     end
 
 end
