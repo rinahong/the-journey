@@ -104,11 +104,16 @@ const Route = {
 
 } //End Of Route
 
-function generateOption (days, selected) {
-  if(selected) {
-    return H('option', {'value': days,'selected':'selected'}, days )
+function generateOption (num, selected) {
+  let days = ' days';
+  if (num === 1) {
+    days = ' day';
   }
-  return H('option', {'value': days}, days )
+
+  if(selected) {
+    return H('option', {'value': num,'selected':'selected'}, num + days )
+  }
+  return H('option', {'value': num}, num )
 }
 
 function genMulOptions(count, duration) {
