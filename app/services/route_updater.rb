@@ -1,6 +1,6 @@
-# r = RouteMover.new(route_id, new_position)
+# r = RouteUpdater.new(route_id, new_position)
 
-class RouteMover
+class RouteUpdater
   attr_accessor :route, :trip, :trip_routes, :initial_position, :new_position, :new_duration
 
   def initialize(route_id, new_position_index, duration_to_change)

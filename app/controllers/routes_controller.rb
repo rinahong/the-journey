@@ -50,12 +50,12 @@ class RoutesController < ApplicationController
 
   def move
     # passing @route.id but this doesn't do anything
-    r = RouteMover.new(params[:id], params[:new_position], @route.duration)
+    r = RouteUpdater.new(params[:id], params[:new_position], @route.duration)
     r.move_save!
   end
 
   def duration_update
-    r = RouteMover.new(@route.id, params[:new_position], params[:new_duration])
+    r = RouteUpdater.new(@route.id, params[:new_position], params[:new_duration])
     r.duration_save!
     @routes = Route.where(trip_id:params[:trip_id]).order(start_date: :asc)
     render json: @routes
