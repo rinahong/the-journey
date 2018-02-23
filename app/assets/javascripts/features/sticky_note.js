@@ -13,8 +13,9 @@ function H (tagName, htmlAttrs = {}, ...elements) {
 // Ajax for StickyNote Object: create, all, delete
 const StickyNote = {
   create(note, index_at) {
+    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const routeid = $('#route-show').data('routeid');
-    const myUrl = `http://localhost:3000/routes/${routeid}/stickynotes`;
+    const myUrl = `${baseUrl}routes/${routeid}/stickynotes`;
     const dataToSend = {
       note: note,
       index_at: index_at

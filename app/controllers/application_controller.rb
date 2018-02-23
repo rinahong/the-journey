@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
     if Rails.env.production?
       @environment = 'production'
     end
-
   end
 
   private
