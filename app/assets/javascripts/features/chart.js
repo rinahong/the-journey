@@ -1,7 +1,7 @@
 const ctx = document.getElementById("donutChart").getContext('2d');
 
 function all() {
-  const baseUrl = env === 'development' ? 'http://localhost:3000/trips/' : 'https://awesome-journey.herokuapp.com'
+  const baseUrl = env === 'development' ? 'http://localhost:3000/trips/' : 'https://awesome-journey.herokuapp.com/trips/'
   const tripid = $('#donutChart').data('tripid');
   const myUrl = `${baseUrl}${tripid}/expense_trackers`;
   return new Promise((resolve, reject) => {
