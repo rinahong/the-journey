@@ -13,8 +13,9 @@ function H (tagName, htmlAttrs = {}, ...elements) {
 // Ajax for Route Object: create, all, delete
 const Route = {
   create(address, latitude, longitude) {
+    const baseUrl = env === 'development' ? 'http://localhost:3000/trips/' : 'https://awesome-journey.herokuapp.com'
     const tripid = $('#map').data('tripid');
-    const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
+    const myUrl = `${baseUrl}${tripid}/routes`;
     const dataToSend = {
       address: address,
       latitude: latitude,
@@ -35,6 +36,7 @@ const Route = {
   },
 
   all() {
+    const baseUrl = env === 'development' ? 'http://localhost:3000/trips/' : 'https://awesome-journey.herokuapp.com'
     const tripid = $('#map').data('tripid');
     const myUrl = `http://localhost:3000/trips/${tripid}/routes`;
     return fetch(myUrl)
@@ -42,6 +44,7 @@ const Route = {
   },
 
   delete(routeId) {
+    const baseUrl = env === 'development' ? 'http://localhost:3000/trips/' : 'https://awesome-journey.herokuapp.com'
     const myUrl = `http://localhost:3000/routes/${routeId}`;
     return fetch(
       myUrl,

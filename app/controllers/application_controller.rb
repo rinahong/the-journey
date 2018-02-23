@@ -22,6 +22,11 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  # Get ENVIRONMENT value from heroku
+  def environment
+    @environment = ENV["ENVRIONMENT"]
+  end
+
   private
     def authenticate_user!
       unless user_signed_in?

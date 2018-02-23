@@ -7,8 +7,13 @@ class ExpenseTrackersController < ApplicationController
   # GET /expense_trackers.json
   def index
     @expense_tracker = ExpenseTracker.new
-    expenses_in_the_trip = ExpenseTracker.where(trip_id: params[:trip_id])
+    expenses_in_the_trip = ExpenseTracker.where(trip_id:params[:trip_id])
     @expense_trackers = expenses_in_the_trip.order(date: :asc)
+
+    respond_to do |format|
+      format.json { render json: @expense_trackers } #For Chart.js Ajax
+      format.html { @expense_trackers }
+    end
   end
 
   # Post /trips/:id/add_form  -> member of trip

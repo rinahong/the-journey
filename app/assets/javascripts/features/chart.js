@@ -1,8 +1,9 @@
 const ctx = document.getElementById("donutChart").getContext('2d');
 
 function all() {
+  const baseUrl = env === 'development' ? 'http://localhost:3000/trips/' : 'https://awesome-journey.herokuapp.com'
   const tripid = $('#donutChart').data('tripid');
-  const myUrl = `http://localhost:3000/trips/${tripid}/expense_trackers`;
+  const myUrl = `${baseUrl}${tripid}/expense_trackers`;
   return new Promise((resolve, reject) => {
     resolve(fetch(myUrl)
      .then(res => res.json())
@@ -26,7 +27,6 @@ all()
     let counter = 0;
     const colorArray = [];
     do {
-      // Random rgb generator
       colorArray.push("#"+((1<<24)*Math.random()|0).toString(16));
       counter++;
     } while (Object.keys(expense_chart_data).length > counter );
@@ -56,5 +56,6 @@ all()
               position: 'bottom'
           }
         }
+        // options: 'rotation'
     });
   })
