@@ -22,8 +22,7 @@
   height: 80vh;
   width: 100%;
   margin: 0;
-  opacity: 0.8;
-  filter: alpha(opacity=80);
+  opacity: 0.9;
 }
 
 /* home_application: anchor style */

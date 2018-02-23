@@ -8,32 +8,31 @@
       <li class="nav-item">
         <a class="nav-anchor nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">The Journey's Favorites</a>
       </li>
-      <li class="nav-anchor tag-form" style="width:40%;margin-left:50px">
+      <li class="nav-anchor tag-form" style="width:60%;padding-left:50px">
         <%= form_for :tags, method: :get, url: trips_path do |f| %>
-          <fieldset class="row">
-            <div class="col-xs-4">
-              <%= f.collection_select(
-                    :tag_list,
-                    ActsAsTaggableOn::Tag.order(:name),
-                    :id,
-                    :name,
-                    {},
-                    {
-                      multiple: true,
-                      class: 'chosen-select',
-                      data: { placeholder: "Search By Tags" }
-                    }
-                  ) %>
+          <div class="col-xs-10 row">
+            <div  style="width:87%;">
+            <%= f.collection_select(
+                  :tag_list,
+                  ActsAsTaggableOn::Tag.order(:name),
+                  :id,
+                  :name,
+                  {},
+                  {
+                    multiple: true,
+                    class: 'chosen-select',
+                    data: { placeholder: "Search By Tags" }
+                  }
+                ) %>
             </div>
-            <div class="col-xs-4">
-              <%= f.submit 'Submit!', class:"btn btn-primary"%>
+            <div>
+              <%= f.submit 'Go!', class:"btn btn-primary"%>
             </div>
-          </fieldset>
+          </div>
         <% end %>
       </li>
     </ul>
   </div>
-
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="tags" role="tabpanel" aria-labelledby="tags-tab">
       <section class="row">

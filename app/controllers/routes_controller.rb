@@ -107,6 +107,8 @@ class RoutesController < ApplicationController
       # Save all chagnes
       routes_to_update.each(&:save)
     end
+
+    #trip's end_date should be updated to last route's end_date 
     trip.end_date = trip.routes.last.end_date
     trip.save!
     render json: :ok
