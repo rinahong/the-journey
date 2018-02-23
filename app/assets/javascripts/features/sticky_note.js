@@ -35,14 +35,16 @@ const StickyNote = {
   },
 
   all() {
+    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const routeid = $('#route-show').data('routeid');
-    const myUrl = `http://localhost:3000/routes/${routeid}/stickynotes`;
+    const myUrl = `${baseUrl}routes/${routeid}/stickynotes`;
     return fetch(myUrl)
        .then(res => res.json())
   },
 
   delete(stickyNoteId) {
-    const myUrl = `http://localhost:3000/stickynotes/${stickyNoteId}`;
+    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
+    const myUrl = `${baseUrl}stickynotes/${stickyNoteId}`;
     return fetch(
       myUrl,
       {
@@ -53,7 +55,8 @@ const StickyNote = {
   },
 
   update(note, index_at, stickyNoteId) {
-    const myUrl = `http://localhost:3000/stickynotes/${stickyNoteId}`;
+    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
+    const myUrl = `${baseUrl}stickynotes/${stickyNoteId}`;
     const dataToUpdate = {
       note: note,
       index_at: index_at
