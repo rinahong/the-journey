@@ -136,7 +136,7 @@ function genMulOptions(count, duration) {
 
 function renderRoutes (allRoutes) {
   return allRoutes.map(route => {
-    let myRouteUrl = `http://localhost:3000/routes/${route.id}`;
+    let myRouteUrl = `${baseUrl}routes/${route.id}`;
     let i = 1;
     return H( 'li',
               {
