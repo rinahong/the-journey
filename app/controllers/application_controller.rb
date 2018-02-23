@@ -24,7 +24,10 @@ class ApplicationController < ActionController::Base
 
   # Get ENVIRONMENT value from heroku
   def environment
-    @environment = ENV["ENVRIONMENT"]
+    if Rails.env.production?
+      @environment = 'production'
+    end
+
   end
 
   private
