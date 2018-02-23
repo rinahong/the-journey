@@ -15,7 +15,6 @@ function H (tagName, htmlAttrs = {}, ...elements) {
 // Ajax for Route Object: create, all, delete
 const Route = {
   create(address, latitude, longitude) {
-    // const baseUrl = env === 'development' ? 'http://localhost:3000/trips/' : 'https://awesome-journey.herokuapp.com/trips/'
     const tripid = $('#map').data('tripid');
     const myUrl = `${baseUrl}trips/${tripid}/routes`;
     const dataToSend = {
@@ -38,7 +37,6 @@ const Route = {
   },
 
   all() {
-    // const baseUrl = env === 'development' ? 'http://localhost:3000/trips/' : 'https://awesome-journey.herokuapp.com'
     const tripid = $('#map').data('tripid');
     const myUrl = `${baseUrl}trips/${tripid}/routes`;
     return fetch(myUrl)
@@ -136,7 +134,7 @@ function genMulOptions(count, duration) {
 
 function renderRoutes (allRoutes) {
   return allRoutes.map(route => {
-    let myRouteUrl = `${baseUrl}routes/${route.id}`;
+    let myRouteUrl = `${baseUrl}trips/routes/${route.id}`;
     let i = 1;
     return H( 'li',
               {
