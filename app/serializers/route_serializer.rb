@@ -7,8 +7,8 @@ class RouteSerializer < ActiveModel::Serializer
   attributes :url
 
   def url
-    baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
-    # "http://localhost:3000" + route_path(object.id)
-    'https://awesome-journey.herokuapp.com/' + route_path(object.id)
+    # baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
+    "http://localhost:3000" + route_path(object.id)
+    # 'https://awesome-journey.herokuapp.com/' + route_path(object.id)
   end
 end
