@@ -1,4 +1,4 @@
-# TODO: DATE UPDATING WHEN CHANGE DURATION
+
 class RoutesController < ApplicationController
   before_action :authenticate_user!, only: [:show]
   before_action :set_route, only: [:show, :edit, :destroy, :move, :duration_update]
@@ -108,7 +108,7 @@ class RoutesController < ApplicationController
       routes_to_update.each(&:save)
     end
 
-    #trip's end_date should be updated to last route's end_date 
+    #trip's end_date should be updated to last route's end_date
     trip.end_date = trip.routes.last.end_date
     trip.save!
     render json: :ok
