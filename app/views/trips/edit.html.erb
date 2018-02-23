@@ -16,10 +16,10 @@
     </div>
 
     <!-- BootStrap Modal Button: Trip Info -->
-    <div class="col-4" data-toggle="modal" data-target='#TripInfoModal'>
-      <div style="padding-left:90%;">
-        <%= fa_icon "paper-plane 2x"  %>
-        <span>Trip Info</span>
+    <div class="col-4">
+      <div>
+        <span style="padding-left:69%;">Expense Tracker</span>
+        <%= link_to fa_icon("credit-card 2x"), trip_expense_trackers_path(@trip) %>
       </div>
     </div>
   </seciton>

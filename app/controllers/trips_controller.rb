@@ -54,7 +54,6 @@ class TripsController < ApplicationController
     unless @trip.start_date.present?
       @trip.start_date = DateTime.now() + 1.month
     end
-    @trip.end_date = @trip.start_date + 2.weeks
 
     if @trip.save
       redirect_to edit_trip_path(@trip), notice: 'Trip was successfully created.'
@@ -66,14 +65,6 @@ class TripsController < ApplicationController
   # PATCH/PUT /trips/1
   def update
     @tags = params[:tag_list]
-    # if @trip.end_date_changed?
-    #   puts "===============@trip end_date changed!!!======================="
-    #   if @trip.routes.last.end_date > @trip.end_date
-    #     # redirect_to edit_trip_path(@trip), alert: 'Trip end date before routes last day'
-    #     puts "===============route last day is bigger then trip last day!!!======================="
-    #     puts @trip.end_date
-    #   end
-    # end
     if @trip.update(trip_params)
       recalculate_trip_route_dates(@trip.routes, @trip)
       redirect_to edit_trip_path(@trip), notice: 'Trip was successfully updated.'

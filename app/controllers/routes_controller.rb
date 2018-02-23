@@ -55,9 +55,12 @@ class RoutesController < ApplicationController
   end
 
   def duration_update
+    trip = Trip.find params[:trip_id]
     r = RouteUpdater.new(@route.id, params[:new_position], params[:new_duration])
     r.duration_save!
     @routes = Route.where(trip_id:params[:trip_id]).order(start_date: :asc)
+    trip.end_date = @routes.last.end_date
+    trip.save!
     render json: @routes
   end
 
@@ -104,7 +107,8 @@ class RoutesController < ApplicationController
       # Save all chagnes
       routes_to_update.each(&:save)
     end
-
+    trip.end_date = trip.routes.last.end_date
+    trip.save!
     render json: :ok
   end
 

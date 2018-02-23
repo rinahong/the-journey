@@ -1,3 +1,4 @@
+<p>***Last date of your trip will set to the last day of your final destination</p>
 <%= simple_form_for @trip do |f| %>
   <% if @trip.errors.present? %>
     <p><%= @trip.errors.full_messages.join(', ') %></p>
@@ -10,9 +11,6 @@
   </div>
   <div class="form-group">
     <%= f.input :start_date, class:"form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.input :end_date, class:"form-control" %>
   </div>
   <div class="form-group">
     <p>Tag List</p>
