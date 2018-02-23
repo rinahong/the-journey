@@ -76,10 +76,10 @@ function renderStickyNotes (allStickyNotes) {
   return allStickyNotes.map(singleNote => {
     return H( 'li',
               {
-                'class': 'single-sticky-note sticky-note-box',
+                'class': 'single-sticky-note',
                 'id': singleNote.id
               },
-              H( 'div', null,
+              H( 'div', {'class': `resizable`},
                 H( 'button', {'class':'delete-button', 'id':singleNote.id}, 'X'),
                 H( 'p',
                   {'id':singleNote.id, 'contenteditable':'true'},
@@ -91,13 +91,16 @@ function renderStickyNotes (allStickyNotes) {
 } // End of renderRoutes()
 
 
+
 // Get all sticky notes when reload
 function reloadStickyNotes () {
   StickyNote.all()
     .then(allStickyNotes => {
       $('.sticky-note-content-list').empty();
       $('.sticky-note-content-list').append(...renderStickyNotes(allStickyNotes));
-      sortStickyNoteList();
+      $( function() {
+        $( ".resizable" ).resizable();
+      } );
     })
 }
 
