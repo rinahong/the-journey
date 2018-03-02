@@ -182,7 +182,12 @@ function reloadRouteList () {
     .then(allRoutes => {
       $('#sortable').empty();
       $('#sortable').append(...renderRoutes(allRoutes));
-      initMap();
+
+      // initialize map with the center of last trip's route location
+      let latitude = allRoutes[allRoutes.length-1].latitude;
+      let longitude = allRoutes[allRoutes.length-1].longitude;
+      initMap({lat: latitude, lng: longitude});
+
       // Sort routes and update new data into db
       sortRouteList();
     })

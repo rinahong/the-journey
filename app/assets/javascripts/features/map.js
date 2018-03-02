@@ -5,10 +5,11 @@ let geocoder;
 let infowindow;
 let path;
 
-function initMap() {
+function initMap(latLngCenter={lat: 49.879, lng: 13.624}) {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
-    center: {lat: 49.879, lng: 13.624}  // Center the map on Hlohovice, Czechia.
+    // center: {lat: 49.879, lng: 13.624}  // Center the map on Hlohovice, Czechia.
+    center: latLngCenter
   });
 
   infowindow = new google.maps.InfoWindow;
@@ -49,8 +50,8 @@ function addLatLng(event) {
   path = poly.getPath();
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
-  console.log("Testing event latlng>>>>>>>", event.latLng)
-  console.log("Testing>>>>>>>", event.getPath)
+  // console.log("Testing event latlng>>>>>>>", event.latLng)
+  // console.log("Testing>>>>>>>", event.getPath)
   path.push(event.latLng);
   // console.log(`path.b, lat:`, path.lat());
   // console.log(`path.b, lng:`, path.lng());
