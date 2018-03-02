@@ -27,6 +27,13 @@ user_not_admin = User.create(
   # is_admin: false
 )
 
+guest_user = User.create(
+  username: 'Guest_User',
+  email: 'g@g.g',
+  password: PASSWORD,
+  # is_admin: false
+)
+
 10.times.each do
   username = Faker::Name.first_name
   User.create(
