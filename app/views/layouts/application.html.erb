@@ -5,10 +5,13 @@
     <%= csrf_meta_tags %>
 
     <script>
-      //@environment variable is passed from application controller
-      // TODO need to figure oute rails.env
-      // var env = 'production'
-      var env = 'development'
+      // In heroku app setting, there is a config varaible: RAILS_ENV = 'production'
+      // Using this value, we can check if it's in production or development mode.
+      <% if ENV["RAILS_ENV"] == 'production' %>
+        var env = 'production'
+      <% else %>
+        var env = 'development'
+      <% end %>
     </script>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
