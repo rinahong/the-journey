@@ -1,6 +1,12 @@
-// if (!baseUrl) {
-//   const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
-// }
+let baseUrl = "";
+let tripid = "";
+if (!baseUrl) {
+  baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
+}
+if (!tripid) {
+  tripid = $('#map').data('tripid');
+}
+
 // Helper method to create new node.
 function H (tagName, htmlAttrs = {}, ...elements) {
   const newElement = document.createElement(tagName);
@@ -15,8 +21,6 @@ function H (tagName, htmlAttrs = {}, ...elements) {
 // Ajax for Route Object: create, all, delete
 const Route = {
   create(address, latitude, longitude) {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
-    const tripid = $('#map').data('tripid');
     const myUrl = `${baseUrl}trips/${tripid}/routes`;
     const dataToSend = {
       address: address,
@@ -38,15 +42,12 @@ const Route = {
   },
 
   all() {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
-    const tripid = $('#map').data('tripid');
     const myUrl = `${baseUrl}trips/${tripid}/routes`;
     return fetch(myUrl)
        .then(res => res.json())
   },
 
   delete(routeId) {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const myUrl = `${baseUrl}routes/${routeId}`;
     return fetch(
       myUrl,
@@ -58,15 +59,12 @@ const Route = {
   },
 
   get (routeId) {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const myUrl = `${baseUrl}routes/${routeId}`;
     return fetch(myUrl)
       .then(res => res.json());
   },
 
   dateUpdater(data) {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
-    const tripid = $('#map').data('tripid');
     const myUrl = `${baseUrl}trips/${tripid}/routes/date_updater`;
     return fetch (
       myUrl,
@@ -82,7 +80,6 @@ const Route = {
   },
 
   move(routeId, data) {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const myUrl = `${baseUrl}routes/${routeId}/move`;
     return fetch (
       myUrl,
@@ -97,7 +94,6 @@ const Route = {
   },
 
   duration_update(routeId, data) {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const myUrl = `${baseUrl}routes/${routeId}/duration_update`;
     return fetch (
       myUrl,
