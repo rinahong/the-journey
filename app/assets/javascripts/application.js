@@ -16,6 +16,7 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require fullcalendar
+//= require hopscotch
 //= require Chart.min
 //= require rails-ujs
 //= require_directory .

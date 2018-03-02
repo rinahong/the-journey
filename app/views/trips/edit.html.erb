@@ -1,10 +1,6 @@
-<link rel="stylesheet" href="hopscotch.css"></link>
-<%= javascript_include_tag 'features/hopscotch' %>
-<%= javascript_include_tag 'features/edit_trip_guide' %>
 <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
 <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
 
 <div class="trip-show-container">
   <section class="row">
@@ -15,21 +11,21 @@
       </div>
     </div>
 
-    <div class="col-4 row">
-      <p class="title" style="padding-left:27%">Edit Your Journey</p>
+    <div class="col-4 row" style="display:inline;">
+      <p id="trip-edit-title" class="title" style="text-align:center">Edit Your Journey <span><%= fa_icon "question-circle", id:"startTourBtn" %></span></p>
+
+
     </div>
 
     <!-- BootStrap Modal Button: Trip Info -->
     <div class="col-4">
       <div style="padding-left:69%;">
-        <span>Expense Tracker</span>
-        <%= link_to fa_icon("credit-card 2x"), trip_expense_trackers_path(@trip) %>
+        <p>Expense Tracker <%= link_to fa_icon("credit-card 2x"), trip_expense_trackers_path(@trip) %></p>
+
       </div>
     </div>
   </seciton>
 </div>
-
-<p class="text-center"><button id="startTourBtn" class="btn btn-large btn-primary">Take a tour</button></p>
 
 
 <div class="row" style="margin-bottom: 100px;">
@@ -59,5 +55,6 @@
 
 <%= javascript_include_tag 'features/dom' %>
 <%= javascript_include_tag 'features/map' %>
+<%= javascript_include_tag 'features/edit_trip_guide' %>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_SECRET'] %>&callback=initMap"
 async defer></script>
