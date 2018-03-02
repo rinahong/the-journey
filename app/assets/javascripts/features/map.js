@@ -8,8 +8,7 @@ let path;
 function initMap(latLngCenter={lat: 49.879, lng: 13.624}) {
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
-    // center: {lat: 49.879, lng: 13.624}  // Center the map on Hlohovice, Czechia.
-    center: latLngCenter
+    center: latLngCenter // Default Center: Hlohovice, Czechia.
   });
 
   infowindow = new google.maps.InfoWindow;
