@@ -109,7 +109,12 @@ class RoutesController < ApplicationController
     end
 
     #trip's end_date should be updated to last route's end_date
-    trip.end_date = trip.routes.last.end_date
+    if trip.routes.empty?
+      trip.end_date = trip.start_date
+    else
+      trip.end_date = trip.routes.last.end_date
+    end
+
     trip.save!
     render json: :ok
   end
