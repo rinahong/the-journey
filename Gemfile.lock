@@ -95,6 +95,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hirb (0.7.3)
+    hopscotch-rails (0.1.2.1)
     i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
@@ -234,6 +235,7 @@ DEPENDENCIES
   font-awesome-rails
   fullcalendar-rails
   hirb
+  hopscotch-rails
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
