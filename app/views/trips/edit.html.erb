@@ -11,21 +11,21 @@
       </div>
     </div>
 
-    <div class="col-4 row">
-      <p id="trip-edit-title" class="title" style="padding-left:27%">Edit Your Journey</p>
+    <div class="col-4 row" style="display:inline;">
+      <p id="trip-edit-title" class="title" style="text-align:center">Edit Your Journey <span><%= fa_icon "question-circle", id:"startTourBtn" %></span></p>
+
+
     </div>
 
     <!-- BootStrap Modal Button: Trip Info -->
     <div class="col-4">
       <div style="padding-left:69%;">
-        <span>Expense Tracker</span>
-        <%= link_to fa_icon("credit-card 2x"), trip_expense_trackers_path(@trip) %>
+        <p>Expense Tracker <%= link_to fa_icon("credit-card 2x"), trip_expense_trackers_path(@trip) %></p>
+
       </div>
     </div>
   </seciton>
 </div>
-
-<p class="text-center"><button id="startTourBtn" class="btn btn-large btn-primary">Take a tour</button></p>
 
 
 <div class="row" style="margin-bottom: 100px;">
