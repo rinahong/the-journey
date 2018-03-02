@@ -1,3 +1,7 @@
+let baseUrl = "";
+if (!baseUrl) {
+  baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
+}
 
 // Helper method to create new node.
 function H (tagName, htmlAttrs = {}, ...elements) {
@@ -13,7 +17,6 @@ function H (tagName, htmlAttrs = {}, ...elements) {
 // Ajax for StickyNote Object: create, all, delete
 const StickyNote = {
   create(note, index_at) {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const routeid = $('#route-show').data('routeid');
     const myUrl = `${baseUrl}routes/${routeid}/stickynotes`;
     const dataToSend = {
@@ -35,7 +38,6 @@ const StickyNote = {
   },
 
   all() {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const routeid = $('#route-show').data('routeid');
     const myUrl = `${baseUrl}routes/${routeid}/stickynotes`;
     return fetch(myUrl)
@@ -43,7 +45,6 @@ const StickyNote = {
   },
 
   delete(stickyNoteId) {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const myUrl = `${baseUrl}stickynotes/${stickyNoteId}`;
     return fetch(
       myUrl,
@@ -55,7 +56,6 @@ const StickyNote = {
   },
 
   update(note, index_at, stickyNoteId) {
-    const baseUrl = env === 'development' ? 'http://localhost:3000/' : 'https://awesome-journey.herokuapp.com/'
     const myUrl = `${baseUrl}stickynotes/${stickyNoteId}`;
     const dataToUpdate = {
       note: note,
