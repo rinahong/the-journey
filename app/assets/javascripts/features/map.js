@@ -1,13 +1,11 @@
 
-let poly;
 let map;
 let geocoder;
 let infowindow;
-let path;
 
 function initMap(latLngCenter={lat: 49.879, lng: 13.624}) {
   map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 4,
+    zoom: 3,
     center: latLngCenter // Default Center: Hlohovice, Czechia.
   });
 
@@ -18,19 +16,10 @@ function initMap(latLngCenter={lat: 49.879, lng: 13.624}) {
     geocodeAddress(geocoder, map);
   });
 
-  //For drawing polylines
-  poly = new google.maps.Polyline({
-    strokeColor: '#000000',
-    strokeOpacity: 1.0,
-    strokeWeight: 3
-  });
-  poly.setMap(map);
-
   const clickable = $('#map').data('clickable');
   // Add a listener for the click event for polylines on trip controller edit page
   if(clickable) {
-    map.addListener('click', addLatLng);
-    // map.addListener('click');
+    map.addListener('click', (event) => geocodeLatLng(geocoder, map, infowindow, event));
   }
 
   Route.all().then( allRoutes => {
@@ -43,30 +32,9 @@ function initMap(latLngCenter={lat: 49.879, lng: 13.624}) {
   });
 }
 
-//For Polylines!!!!!!!
-// Handles click events on a map, and adds a new point to the Polyline.
-function addLatLng(event) {
-  path = poly.getPath();
-  // Because path is an MVCArray, we can simply append a new coordinate
-  // and it will automatically appear.
-  // console.log("Testing event latlng>>>>>>>", event.latLng)
-  // console.log("Testing>>>>>>>", event.getPath)
-  path.push(event.latLng);
-  // console.log(`path.b, lat:`, path.lat());
-  // console.log(`path.b, lng:`, path.lng());
-  geocodeLatLng(geocoder, map, infowindow, path.b[path.b.length - 1]);
-
-  // Add a new marker at the new plotted point on the polyline.
-  let marker = new google.maps.Marker({
-     position: event.latLng,
-     title: '#' + path.getLength(),
-     map: map
-  });
-}
-
 //For getting address using latitude and longitude
-function geocodeLatLng(geocoder, map, infowindow, path) {
-  let latlng = {lat: path.lat(), lng: path.lng()};
+function geocodeLatLng(geocoder, map, infowindow, event) {
+  let latlng = {lat: event.latLng.lat(), lng: event.latLng.lng()};
   geocoder.geocode({'location': latlng}, function(results, status) {
     if (status === 'OK') {
       if (results[0]) {
@@ -104,8 +72,6 @@ function geocodeLatLng(geocoder, map, infowindow, path) {
           position: latlng,
           map: map
         });
-        // console.log(`path.b, lat:`, path.lat());
-        // console.log(`path.b, lng:`, path.lng());
         let contentString = '<div id="content">'+
            '<div id="routeInfo">' +
            '<span class="address">' + address + '</span>' +

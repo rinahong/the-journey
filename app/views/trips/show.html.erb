@@ -81,7 +81,8 @@
       <canvas id="donutChart" data-tripid="<%= @trip.id %>"></canvas>
     </div>
     <div class="borderingDiv">
-      <div id="calendar" data-tripid="<%= @trip.id %>"></div>
+      <div id="calendar" data-tripid="<%= @trip.id %>"
+        data-startdate="<%= @trip.start_date.strftime('%Y-%m')%>"></div>
     <div>
   </div>
 </div>
