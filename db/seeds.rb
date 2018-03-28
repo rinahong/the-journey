@@ -5,11 +5,13 @@ Trip.destroy_all
 User.destroy_all
 
 PASSWORD = '123'
+CURRENCY_CODE_ARR = ["CAD", "KRW", "GDP", "USD", "JPY", "CNY"]
 
 user_admin = User.create(
   username: 'admin',
   email: 'a@a.a',
   password: PASSWORD,
+  preferred_currency_code: CURRENCY_CODE_ARR[rand(0..CURRENCY_CODE_ARR.length)]
   # is_admin: true
 )
 # User Not Admin
@@ -17,6 +19,7 @@ user_not_admin = User.create(
   username: 'test',
   email: 't@t.t',
   password: PASSWORD,
+  preferred_currency_code: CURRENCY_CODE_ARR[rand(0..CURRENCY_CODE_ARR.length)]
   # is_admin: false
 )
 
@@ -24,6 +27,7 @@ user_not_admin = User.create(
   username: 'test2',
   email: 't2@t.t',
   password: PASSWORD,
+  preferred_currency_code: CURRENCY_CODE_ARR[rand(0..CURRENCY_CODE_ARR.length)]
   # is_admin: false
 )
 
@@ -31,6 +35,7 @@ guest_user = User.create(
   username: 'Guest_User',
   email: 'g@g.g',
   password: PASSWORD,
+  preferred_currency_code: CURRENCY_CODE_ARR[rand(0..CURRENCY_CODE_ARR.length)]
   # is_admin: false
 )
 
@@ -39,7 +44,8 @@ guest_user = User.create(
   User.create(
     username: username,
     email: "#{username.downcase}@example.com",
-    password: PASSWORD
+    password: PASSWORD,
+    preferred_currency_code: CURRENCY_CODE_ARR[rand(0..CURRENCY_CODE_ARR.length)]
   )
 end
 
@@ -99,6 +105,8 @@ trips.each do |trip|
       date: s_d,
       description: Faker::Beer.style,
       price: rand(1..200),
+      currency_rate: rand,
+      from_currency_code: CURRENCY_CODE_ARR[rand(0..CURRENCY_CODE_ARR.length)],
       trip_id: trip.id
     )
   end

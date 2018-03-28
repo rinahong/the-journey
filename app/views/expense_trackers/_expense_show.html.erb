@@ -14,6 +14,6 @@
     <%= expense_tracker.description %>
   </div>
   <div class="col-md-1">
-    <%= expense_tracker.price %>
+    <%= (expense_tracker.price * expense_tracker.currency_rate).round(2)%>
   </div>
 </div>

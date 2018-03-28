@@ -39,9 +39,9 @@ class ExpenseTrackersController < ApplicationController
     fc = FixerClient.new(ENV['FIXER_API_SECRET'])
     fc_historical = fc.historical(@expense_tracker.date)
     fc_historical_rates = eval(fc_historical.body)[:rates]
-
-    # crf = CurrencyRateFinder.new(fc_historical, current_user.currency_code)
-    # @expense_tracker.currency_rate = crf.find(from, to) #-> do simple calcultion 1/from_rate*to_rate
+    crf = CurrencyRateFinder.new(fc_historical_rates)
+    @expense_tracker.currency_rate =
+        crf.convert(@expense_tracker.from_currency_code, current_user.preferred_currency_code)
     respond_to do |format|
       if @expense_tracker.save
         format.js { render 'add_expense_data_sjr'}
@@ -88,7 +88,7 @@ class ExpenseTrackersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_tracker_params
-      params.require(:expense_tracker).permit(:category, :date, :description, :price)
+      params.require(:expense_tracker).permit(:category, :date, :description, :price, :from_currency_code)
     end
 
     def find_trip
