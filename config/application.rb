@@ -30,5 +30,9 @@ module TheJourney
 
     config.assets.enabled = true
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    # To load a class/module in lib directory
+    config.autoload_paths << Rails.root.join("lib")
+    config.eager_load_paths << Rails.root.join("lib")
   end
 end

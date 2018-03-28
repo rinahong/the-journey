@@ -207,6 +207,7 @@ $(document).ready(() => {
       .then(() => reloadRouteList())
   });
 
+ // Delete a route at the index on click of - icon 
   $('#sortable').on('click','.fa.fa-minus-square', e => {
     const routeId = $(e.target).data('routeid');
     const routeIndex = $( "li.single-route" ).index($(`li.single-route#${routeId}`))

@@ -35,6 +35,13 @@ class ExpenseTrackersController < ApplicationController
     @expense_tracker = ExpenseTracker.new expense_tracker_params
     @trip = Trip.find params[:trip_id]
     @expense_tracker.trip = @trip
+
+    fc = FixerClient.new(ENV['FIXER_API_SECRET'])
+    fc_historical = fc.historical(@expense_tracker.date)
+    fc_historical_rates = eval(fc_historical.body)[:rates]
+
+    # crf = CurrencyRateFinder.new(fc_historical, current_user.currency_code)
+    # @expense_tracker.currency_rate = crf.find(from, to) #-> do simple calcultion 1/from_rate*to_rate
     respond_to do |format|
       if @expense_tracker.save
         format.js { render 'add_expense_data_sjr'}
