@@ -35,7 +35,8 @@ class ExpenseTrackersController < ApplicationController
     @expense_tracker = ExpenseTracker.new expense_tracker_params
     @trip = Trip.find params[:trip_id]
     @expense_tracker.trip = @trip
-
+    @expense_tracker.from_currency_code = params[:code]
+    
     fc = FixerClient.new(ENV['FIXER_API_SECRET'])
     fc_historical = fc.historical(@expense_tracker.date)
     fc_historical_rates = eval(fc_historical.body)[:rates]
@@ -88,7 +89,7 @@ class ExpenseTrackersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def expense_tracker_params
-      params.require(:expense_tracker).permit(:category, :date, :description, :price, :from_currency_code)
+      params.require(:expense_tracker).permit(:category, :date, :description, :price, :code)
     end
 
     def find_trip
