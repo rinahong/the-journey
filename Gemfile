@@ -37,7 +37,7 @@ gem 'bootstrap'
 gem "font-awesome-rails"
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-gem 'acts-as-taggable-on', '~> 4.0'
+gem 'acts-as-taggable-on', '~> 6.0'
 gem 'chart-js-rails'
 gem 'simple_form'
 gem 'cancancan'
@@ -53,6 +53,7 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'hirb'
+  gem 'rb-readline'
 end
 
 group :development do
